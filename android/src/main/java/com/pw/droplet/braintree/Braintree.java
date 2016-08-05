@@ -5,6 +5,8 @@ import android.content.Context;
 import android.app.Activity;
 
 import com.braintreepayments.api.PaymentRequest;
+import com.braintreepayments.api.ThreeDSecure;
+import com.braintreepayments.api.interfaces.BraintreeErrorListener;
 import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.braintreepayments.api.BraintreePaymentActivity;
 import com.braintreepayments.api.BraintreeFragment;
@@ -18,6 +20,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ActivityEventListener;
+
+import java.util.Locale;
 
 public class Braintree extends ReactContextBaseJavaModule implements ActivityEventListener {
   private static final int PAYMENT_REQUEST = 1;
@@ -88,9 +92,9 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
     this.errorCallback = errorCallback;
 
     PaymentRequest paymentRequest = new PaymentRequest()
-    .clientToken(this.getToken());
+      .clientToken(this.getToken());
 
-    (getCurrentActivity()).startActivityForResult(
+    getCurrentActivity().startActivityForResult(
       paymentRequest.getIntent(getCurrentActivity()),
       PAYMENT_REQUEST
     );
@@ -118,4 +122,28 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
       }
     }
   }
+
+  @ReactMethod
+  public void verify3DSecure(String paymentNonce, double amount, final Callback successCallback, final Callback errorCallback) {
+    try {
+      final BraintreeFragment fragment3DSecure = BraintreeFragment.newInstance(getCurrentActivity(), getToken());
+      fragment3DSecure.addListener(new PaymentMethodNonceCreatedListener() {
+        @Override
+        public void onPaymentMethodNonceCreated(PaymentMethodNonce paymentMethodNonce) {
+          successCallback.invoke(paymentMethodNonce.getNonce());
+        }
+      });
+      fragment3DSecure.addListener(new BraintreeErrorListener() {
+        @Override
+        public void onError(Exception error) {
+          errorCallback.invoke(error.getMessage());
+        }
+      });
+      String amountStr = String.format(Locale.US, "%.2f", amount);
+      ThreeDSecure.performVerification(fragment3DSecure, paymentNonce, amountStr);
+    } catch (Exception e) {
+      errorCallback.invoke(e.getMessage());
+    }
+  }
+
 }

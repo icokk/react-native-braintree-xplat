@@ -21,4 +21,10 @@ module.exports = {
       Braintree.paymentRequest((nonce) => resolve(nonce), (error) => reject(error));
     });
   },
+
+  verify3DSecure(paymentNonce, amount) {
+    return new Promise(function(resolve, reject) {
+      Braintree.verify3DSecure(paymentNonce, amount, (nonce) => resolve(nonce), (error) => reject(error));
+    });
+  },
 };
