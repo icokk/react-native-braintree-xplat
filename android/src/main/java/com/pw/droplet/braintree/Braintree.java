@@ -27,7 +27,7 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
   private static final int PAYMENT_REQUEST = 1;
   private String token;
 
-  private Callback successCallback;
+  private Callback nonceCreatedCallback;
   private Callback errorCallback;
 
   private Context mActivityContext;
@@ -59,7 +59,13 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
       this.mBraintreeFragment.addListener(new PaymentMethodNonceCreatedListener() {
         @Override
         public void onPaymentMethodNonceCreated(PaymentMethodNonce paymentMethodNonce) {
-          nonceCallback(paymentMethodNonce.getNonce());
+          nonceCreatedHandler(paymentMethodNonce.getNonce());
+        }
+      });
+      this.mBraintreeFragment.addListener(new BraintreeErrorListener() {
+        @Override
+        public void onError(Exception error) {
+          errorHandler(error.getMessage());
         }
       });
       this.setToken(token);
@@ -69,9 +75,19 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
     }
   }
 
+  private void nonceCreatedHandler(String nonce) {
+    if ( this.nonceCreatedCallback != null )
+      this.nonceCreatedCallback.invoke(nonce);
+  }
+
+  private void errorHandler(Object errorMessage) {
+    if ( this.errorCallback !=  null )
+      this.errorCallback.invoke(errorMessage);
+  }
+
   @ReactMethod
   public void getCardNonce(final String cardNumber, final String expirationMonth, final String expirationYear, final Callback successCallback, final Callback errorCallback) {
-    this.successCallback = successCallback;
+    this.nonceCreatedCallback = successCallback;
     this.errorCallback = errorCallback;
 
     CardBuilder cardBuilder = new CardBuilder()
@@ -82,22 +98,21 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
     Card.tokenize(this.mBraintreeFragment, cardBuilder);
   }
 
-  public void nonceCallback(String nonce) {
-    this.successCallback.invoke(nonce);
-  }
-
   @ReactMethod
   public void paymentRequest(final Callback successCallback, final Callback errorCallback) {
-    this.successCallback = successCallback;
+    this.nonceCreatedCallback = successCallback;
     this.errorCallback = errorCallback;
 
     PaymentRequest paymentRequest = new PaymentRequest()
       .clientToken(this.getToken());
 
-    getCurrentActivity().startActivityForResult(
-      paymentRequest.getIntent(getCurrentActivity()),
-      PAYMENT_REQUEST
-    );
+    Activity currentActivity = getCurrentActivity();
+    if ( currentActivity != null ) {
+      currentActivity.startActivityForResult(
+        paymentRequest.getIntent(currentActivity),
+        PAYMENT_REQUEST
+      );
+    }
   }
 
   @Override
@@ -108,12 +123,12 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
           PaymentMethodNonce paymentMethodNonce = data.getParcelableExtra(
             BraintreePaymentActivity.EXTRA_PAYMENT_METHOD_NONCE
           );
-          this.successCallback.invoke(paymentMethodNonce.getNonce());
+          this.nonceCreatedHandler(paymentMethodNonce.getNonce());
           break;
         case BraintreePaymentActivity.BRAINTREE_RESULT_DEVELOPER_ERROR:
         case BraintreePaymentActivity.BRAINTREE_RESULT_SERVER_ERROR:
         case BraintreePaymentActivity.BRAINTREE_RESULT_SERVER_UNAVAILABLE:
-          this.errorCallback.invoke(
+          this.errorHandler(
             data.getSerializableExtra(BraintreePaymentActivity.EXTRA_ERROR_MESSAGE)
           );
           break;
@@ -126,21 +141,12 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
   @ReactMethod
   public void verify3DSecure(String paymentNonce, double amount, final Callback successCallback, final Callback errorCallback) {
     try {
-      final BraintreeFragment fragment3DSecure = BraintreeFragment.newInstance(getCurrentActivity(), getToken());
-      fragment3DSecure.addListener(new PaymentMethodNonceCreatedListener() {
-        @Override
-        public void onPaymentMethodNonceCreated(PaymentMethodNonce paymentMethodNonce) {
-          successCallback.invoke(paymentMethodNonce.getNonce());
-        }
-      });
-      fragment3DSecure.addListener(new BraintreeErrorListener() {
-        @Override
-        public void onError(Exception error) {
-          errorCallback.invoke(error.getMessage());
-        }
-      });
+      this.nonceCreatedCallback = successCallback;
+      this.errorCallback = errorCallback;
+
       String amountStr = String.format(Locale.US, "%.2f", amount);
-      ThreeDSecure.performVerification(fragment3DSecure, paymentNonce, amountStr);
+
+      ThreeDSecure.performVerification(mBraintreeFragment, paymentNonce, amountStr);
     } catch (Exception e) {
       errorCallback.invoke(e.getMessage());
     }
