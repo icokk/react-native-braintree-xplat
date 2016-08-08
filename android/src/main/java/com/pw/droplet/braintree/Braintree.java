@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.content.Context;
 import android.app.Activity;
 
+import com.braintreepayments.api.PayPal;
 import com.braintreepayments.api.PaymentRequest;
 import com.braintreepayments.api.ThreeDSecure;
 import com.braintreepayments.api.interfaces.BraintreeErrorListener;
+import com.braintreepayments.api.models.PayPalRequest;
 import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.braintreepayments.api.BraintreePaymentActivity;
 import com.braintreepayments.api.BraintreeFragment;
@@ -87,31 +89,39 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
 
   @ReactMethod
   public void getCardNonce(final String cardNumber, final String expirationMonth, final String expirationYear, final Callback successCallback, final Callback errorCallback) {
-    this.nonceCreatedCallback = successCallback;
-    this.errorCallback = errorCallback;
+    try {
+      this.nonceCreatedCallback = successCallback;
+      this.errorCallback = errorCallback;
 
-    CardBuilder cardBuilder = new CardBuilder()
-      .cardNumber(cardNumber)
-      .expirationMonth(expirationMonth)
-      .expirationYear(expirationYear);
+      CardBuilder cardBuilder = new CardBuilder()
+        .cardNumber(cardNumber)
+        .expirationMonth(expirationMonth)
+        .expirationYear(expirationYear);
 
-    Card.tokenize(this.mBraintreeFragment, cardBuilder);
+      Card.tokenize(this.mBraintreeFragment, cardBuilder);
+    } catch (Exception e) {
+      errorCallback.invoke(e.getMessage());
+    }
   }
 
   @ReactMethod
   public void paymentRequest(final Callback successCallback, final Callback errorCallback) {
-    this.nonceCreatedCallback = successCallback;
-    this.errorCallback = errorCallback;
+    try {
+      this.nonceCreatedCallback = successCallback;
+      this.errorCallback = errorCallback;
 
-    PaymentRequest paymentRequest = new PaymentRequest()
-      .clientToken(this.getToken());
+      PaymentRequest paymentRequest = new PaymentRequest()
+        .clientToken(this.getToken());
 
-    Activity currentActivity = getCurrentActivity();
-    if ( currentActivity != null ) {
-      currentActivity.startActivityForResult(
-        paymentRequest.getIntent(currentActivity),
-        PAYMENT_REQUEST
-      );
+      Activity currentActivity = getCurrentActivity();
+      if ( currentActivity != null ) {
+        currentActivity.startActivityForResult(
+          paymentRequest.getIntent(currentActivity),
+          PAYMENT_REQUEST
+        );
+      }
+    } catch (Exception e) {
+      errorCallback.invoke(e.getMessage());
     }
   }
 
@@ -147,6 +157,48 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
       String amountStr = String.format(Locale.US, "%.2f", amount);
 
       ThreeDSecure.performVerification(mBraintreeFragment, paymentNonce, amountStr);
+    } catch (Exception e) {
+      errorCallback.invoke(e.getMessage());
+    }
+  }
+
+  @ReactMethod
+  public void tokenizeCardAndVerify(String cardNumber, String expirationMonth, String expirationYear, String cvv, double amount, boolean verify,
+                                    final Callback successCallback, final Callback errorCallback)
+  {
+    try {
+      this.nonceCreatedCallback = successCallback;
+      this.errorCallback = errorCallback;
+
+      CardBuilder cardBuilder = new CardBuilder()
+        .cardNumber(cardNumber)
+        .expirationMonth(expirationMonth)
+        .expirationYear(expirationYear)
+        .cvv(cvv);
+
+      if ( verify ) {
+        String amountStr = String.format(Locale.US, "%.2f", amount);
+        ThreeDSecure.performVerification(this.mBraintreeFragment, cardBuilder, amountStr);
+      } else {
+        Card.tokenize(this.mBraintreeFragment, cardBuilder);
+      }
+    } catch (Exception e) {
+      errorCallback.invoke(e.getMessage());
+    }
+  }
+
+  @ReactMethod
+  public void payWithPayPal(double amount, String currency, final Callback successCallback, final Callback errorCallback) {
+    try {
+      this.nonceCreatedCallback = successCallback;
+      this.errorCallback = errorCallback;
+
+      String amountStr = String.format(Locale.US, "%.2f", amount);
+
+      PayPalRequest request = new PayPalRequest(amountStr)
+        .currencyCode(currency);
+
+      PayPal.requestOneTimePayment(mBraintreeFragment, request);
     } catch (Exception e) {
       errorCallback.invoke(e.getMessage());
     }
