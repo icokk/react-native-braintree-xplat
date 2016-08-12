@@ -148,6 +148,11 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
     }
   }
 
+  // necessary for react-native 0.31
+  public void onNewIntent(Intent intent) {
+
+  }
+
   @ReactMethod
   public void verify3DSecure(String paymentNonce, double amount, final Callback successCallback, final Callback errorCallback) {
     try {
