@@ -1,4 +1,3 @@
-#123
 # react-native-braintree-xplat
 [![npm version](https://badge.fury.io/js/react-native-braintree-xplat.svg)](https://badge.fury.io/js/react-native-braintree-xplat)
 
