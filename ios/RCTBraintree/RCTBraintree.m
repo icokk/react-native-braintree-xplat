@@ -127,7 +127,7 @@ RCT_EXPORT_METHOD(verify3DSecure: (NSString *)paymentNonce
                   )
 {
     NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:amount];
-    BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] init];
+    BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
     [threeDSecureDriver verifyCardWithNonce:paymentNonce
                                      amount:amountNum
                                  completion:^(BTThreeDSecureCardNonce *card, NSError *error){
@@ -157,7 +157,7 @@ RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
                   )
 {
     NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:amount];
-    BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] init];
+    BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
     BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
     BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
 
@@ -170,6 +170,7 @@ RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
                               [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
                                                                amount:amountNum
                                                            completion:^(BTThreeDSecureCardNonce *secureCard, NSError *error) {
+                                                                    NSArray *args = @[];
                                                                     if ( error == nil ) {
                                                                         if ( secureCard ) {
                                                                             args = @[[NSNull null], secureCard.nonce];
@@ -179,9 +180,10 @@ RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
                                                                     } else {
                                                                         args = @[error.description, [NSNull null]];
                                                                     }
+                                                                    callback(args);
                               }];
                           } else {
-                              args = @[[NSNull null], [NSNull null]]
+                              args = @[[NSNull null], [NSNull null]];
                           }
                       } else {
                           args = @[error.description, [NSNull null]];
