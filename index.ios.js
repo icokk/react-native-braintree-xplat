@@ -49,7 +49,7 @@ var Braintree = {
     			nonce != null ? resolve(nonce) : reject(err);
     		});
     	});
-    }
+    },
 
 	showPayPalCheckoutController(amount, currency) {
 		return new Promise(function(resolve, reject) {
