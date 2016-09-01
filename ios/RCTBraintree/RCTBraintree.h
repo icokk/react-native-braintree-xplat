@@ -11,6 +11,7 @@
 #import "BraintreePayPal.h"
 #import "BraintreeCard.h"
 #import "BraintreeUI.h"
+#import "Braintree3DSecure.h"
 
 @interface RCTBraintree : UIViewController <RCTBridgeModule, BTDropInViewControllerDelegate, BTViewControllerPresentingDelegate>
 

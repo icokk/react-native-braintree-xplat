@@ -51,6 +51,30 @@ var Braintree = {
     	});
     }
 
+	showPayPalCheckoutController(amount, currency) {
+		return new Promise(function(resolve, reject) {
+			RCTBRaintree.payWithPayPal(amount, currency || "EUR", function(err, nonce) {
+    			nonce != null ? resolve(nonce) : reject(err);
+    		});
+		});
+	},
+
+  verify3DSecure(paymentNonce, amount) {
+    return new Promise(function(resolve, reject) {
+      RCTBRaintree.verify3DSecure(paymentNonce, amount, function(err, nonce) {
+        nonce != null ? resolve(nonce) : reject(err);
+      });
+    });
+  },
+
+	get3DSecureVerifiedCardNonce(cardNumber, expirationMonth, expirationYear, cvv, amount, verify) {
+		return new Promise(function(resolve, reject) {
+			RCTBRaintree.tokenizeCardAndVerify(cardNumber, expirationMonth, expirationYear, cvv, amount, !!verify, function(err, nonce) {
+    			nonce != null ? resolve(nonce) : reject(err);
+    		});
+		});
+	},
+
 };
 
 module.exports = Braintree;

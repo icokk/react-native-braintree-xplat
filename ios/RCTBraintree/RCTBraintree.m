@@ -118,7 +118,106 @@ RCT_EXPORT_METHOD(getCardNonce: (NSString *)cardNumber
                       }
                       callback(args);
                   }
+    ];
+}
+
+RCT_EXPORT_METHOD(verify3DSecure: (NSString *)paymentNonce
+                  amount: (NSString *)amount
+                  callback: (RCTResponseSenderBlock)callback
+                  )
+{
+    NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:amount];
+    BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient:self.apiClient delegate:self]
+    [threeDSecureDriver verifyCardWithNonce:paymentNonce
+                                     amount:amountNum
+                                 completion:^(BTThreeDSecureCardNonce *card, NSError *error){
+
+                                      NSArray *args = @[];
+                                      if ( error == nil ) {
+                                          if ( card ) {
+                                              args = @[[NSNull null], card.nonce];
+                                          } else {
+                                              args = @[[NSNull null], [NSNull null]];
+                                          }
+                                      } else {
+                                          args = @[error.description, [NSNull null]];
+                                      }
+                                      callback(args);
+                                  }
+    ];
+}
+
+RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
+                  expirationMonth: (NSString *)expirationMonth
+                  expirationYear: (NSString *)expirationYear
+                  amount: (NSString *)amount
+                  verify: (bool)verify
+                  callback: (RCTResponseSenderBlock)callback
+                  )
+{
+    NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:amount];
+    BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient:self.apiClient delegate:self]
+    BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
+    BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
+
+    [cardClient tokenizeCard:card
+                  completion:^(BTCardNonce *tokenizedCard, NSError *error) {
+                      
+                      NSArray *args = @[];
+                      if ( error == nil ) {
+                          if ( tokenizedCard ) {
+                              [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
+                                                               amount:amountNum
+                                                           completion:^(BTThreeDSecureCardNonce *secureCard, NSError *error) {
+                                                                    if ( error == nil ) {
+                                                                        if ( secureCard ) {
+                                                                            args = @[[NSNull null], secureCard.nonce];
+                                                                        } else {
+                                                                            args = @[[NSNull null], [NSNull null]];
+                                                                        }
+                                                                    } else {
+                                                                        args = @[error.description, [NSNull null]];
+                                                                    }
+                              }];
+                          } else {
+                              args = @[[NSNull null], [NSNull null]]
+                          }
+                      } else {
+                          args = @[error.description, [NSNull null]];
+                      }
+                      callback(args);
+                  }
      ];
+}
+
+RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
+                  currency: (NSString *)currency
+                  callback: (RCTResponseSenderBlock)callback
+                  )
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        BTPayPalDriver *payPalDriver = [[BTPayPalDriver alloc] initWithAPIClient:self.braintreeClient];
+        BTPayPalRequest *request = [[BTPayPalRequest alloc] initWithAmount:amount]
+        request.currencyCode = currency;
+        
+        [payPalDriver requestOneTimePayment:request
+                                 completion:^(BTPayPalAccountNonce * _Nullable tokenizedPayPalAccount, NSError *error) {
+
+                                  NSArray *args = @[];
+                                  if ( error == nil ) {
+                                      if ( tokenizedPayPalAccount ) {
+                                          args = @[[NSNull null], tokenizedPayPalAccount.nonce];
+                                      } else {
+                                          args = @[[NSNull null], [NSNull null]];
+                                      }
+                                  } else {
+                                      args = @[error.description, [NSNull null]];
+                                  }
+                                  callback(args);
+                              }
+        ];
+    });
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
