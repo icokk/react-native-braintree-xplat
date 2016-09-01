@@ -127,7 +127,7 @@ RCT_EXPORT_METHOD(verify3DSecure: (NSString *)paymentNonce
                   )
 {
     NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:amount];
-    BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient:self.apiClient delegate:self]
+    BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] init];
     [threeDSecureDriver verifyCardWithNonce:paymentNonce
                                      amount:amountNum
                                  completion:^(BTThreeDSecureCardNonce *card, NSError *error){
@@ -150,13 +150,14 @@ RCT_EXPORT_METHOD(verify3DSecure: (NSString *)paymentNonce
 RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
                   expirationMonth: (NSString *)expirationMonth
                   expirationYear: (NSString *)expirationYear
+                  cvv: (NSString *)cvv
                   amount: (NSString *)amount
                   verify: (bool)verify
                   callback: (RCTResponseSenderBlock)callback
                   )
 {
     NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:amount];
-    BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient:self.apiClient delegate:self]
+    BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] init];
     BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
     BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
 
@@ -198,7 +199,7 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
     dispatch_async(dispatch_get_main_queue(), ^{
         
         BTPayPalDriver *payPalDriver = [[BTPayPalDriver alloc] initWithAPIClient:self.braintreeClient];
-        BTPayPalRequest *request = [[BTPayPalRequest alloc] initWithAmount:amount]
+        BTPayPalRequest *request = [[BTPayPalRequest alloc] initWithAmount:amount];
         request.currencyCode = currency;
         
         [payPalDriver requestOneTimePayment:request
