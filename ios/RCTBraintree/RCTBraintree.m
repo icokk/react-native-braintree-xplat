@@ -122,10 +122,11 @@ RCT_EXPORT_METHOD(getCardNonce: (NSString *)cardNumber
 }
 
 RCT_EXPORT_METHOD(verify3DSecure: (NSString *)paymentNonce
-                  amount: (NSDecimalNumber *)amount
+                  amountNumber: (NSNumber * _Nonnull)amountNumber
                   callback: (RCTResponseSenderBlock)callback
                   )
 {
+    NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[amountNumber decimalValue]];
     BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
     [threeDSecureDriver verifyCardWithNonce:paymentNonce
                                      amount:amount
@@ -150,11 +151,12 @@ RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
                   expirationMonth: (NSString *)expirationMonth
                   expirationYear: (NSString *)expirationYear
                   cvv: (NSString *)cvv
-                  amount: (NSDecimalNumber *)amount
+                  amountNumber: (NSNumber * _Nonnull)amountNumber
                   verify: (BOOL)verify
                   callback: (RCTResponseSenderBlock)callback
                   )
 {
+    NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[amountNumber decimalValue]];
     BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
     BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
     BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
@@ -182,25 +184,24 @@ RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
                               }];
                           } else {
                               args = @[[NSNull null], [NSNull null]];
+                              callback(args);
                           }
                       } else {
                           args = @[error.description, [NSNull null]];
+                          callback(args);
                       }
-                      callback(args);
                   }
      ];
 }
 
-RCT_EXPORT_METHOD(payWithPayPal: (NSDecimalNumber *)amount
+RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
                   currency: (NSString *)currency
                   callback: (RCTResponseSenderBlock)callback
                   )
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        NSString amountStr = [NSString stringWithFormat:@"%.2f", [[NSDecimalNumber decimalNumberWithDecimal:amount] doubleValue]]
         BTPayPalDriver *payPalDriver = [[BTPayPalDriver alloc] initWithAPIClient:self.braintreeClient];
-        BTPayPalRequest *request = [[BTPayPalRequest alloc] initWithAmount:amountStr];
+        BTPayPalRequest *request = [[BTPayPalRequest alloc] initWithAmount:amount];
         request.currencyCode = currency;
         
         [payPalDriver requestOneTimePayment:request

@@ -53,7 +53,7 @@ var Braintree = {
 
 	showPayPalCheckoutController(amount, currency) {
 		return new Promise(function(resolve, reject) {
-			RCTBraintree.payWithPayPal(amount, currency || "EUR", function(err, nonce) {
+			RCTBraintree.payWithPayPal(String(amount.toFixed(2)), currency || "EUR", function(err, nonce) {
     			nonce != null ? resolve(nonce) : reject(err);
     		});
 		});
