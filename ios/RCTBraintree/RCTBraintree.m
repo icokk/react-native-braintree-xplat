@@ -122,14 +122,13 @@ RCT_EXPORT_METHOD(getCardNonce: (NSString *)cardNumber
 }
 
 RCT_EXPORT_METHOD(verify3DSecure: (NSString *)paymentNonce
-                  amount: (NSString *)amount
+                  amount: (NSDecimalNumber *)amount
                   callback: (RCTResponseSenderBlock)callback
                   )
 {
-    NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:amount];
     BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
     [threeDSecureDriver verifyCardWithNonce:paymentNonce
-                                     amount:amountNum
+                                     amount:amount
                                  completion:^(BTThreeDSecureCardNonce *card, NSError *error){
 
                                       NSArray *args = @[];
@@ -151,12 +150,11 @@ RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
                   expirationMonth: (NSString *)expirationMonth
                   expirationYear: (NSString *)expirationYear
                   cvv: (NSString *)cvv
-                  amount: (NSString *)amount
-                  verify: (bool)verify
+                  amount: (NSDecimalNumber *)amount
+                  verify: (BOOL)verify
                   callback: (RCTResponseSenderBlock)callback
                   )
 {
-    NSDecimalNumber *amountNum = [NSDecimalNumber decimalNumberWithString:amount];
     BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
     BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
     BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
@@ -168,7 +166,7 @@ RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
                       if ( error == nil ) {
                           if ( tokenizedCard ) {
                               [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
-                                                               amount:amountNum
+                                                               amount:amount
                                                            completion:^(BTThreeDSecureCardNonce *secureCard, NSError *error) {
                                                                     NSArray *args = @[];
                                                                     if ( error == nil ) {
@@ -193,15 +191,16 @@ RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
      ];
 }
 
-RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
+RCT_EXPORT_METHOD(payWithPayPal: (NSDecimalNumber *)amount
                   currency: (NSString *)currency
                   callback: (RCTResponseSenderBlock)callback
                   )
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         
+        NSString amountStr = [NSString stringWithFormat:@"%.2f", [[NSDecimalNumber decimalNumberWithDecimal:amount] doubleValue]]
         BTPayPalDriver *payPalDriver = [[BTPayPalDriver alloc] initWithAPIClient:self.braintreeClient];
-        BTPayPalRequest *request = [[BTPayPalRequest alloc] initWithAmount:amount];
+        BTPayPalRequest *request = [[BTPayPalRequest alloc] initWithAmount:amountStr];
         request.currencyCode = currency;
         
         [payPalDriver requestOneTimePayment:request
