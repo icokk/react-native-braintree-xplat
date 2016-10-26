@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/main"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:id="@+id/main">
+  android:columnCount="2">
 
   <TextView
     android:text="@string/credit_card_number"
@@ -13,14 +14,20 @@
     android:layout_columnSpan="2"
     android:layout_gravity="fill_horizontal" />
 
-  <EditText
-    android:inputType="number"
-    android:id="@+id/cardNumber"
+  <android.support.design.widget.TextInputLayout
+    android:id="@+id/cardNumberLayout"
     android:layout_row="1"
     android:layout_column="0"
     android:layout_columnSpan="2"
-    android:hint="@string/card_number"
-    android:layout_gravity="fill_horizontal" />
+    android:layout_gravity="fill_horizontal">
+
+    <EditText
+      android:inputType="number"
+      android:id="@+id/cardNumber"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/credit_card_number" />
+  </android.support.design.widget.TextInputLayout>
 
   <TextView
     android:text="@string/cvv"
@@ -30,14 +37,20 @@
     android:layout_columnSpan="2"
     android:layout_gravity="fill_horizontal" />
 
-  <EditText
-    android:inputType="number"
-    android:id="@+id/cardCVV"
-    android:hint="@string/cvc_cvv"
+  <android.support.design.widget.TextInputLayout
+    android:id="@+id/cardCVVLayout"
     android:layout_row="3"
     android:layout_column="0"
     android:layout_columnSpan="2"
-    android:layout_gravity="fill_horizontal" />
+    android:layout_gravity="fill_horizontal">
+
+    <EditText
+      android:inputType="number"
+      android:id="@+id/cardCVV"
+      android:hint="@string/cvc_cvv"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+  </android.support.design.widget.TextInputLayout>
 
   <TextView
     android:text="@string/expiration_date"
@@ -47,24 +60,36 @@
     android:layout_columnSpan="2"
     android:layout_gravity="fill_horizontal" />
 
-  <EditText
-    android:inputType="number"
-    android:hint="@string/month"
+  <android.support.design.widget.TextInputLayout
+    android:id="@+id/expiryMonthLayout"
     android:layout_row="5"
     android:layout_column="0"
     android:layout_columnWeight="1"
     android:layout_gravity="fill_horizontal"
-    android:id="@+id/expiryMonth"
-    tools:targetApi="lollipop" />
+    tools:targetApi="lollipop">
 
-  <EditText
-    android:inputType="number"
-    android:hint="@string/year"
+    <EditText
+      android:id="@+id/expiryMonth"
+      android:inputType="number"
+      android:hint="@string/month"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+  </android.support.design.widget.TextInputLayout>
+
+  <android.support.design.widget.TextInputLayout
+    android:id="@+id/expiryYearLayout"
     android:layout_row="5"
     android:layout_column="1"
     android:layout_columnWeight="1"
-    android:id="@+id/expiryYear"
     android:layout_gravity="fill_horizontal"
-    tools:targetApi="lollipop" />
+    tools:targetApi="lollipop">
+
+    <EditText
+      android:inputType="number"
+      android:hint="@string/year"
+      android:id="@+id/expiryYear"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+  </android.support.design.widget.TextInputLayout>
 
 </GridLayout>

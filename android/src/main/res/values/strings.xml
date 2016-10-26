@@ -5,6 +5,6 @@
   <string name="cvv">CVV</string>
   <string name="cvc_cvv">CVC/CVV</string>
   <string name="expiration_date">Expiration Date</string>
-  <string name="month">Month</string>
-  <string name="year">Year</string>
+  <string name="month">Expiration Month</string>
+  <string name="year">Expiration Year</string>
 </resources>
