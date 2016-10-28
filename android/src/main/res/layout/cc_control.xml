@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:measureAllChildren="false"
+    tools:context="com.abelium.braintreeccform.CreditCardControl"
+    tools:parentTag="FrameLayout">
+
+    <include layout="@layout/cc_layout" />
+
+    <ProgressBar
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:id="@+id/ctrlActivityIndicator"
+        android:indeterminateOnly="true"
+        android:keepScreenOn="true"
+        android:visibility="gone" />
+</merge>

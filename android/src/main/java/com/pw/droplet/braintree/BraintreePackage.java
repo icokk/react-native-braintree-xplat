@@ -1,5 +1,6 @@
 package com.pw.droplet.braintree;
 
+import com.abelium.braintreeccform.CreditCardControlManager;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
@@ -17,7 +18,6 @@ public class BraintreePackage implements ReactPackage {
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
     mModuleInstance = new Braintree(reactContext);
-
     modules.add(mModuleInstance);
     return modules;
   }
@@ -29,6 +29,8 @@ public class BraintreePackage implements ReactPackage {
 
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-    return Collections.emptyList();
+    List<ViewManager> viewManagers = new ArrayList<>();
+    viewManagers.add(new CreditCardControlManager(mModuleInstance));
+    return viewManagers;
   }
 }

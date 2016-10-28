@@ -1,10 +1,11 @@
 <resources>
   <string name="app_name">react-native-braintree-xplat</string>
   <string name="credit_card_number">Credit Card Number</string>
-  <string name="card_number">Card Number</string>
-  <string name="cvv">CVV</string>
   <string name="cvc_cvv">CVC/CVV</string>
-  <string name="expiration_date">Expiration Date</string>
-  <string name="month">Expiration Month</string>
-  <string name="year">Expiration Year</string>
+  <string name="month">Month (MM)</string>
+  <string name="year">Year (YYYY)</string>
+  <string name="invalid_cc_number">Invalid credit card number</string>
+  <string name="invalid_cc_cvv">Invalid control code, it must contain 3 or 4 digits</string>
+  <string name="invalid_cc_date">Invalid date or expired card</string>
+  <string name="error_cc_not_accepted">Credit card not accepted</string>
 </resources>
