@@ -28,6 +28,11 @@ public class CreditCardControlManager extends SimpleViewManager<CreditCardContro
     return control;
   }
 
+  @ReactProp(name = "requiredCard")
+  public void setRequireCVV(RCTCreditCardControl control, String requiredCard) {
+    control.setRequiredCardName(requiredCard);
+  }
+
   @ReactProp(name = "require3dSecure")
   public void setRequire3dSecure(RCTCreditCardControl control, boolean require3dSecure) {
     control.setRequire3dSecure(require3dSecure);

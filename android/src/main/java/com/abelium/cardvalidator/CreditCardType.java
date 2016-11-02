@@ -61,6 +61,13 @@ public enum CreditCardType {
         return Validity.Partial;
     }
 
+    public static CreditCardType byName(String name) {
+        for ( CreditCardType card : CreditCardType.values() )
+            if ( card.name.equals(name) || card.niceName.equals(name) )
+                return card;
+        return null;
+    }
+
     boolean isLengthMaximal(String number) {
         return number.length() == maxLength;
     }

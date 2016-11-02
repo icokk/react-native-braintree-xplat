@@ -4,6 +4,7 @@ import { requireNativeComponent, View } from 'react-native';
 var CreditCardControl = {
   name: 'CreditCardControl',
   propTypes: {
+    requiredCard: PropTypes.string,
     require3dSecure: PropTypes.bool,
     requireCVV: PropTypes.bool,
     amount: PropTypes.number,

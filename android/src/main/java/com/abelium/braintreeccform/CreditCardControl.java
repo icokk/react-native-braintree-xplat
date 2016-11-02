@@ -67,7 +67,8 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     }
 
     private SubmitHandler onSubmit;
-    private CreditCardType requiredCard;
+    private CreditCardType requiredCard = null;
+    private boolean requireCVV = true;
 
     private EditText ccNumber, ccCVV, ccMonth, ccYear;
     private TextInputLayout ccNumberLayout, ccCVVLayout, ccMonthLayout, ccYearLayout;
@@ -120,6 +121,8 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
         ccCVV.addTextChangedListener(new CCTextWatcher(ControlType.CVV));
         ccMonth.addTextChangedListener(new CCTextWatcher(ControlType.Month));
         ccYear.addTextChangedListener(new CCTextWatcher(ControlType.Year));
+        // set control state
+        this.ccCVV.setVisibility(requireCVV ? VISIBLE : GONE);
     }
 
     @Override
@@ -202,7 +205,7 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
         if ( this.onSubmit == null )
             return;
         String number = ccNumber.getText().toString();
-        String cvv = ccCVV.getText().toString();
+        String cvv = requireCVV ? ccCVV.getText().toString() : null;
         DateValidity dv = DateValidator.validateDate(ccMonth.getText().toString(), ccYear.getText().toString());
         String month = String.format(Locale.US, "%02d", dv.getMonth());
         String year = String.format(Locale.US, "%04d", dv.getYear());
@@ -246,5 +249,15 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
 
     public void setRequiredCard(CreditCardType requiredCard) {
         this.requiredCard = requiredCard;
+    }
+
+    public boolean isRequireCVV() {
+      return requireCVV;
+    }
+
+    public void setRequireCVV(boolean requireCVV) {
+      this.requireCVV = requireCVV;
+      if ( this.ccCVV != null )
+        this.ccCVV.setVisibility(requireCVV ? VISIBLE : GONE);
     }
 }

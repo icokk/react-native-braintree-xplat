@@ -3,6 +3,7 @@ package com.abelium.braintreeccform;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.abelium.cardvalidator.CreditCardType;
 import com.facebook.react.bridge.Callback;
 import com.pw.droplet.braintree.Braintree;
 
@@ -10,7 +11,6 @@ public class RCTCreditCardControl extends CreditCardControl
 {
   private Braintree braintreeModule;
   private boolean require3dSecure = false;
-  private boolean requireCVV = true;
   private double amount;
   private Callback onNonceReceived;
 
@@ -75,12 +75,13 @@ public class RCTCreditCardControl extends CreditCardControl
     this.require3dSecure = require3dSecure;
   }
 
-  public boolean isRequireCVV() {
-    return requireCVV;
+  public String getRequiredCardName() {
+    CreditCardType card = getRequiredCard();
+    return card == null ? null : card.getName();
   }
 
-  public void setRequireCVV(boolean requireCVV) {
-    this.requireCVV = requireCVV;
+  public void setRequiredCardName(String requiredCard) {
+    setRequiredCard(CreditCardType.byName(requiredCard));
   }
 
   public double getAmount() {
