@@ -8,25 +8,37 @@ import com.pw.droplet.braintree.Braintree;
 
 public class RCTCreditCardControl extends CreditCardControl
 {
-  public RCTCreditCardControl(Context context) {
-    super(context);
-  }
-
-  public RCTCreditCardControl(Context context, AttributeSet attrs) {
-    super(context, attrs);
-  }
-
-  public RCTCreditCardControl(Context context, AttributeSet attrs, int defStyleAttr) {
-    super(context, attrs, defStyleAttr);
-  }
-
   private Braintree braintreeModule;
   private boolean require3dSecure = false;
   private boolean requireCVV = true;
   private double amount;
   private Callback onNonceReceived;
 
-  public void obtainPaymentNonce(String number, String cvv, String month, String year) {
+  public RCTCreditCardControl(Context context) {
+    super(context);
+    initialize();
+  }
+
+  public RCTCreditCardControl(Context context, AttributeSet attrs) {
+    super(context, attrs);
+    initialize();
+  }
+
+  public RCTCreditCardControl(Context context, AttributeSet attrs, int defStyleAttr) {
+    super(context, attrs, defStyleAttr);
+    initialize();
+  }
+
+  private void initialize() {
+    setOnSubmit(new CreditCardControl.SubmitHandler() {
+      @Override
+      public void submit(String number, String cvv, String month, String year) {
+        obtainPaymentNonce(number, cvv, month, year);
+      }
+    });
+  }
+
+  private void obtainPaymentNonce(String number, String cvv, String month, String year) {
     Callback successCallback = new Callback() {
       @Override
       public void invoke(Object... args) {

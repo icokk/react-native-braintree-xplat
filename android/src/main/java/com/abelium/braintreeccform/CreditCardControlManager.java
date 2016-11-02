@@ -1,7 +1,9 @@
 package com.abelium.braintreeccform;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.annotations.ReactProp;
 import com.pw.droplet.braintree.Braintree;
 
 public class CreditCardControlManager extends SimpleViewManager<CreditCardControl>
@@ -21,14 +23,28 @@ public class CreditCardControlManager extends SimpleViewManager<CreditCardContro
 
   @Override
   protected CreditCardControl createViewInstance(ThemedReactContext reactContext) {
-    final RCTCreditCardControl control = new RCTCreditCardControl(reactContext);
+    RCTCreditCardControl control = new RCTCreditCardControl(reactContext);
     control.setBraintreeModule(braintreeModule);
-    control.setOnSubmit(new CreditCardControl.SubmitHandler() {
-      @Override
-      public void submit(String number, String cvv, String month, String year) {
-        control.obtainPaymentNonce(number, cvv, month, year);
-      }
-    });
     return control;
+  }
+
+  @ReactProp(name = "require3dSecure")
+  public void setRequire3dSecure(RCTCreditCardControl control, boolean require3dSecure) {
+    control.setRequire3dSecure(require3dSecure);
+  }
+
+  @ReactProp(name = "requireCVV")
+  public void setRequireCVV(RCTCreditCardControl control, boolean requireCVV) {
+    control.setRequireCVV(requireCVV);
+  }
+
+  @ReactProp(name = "amount")
+  public void setAmount(RCTCreditCardControl control, double amount) {
+    control.setAmount(amount);
+  }
+
+  @ReactProp(name = "onNonceReceived")
+  public void setOnNonceReceived(RCTCreditCardControl control, Callback onNonceReceived) {
+    control.setOnNonceReceived(onNonceReceived);
   }
 }
