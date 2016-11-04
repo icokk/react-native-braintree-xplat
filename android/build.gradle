@@ -24,4 +24,5 @@ dependencies {
     compile 'com.braintreepayments.api:braintree:2.+'
     compile 'com.braintreepayments.api:drop-in:2.+'
     compile 'com.android.support:design:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.0.1'
 }

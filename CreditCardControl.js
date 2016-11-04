@@ -1,17 +1,25 @@
-import { PropTypes } from 'react';
-import { requireNativeComponent, View } from 'react-native';
+import React, { PropTypes } from 'react'
+import { View, requireNativeComponent } from 'react-native'
 
-var CreditCardControl = {
-  name: 'CreditCardControl',
-  propTypes: {
+export default class CreditCardControl extends React.Component {
+  static displayName = "CreditCardControl";
+
+  static propTypes = {
+    // include the default view properties
+    ...View.propTypes,
+    // extra properties
     requiredCard: PropTypes.string,
     require3dSecure: PropTypes.bool,
     requireCVV: PropTypes.bool,
     amount: PropTypes.number,
     onNonceReceived: PropTypes.func,
-    // include the default view properties
-    ...View.propTypes
-  },
+  };
+
+  render() {
+    return (
+      <RCTCreditCardControl {...this.props} />
+    );
+  }
 }
 
-module.exports = requireNativeComponent('RCTCreditCardControl', CreditCardControl);
+const RCTCreditCardControl = requireNativeComponent('RCTCreditCardControl', CreditCardControl);

@@ -1,35 +1,29 @@
 package com.abelium.braintreeccform;
 
-import android.content.Context;
-import android.util.AttributeSet;
+import android.annotation.SuppressLint;
 
 import com.abelium.cardvalidator.CreditCardType;
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
-import com.pw.droplet.braintree.Braintree;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
 
+@SuppressLint("ViewConstructor")
 public class RCTCreditCardControl extends CreditCardControl
 {
-  private Braintree braintreeModule;
+  private CreditCardControlManager manager;
   private boolean require3dSecure = false;
   private double amount;
-  private Callback onNonceReceived;
 
-  public RCTCreditCardControl(Context context) {
+  public RCTCreditCardControl(ThemedReactContext context, CreditCardControlManager manager) {
     super(context);
-    initialize();
+    this.manager = manager;
+    initializeHandlers();
   }
 
-  public RCTCreditCardControl(Context context, AttributeSet attrs) {
-    super(context, attrs);
-    initialize();
-  }
-
-  public RCTCreditCardControl(Context context, AttributeSet attrs, int defStyleAttr) {
-    super(context, attrs, defStyleAttr);
-    initialize();
-  }
-
-  private void initialize() {
+  private void initializeHandlers() {
     setOnSubmit(new CreditCardControl.SubmitHandler() {
       @Override
       public void submit(String number, String cvv, String month, String year) {
@@ -44,8 +38,10 @@ public class RCTCreditCardControl extends CreditCardControl
       public void invoke(Object... args) {
         String nonce = (String) args[0];
         endSubmit(true, null);
-        if ( onNonceReceived != null )
-          onNonceReceived.invoke(nonce);
+        // emit event
+        WritableMap eventArgs = Arguments.createMap();
+        eventArgs.putString("nonce", nonce);
+        emitEvent("onNonceReceived", eventArgs);
       }
     };
     Callback errorCallback = new Callback() {
@@ -55,16 +51,14 @@ public class RCTCreditCardControl extends CreditCardControl
         endSubmit(false, errorMessage);
       }
     };
-    braintreeModule.tokenizeCardAndVerify(number, month, year, cvv, amount, require3dSecure,
+    manager.getBraintreeModule().tokenizeCardAndVerify(number, month, year, cvv, amount, require3dSecure,
       successCallback, errorCallback);
   }
 
-  public Braintree getBraintreeModule() {
-    return braintreeModule;
-  }
-
-  public void setBraintreeModule(Braintree braintreeModule) {
-    this.braintreeModule = braintreeModule;
+  private void emitEvent(String name, WritableMap eventArgs) {
+    ReactContext reactContext = (ReactContext) getContext();
+    RCTEventEmitter eventEmitter = reactContext.getJSModule(RCTEventEmitter.class);
+    eventEmitter.receiveEvent(getId(), name, eventArgs);
   }
 
   public boolean isRequire3dSecure() {
@@ -90,13 +84,5 @@ public class RCTCreditCardControl extends CreditCardControl
 
   public void setAmount(double amount) {
     this.amount = amount;
-  }
-
-  public Callback getOnNonceReceived() {
-    return onNonceReceived;
-  }
-
-  public void setOnNonceReceived(Callback onNonceReceived) {
-    this.onNonceReceived = onNonceReceived;
   }
 }

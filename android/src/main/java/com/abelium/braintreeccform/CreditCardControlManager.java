@@ -1,12 +1,21 @@
 package com.abelium.braintreeccform;
 
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.pw.droplet.braintree.Braintree;
 
-public class CreditCardControlManager extends SimpleViewManager<CreditCardControl>
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
+public class CreditCardControlManager extends SimpleViewManager<RCTCreditCardControl>
 {
   public static final String CLASS_NAME = "RCTCreditCardControl";
 
@@ -22,10 +31,12 @@ public class CreditCardControlManager extends SimpleViewManager<CreditCardContro
   }
 
   @Override
-  protected CreditCardControl createViewInstance(ThemedReactContext reactContext) {
-    RCTCreditCardControl control = new RCTCreditCardControl(reactContext);
-    control.setBraintreeModule(braintreeModule);
-    return control;
+  protected RCTCreditCardControl createViewInstance(ThemedReactContext reactContext) {
+    return new RCTCreditCardControl(reactContext, this);
+  }
+
+  public Braintree getBraintreeModule() {
+    return braintreeModule;
   }
 
   @ReactProp(name = "requiredCard")
@@ -48,8 +59,11 @@ public class CreditCardControlManager extends SimpleViewManager<CreditCardContro
     control.setAmount(amount);
   }
 
-  @ReactProp(name = "onNonceReceived")
-  public void setOnNonceReceived(RCTCreditCardControl control, Callback onNonceReceived) {
-    control.setOnNonceReceived(onNonceReceived);
+  @Nullable
+  @Override
+  public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
+    return MapBuilder.of(
+      "onNonceReceived", (Object) MapBuilder.of("registrationName", "onNonceReceived")
+    );
   }
 }
