@@ -12,13 +12,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class BraintreePackage implements ReactPackage {
-  private Braintree mModuleInstance;
+  private Braintree braintreeInstance;
+
+  private synchronized Braintree getBraintreeInstance(ReactApplicationContext reactContext) {
+    if ( braintreeInstance == null )
+      braintreeInstance = new Braintree(reactContext);
+    return braintreeInstance;
+  }
 
   @Override
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
-    mModuleInstance = new Braintree(reactContext);
-    modules.add(mModuleInstance);
+    modules.add(getBraintreeInstance(reactContext));
     return modules;
   }
 
@@ -30,7 +35,7 @@ public class BraintreePackage implements ReactPackage {
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
     List<ViewManager> viewManagers = new ArrayList<>();
-    viewManagers.add(new CreditCardControlManager(mModuleInstance, reactContext));
+    viewManagers.add(new CreditCardControlManager(getBraintreeInstance(reactContext), reactContext));
     return viewManagers;
   }
 }

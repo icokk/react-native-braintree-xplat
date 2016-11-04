@@ -160,10 +160,13 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     }
 
     private void markField(ControlType control, TextInputLayout layout, Validity validity, boolean submit) {
-        if ( validity == Validity.Invalid || (submit && validity == Validity.Partial) )
+        if ( validity == Validity.Invalid || (submit && validity == Validity.Partial) ) {
+            layout.setErrorEnabled(true);
             layout.setError(getErrorMessage(control, validity));
-        else
+        } else {
+            layout.setError(null);
             layout.setErrorEnabled(false);
+        }
     }
 
     private Validity validateNumber(boolean submit) {

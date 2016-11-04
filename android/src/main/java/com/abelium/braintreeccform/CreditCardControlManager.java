@@ -1,10 +1,8 @@
 package com.abelium.braintreeccform;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
-import com.facebook.csslayout.CSSLayoutContext;
 import com.facebook.csslayout.CSSMeasureMode;
 import com.facebook.csslayout.CSSNodeAPI;
 import com.facebook.csslayout.MeasureOutput;
@@ -99,14 +97,14 @@ public class CreditCardControlManager extends ViewGroupManager<RCTCreditCardCont
     public final MeasureFunction measureFunction = new MeasureFunction() {
       @Override
       public void measure(CSSNodeAPI node, float width, CSSMeasureMode widthMode, float height, CSSMeasureMode heightMode, MeasureOutput measureOutput) {
-        Log.i(TAG, String.format("MEASURE %s, %s %s, %s %s", node, width, widthMode, height, heightMode));
+        // Log.i(TAG, String.format("MEASURE %s, %s %s, %s %s", node, width, widthMode, height, heightMode));
         //noinspection WrongConstant
         dummyControl.measure(
                 View.MeasureSpec.makeMeasureSpec((int) width, translateMeasureSpec(widthMode)),
                 View.MeasureSpec.makeMeasureSpec((int) height, translateMeasureSpec(heightMode)));
         measureOutput.width = dummyControl.getMeasuredWidth();
         measureOutput.height = dummyControl.getMeasuredHeight();
-        Log.i(TAG, String.format("MEASURE RESULT: width=%s height=%s", measureOutput.width, measureOutput.height));
+        // Log.i(TAG, String.format("MEASURE RESULT: width=%s height=%s", measureOutput.width, measureOutput.height));
       }
     };
   }

@@ -15,9 +15,15 @@ export default class CreditCardControl extends React.Component {
     onNonceReceived: PropTypes.func,
   };
 
+  _onNonceReceived(event) {
+    if ( this.props.onNonceReceived )
+      this.props.onNonceReceived(event.nativeEvent.nonce);
+  }
+
   render() {
     return (
-      <RCTCreditCardControl {...this.props} />
+      <RCTCreditCardControl {...this.props}
+        onNonceReceived={(event) => { this._onNonceReceived(event); }} />
     );
   }
 }

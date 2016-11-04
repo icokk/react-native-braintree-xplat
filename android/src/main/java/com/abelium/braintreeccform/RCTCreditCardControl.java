@@ -52,6 +52,7 @@ public class RCTCreditCardControl extends CreditCardControl
       @Override
       public void invoke(Object... args) {
         String errorMessage = (String) args[0];
+        Log.w(TAG, "BRAINTREE ERROR " + errorMessage);
         endSubmit(false, errorMessage);
       }
     };
