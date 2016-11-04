@@ -1,6 +1,7 @@
 package com.abelium.braintreeccform;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import com.abelium.cardvalidator.CreditCardType;
 import com.facebook.react.bridge.Arguments;
@@ -13,6 +14,8 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 @SuppressLint("ViewConstructor")
 public class RCTCreditCardControl extends CreditCardControl
 {
+  public static final String TAG = RCTCreditCardControl.class.getName();
+
   private CreditCardControlManager manager;
   private boolean require3dSecure = false;
   private double amount;
@@ -20,6 +23,7 @@ public class RCTCreditCardControl extends CreditCardControl
   public RCTCreditCardControl(ThemedReactContext context, CreditCardControlManager manager) {
     super(context);
     this.manager = manager;
+    initComponents();       // must call here beacuse onFinishInflate is not called in react native
     initializeHandlers();
   }
 
@@ -60,6 +64,23 @@ public class RCTCreditCardControl extends CreditCardControl
     RCTEventEmitter eventEmitter = reactContext.getJSModule(RCTEventEmitter.class);
     eventEmitter.receiveEvent(getId(), name, eventArgs);
   }
+
+  private final Runnable measureAndLayout = new Runnable() {
+    @Override
+    public void run() {
+      measure(MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.EXACTLY),
+              MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.EXACTLY));
+      layout(getLeft(), getTop(), getRight(), getBottom());
+    }
+  };
+
+  @Override
+  public void requestLayout() {
+    super.requestLayout();
+    Log.i(TAG, "requestLayout " + this);
+    post(measureAndLayout);
+  }
+
 
   public boolean isRequire3dSecure() {
     return require3dSecure;

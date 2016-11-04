@@ -30,7 +30,7 @@ public class BraintreePackage implements ReactPackage {
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
     List<ViewManager> viewManagers = new ArrayList<>();
-    viewManagers.add(new CreditCardControlManager(mModuleInstance));
+    viewManagers.add(new CreditCardControlManager(mModuleInstance, reactContext));
     return viewManagers;
   }
 }

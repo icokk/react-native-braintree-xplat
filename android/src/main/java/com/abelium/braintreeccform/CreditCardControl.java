@@ -70,6 +70,7 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     private CreditCardType requiredCard = null;
     private boolean requireCVV = true;
 
+    private boolean initialized = false;
     private EditText ccNumber, ccCVV, ccMonth, ccYear;
     private TextInputLayout ccNumberLayout, ccCVVLayout, ccMonthLayout, ccYearLayout;
     private Button ccPayBtn;
@@ -99,6 +100,12 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        initComponents();
+    }
+
+    protected void initComponents() {
+        if ( initialized )
+            return;
         // set fields
         this.ccNumber = (EditText) findViewById(R.id.cc_number);
         this.ccCVV = (EditText) findViewById(R.id.cc_cvv);
@@ -123,6 +130,8 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
         ccYear.addTextChangedListener(new CCTextWatcher(ControlType.Year));
         // set control state
         this.ccCVV.setVisibility(requireCVV ? VISIBLE : GONE);
+        //
+        initialized = true;
     }
 
     @Override
