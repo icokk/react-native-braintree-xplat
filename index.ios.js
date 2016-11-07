@@ -1,6 +1,8 @@
 'use strict';
 
 import { NativeModules, processColor } from 'react-native';
+import CreditCardControl from './CreditCardControl';
+
 var RCTBraintree = NativeModules.Braintree;
 
 var Braintree = {
@@ -75,6 +77,7 @@ var Braintree = {
 		});
 	},
 
+  CreditCardControl: CreditCardControl,
 };
 
 module.exports = Braintree;
