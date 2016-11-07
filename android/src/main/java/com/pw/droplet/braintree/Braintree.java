@@ -57,24 +57,32 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
   @ReactMethod
   public void setup(final String token, final Callback successCallback, final Callback errorCallback) {
     try {
-      this.mBraintreeFragment = BraintreeFragment.newInstance(getCurrentActivity(), token);
-      this.mBraintreeFragment.addListener(new PaymentMethodNonceCreatedListener() {
-        @Override
-        public void onPaymentMethodNonceCreated(PaymentMethodNonce paymentMethodNonce) {
-          nonceCreatedHandler(paymentMethodNonce.getNonce());
-        }
-      });
-      this.mBraintreeFragment.addListener(new BraintreeErrorListener() {
-        @Override
-        public void onError(Exception error) {
-          errorHandler(error.getMessage());
-        }
-      });
-      this.setToken(token);
+      this.setup(token);
       successCallback.invoke(this.getToken());
     } catch (InvalidArgumentException e) {
       errorCallback.invoke(e.getMessage());
     }
+  }
+
+  public void setup(String token) throws InvalidArgumentException {
+    this.mBraintreeFragment = BraintreeFragment.newInstance(getCurrentActivity(), token);
+    this.mBraintreeFragment.addListener(new PaymentMethodNonceCreatedListener() {
+      @Override
+      public void onPaymentMethodNonceCreated(PaymentMethodNonce paymentMethodNonce) {
+        nonceCreatedHandler(paymentMethodNonce.getNonce());
+      }
+    });
+    this.mBraintreeFragment.addListener(new BraintreeErrorListener() {
+      @Override
+      public void onError(Exception error) {
+        errorHandler(error.getMessage());
+      }
+    });
+    this.setToken(token);
+  }
+
+  public boolean isSetup() {
+    return mBraintreeFragment != null && token != null;
   }
 
   private void nonceCreatedHandler(String nonce) {

@@ -8,6 +8,7 @@ export default class CreditCardControl extends React.Component {
     // include the default view properties
     ...View.propTypes,
     // extra properties
+    clientToken: PropTypes.string,
     requiredCard: PropTypes.string,
     require3dSecure: PropTypes.bool,
     requireCVV: PropTypes.bool,

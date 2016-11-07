@@ -244,7 +244,7 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     public void endSubmit(boolean success, String errorMessage) {
         showSubmitMode(false);
         if ( !success && errorMessage != null )
-            ccNumber.setError(getContext().getString(R.string.error_cc_not_accepted));
+            ccNumberLayout.setError(getContext().getString(R.string.error_cc_not_accepted));
     }
 
     public SubmitHandler getOnSubmit() {

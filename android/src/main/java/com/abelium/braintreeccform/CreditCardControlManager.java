@@ -1,8 +1,10 @@
 package com.abelium.braintreeccform;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
+import com.braintreepayments.api.exceptions.InvalidArgumentException;
 import com.facebook.csslayout.CSSMeasureMode;
 import com.facebook.csslayout.CSSNodeAPI;
 import com.facebook.csslayout.MeasureOutput;
@@ -64,6 +66,11 @@ public class CreditCardControlManager extends ViewGroupManager<RCTCreditCardCont
   @ReactProp(name = "amount")
   public void setAmount(RCTCreditCardControl control, double amount) {
     control.setAmount(amount);
+  }
+
+  @ReactProp(name = "clientToken")
+  public void setClientToken(RCTCreditCardControl control, String clientToken) {
+    control.setClientToken(clientToken);
   }
 
   @Nullable

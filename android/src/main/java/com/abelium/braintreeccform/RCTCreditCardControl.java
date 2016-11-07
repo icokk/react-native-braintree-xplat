@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
+import com.pw.droplet.braintree.Braintree;
 
 @SuppressLint("ViewConstructor")
 public class RCTCreditCardControl extends CreditCardControl
@@ -19,6 +20,7 @@ public class RCTCreditCardControl extends CreditCardControl
   private CreditCardControlManager manager;
   private boolean require3dSecure = false;
   private double amount;
+  private String clientToken;
 
   public RCTCreditCardControl(ThemedReactContext context, CreditCardControlManager manager) {
     super(context);
@@ -56,8 +58,16 @@ public class RCTCreditCardControl extends CreditCardControl
         endSubmit(false, errorMessage);
       }
     };
-    manager.getBraintreeModule().tokenizeCardAndVerify(number, month, year, cvv, amount, require3dSecure,
-      successCallback, errorCallback);
+    try {
+      Braintree braintreeModule = manager.getBraintreeModule();
+      if ( clientToken != null && !clientToken.equals(braintreeModule.getToken()) )
+        braintreeModule.setup(clientToken);
+      braintreeModule.tokenizeCardAndVerify(number, month, year, cvv, amount, require3dSecure,
+        successCallback, errorCallback);
+    } catch (Exception e) {
+      Log.e(TAG, "Could not initialize payment gateway", e);
+      errorCallback.invoke("Could not initialize payment gateway");
+    }
   }
 
   private void emitEvent(String name, WritableMap eventArgs) {
@@ -106,5 +116,14 @@ public class RCTCreditCardControl extends CreditCardControl
 
   public void setAmount(double amount) {
     this.amount = amount;
+  }
+
+  public String getClientToken() {
+    return clientToken;
+  }
+
+  public void setClientToken(String clientToken) {
+    Log.i(TAG, "SET CLIENT TOKEN " + clientToken);
+    this.clientToken = clientToken;
   }
 }
