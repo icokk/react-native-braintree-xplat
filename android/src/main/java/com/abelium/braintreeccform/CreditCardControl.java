@@ -159,14 +159,40 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
         return " ";  // year doesn't have it's own error message
     }
 
-    private void markField(ControlType control, TextInputLayout layout, Validity validity, boolean submit) {
+    private TextInputLayout getControlLayout(ControlType control) {
+        switch ( control ) {
+            case Number:
+                return ccNumberLayout;
+            case CVV:
+                return ccCVVLayout;
+            case Month:
+                return ccMonthLayout;
+            case Year:
+                return ccYearLayout;
+        }
+        throw new UnsupportedOperationException();
+    }
+
+    private void markField(ControlType control, Validity validity, boolean submit) {
         if ( validity == Validity.Invalid || (submit && validity == Validity.Partial) ) {
+            setError(control, getErrorMessage(control, validity));
+        } else {
+            setError(control, null);
+        }
+    }
+
+    public void setError(ControlType control, String message) {
+        TextInputLayout layout = getControlLayout(control);
+        boolean errorEnabled = layout.isErrorEnabled();
+        if ( message != null ) {
             layout.setErrorEnabled(true);
-            layout.setError(getErrorMessage(control, validity));
+            layout.setError(message);
         } else {
             layout.setError(null);
             layout.setErrorEnabled(false);
         }
+        if ( errorEnabled != layout.isErrorEnabled() )
+            this.requestLayout();
     }
 
     private Validity validateNumber(boolean submit) {
@@ -174,7 +200,7 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
         Validity validity = ccmatch.getValidity();
         if ( requiredCard != null && requiredCard != ccmatch.getCardType() )
             validity = Validity.Invalid;
-        markField(ControlType.Number, ccNumberLayout, validity, submit);
+        markField(ControlType.Number, validity, submit);
         return ccmatch.getValidity();
     }
 
@@ -183,14 +209,14 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
         if ( requiredCard == null )
             cardType = CreditCardValidator.detectCard(ccNumber.getText().toString()).getCardType();
         Validity validity = CreditCardValidator.validateCVC(ccCVV.getText().toString(), cardType);
-        markField(ControlType.CVV, ccCVVLayout, validity, submit);
+        markField(ControlType.CVV, validity, submit);
         return validity;
     }
 
     private Validity validateDate(boolean submit) {
         DateValidity dv = DateValidator.validateDate(ccMonth.getText().toString(), ccYear.getText().toString());
-        markField(ControlType.Month, ccMonthLayout, dv.validity(), submit);
-        markField(ControlType.Year, ccYearLayout, dv.validity(), submit);
+        markField(ControlType.Month, dv.validity(), submit);
+        markField(ControlType.Year, dv.validity(), submit);
         return dv.validity();
     }
 
@@ -237,6 +263,7 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
         for ( View control : controls )
             control.setEnabled(!submitting);
         ccSpinner.setVisibility(submitting ? VISIBLE : GONE);
+        this.requestLayout();
     }
 
     // public interface
@@ -244,7 +271,7 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     public void endSubmit(boolean success, String errorMessage) {
         showSubmitMode(false);
         if ( !success && errorMessage != null )
-            ccNumberLayout.setError(getContext().getString(R.string.error_cc_not_accepted));
+            setError(ControlType.Number, getContext().getString(R.string.error_cc_not_accepted));
     }
 
     public SubmitHandler getOnSubmit() {
