@@ -1,10 +1,8 @@
 package com.abelium.braintreeccform;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
-import com.braintreepayments.api.exceptions.InvalidArgumentException;
 import com.facebook.csslayout.CSSMeasureMode;
 import com.facebook.csslayout.CSSNodeAPI;
 import com.facebook.csslayout.MeasureOutput;
@@ -64,6 +62,11 @@ public class CreditCardControlManager extends ViewGroupManager<RCTCreditCardCont
   @ReactProp(name = "requireCVV")
   public void setRequireCVV(RCTCreditCardControl control, boolean requireCVV) {
     control.setRequireCVV(requireCVV);
+  }
+
+  @ReactProp(name = "hidePayButton")
+  public void setHidePayButton(RCTCreditCardControl control, boolean hidePayButton) {
+    control.setHidePayButton(hidePayButton);
   }
 
   @ReactProp(name = "amount")

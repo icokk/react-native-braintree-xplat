@@ -27,6 +27,7 @@ export default class CardUISamplePage extends Component {
                         // style={{ width: 240, height: 270 }}
                         ref={(ref) => { this.control = ref; }}
                         clientToken={this.state.clientToken}
+                        hidePayButton={true}
                         onNonceReceived={(nonce) => {
                             console.log("NONCE", nonce);
                             this.setState({ paymentNonce: nonce });

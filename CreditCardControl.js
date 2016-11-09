@@ -12,6 +12,7 @@ export default class CreditCardControl extends React.Component {
     requiredCard: PropTypes.string,
     require3dSecure: PropTypes.bool,
     requireCVV: PropTypes.bool,
+    hidePayButton: PropTypes.bool,
     amount: PropTypes.number,
     onNonceReceived: PropTypes.func,
   };

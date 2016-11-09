@@ -69,6 +69,7 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     private SubmitHandler onSubmit;
     private CreditCardType requiredCard = null;
     private boolean requireCVV = true;
+    private boolean hidePayButton = false;
 
     private boolean initialized = false;
     private EditText ccNumber, ccCVV, ccMonth, ccYear;
@@ -130,6 +131,7 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
         ccYear.addTextChangedListener(new CCTextWatcher(ControlType.Year));
         // set control state
         this.ccCVV.setVisibility(requireCVV ? VISIBLE : GONE);
+        this.ccPayBtn.setVisibility(hidePayButton ? GONE : VISIBLE);
         //
         initialized = true;
     }
@@ -295,8 +297,18 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     }
 
     public void setRequireCVV(boolean requireCVV) {
-      this.requireCVV = requireCVV;
-      if ( this.ccCVV != null )
-        this.ccCVV.setVisibility(requireCVV ? VISIBLE : GONE);
+        this.requireCVV = requireCVV;
+        if (this.ccCVV != null)
+            this.ccCVV.setVisibility(requireCVV ? VISIBLE : GONE);
+    }
+
+    public void setHidePayButton(boolean hidePayButton) {
+        this.hidePayButton = hidePayButton;
+        if ( this.ccPayBtn != null )
+            this.ccPayBtn.setVisibility(hidePayButton ? GONE : VISIBLE);
+    }
+
+    public boolean isHidePayButton() {
+        return hidePayButton;
     }
 }
