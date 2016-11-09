@@ -49,13 +49,7 @@ export default class CreditCardControl extends React.Component {
     return (
       <RCTCreditCardControl {...this.props}
         ref={(ref) => { this.nativeControl = ref; }}
-        style={style}
         onNonceReceived={(event) => { this._onNonceReceived(event); }}
-        onLayoutChanged={(event) => {
-          let { width, height } = event.nativeEvent;
-          console.log('LAYOUT', { width, height });
-          this.setState({ width, height });
-        }}
       />
     );
   }
