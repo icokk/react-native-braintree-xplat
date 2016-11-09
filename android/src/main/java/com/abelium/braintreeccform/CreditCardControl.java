@@ -228,7 +228,7 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
         return validity;
     }
 
-    private boolean validateAndSubmit() {
+    public boolean validateAndSubmit() {
         Validity validity = validate(true);
         if ( validity == Validity.Complete ) {
             submit();

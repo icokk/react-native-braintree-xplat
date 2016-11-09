@@ -9,6 +9,7 @@ import com.facebook.csslayout.CSSMeasureMode;
 import com.facebook.csslayout.CSSNodeAPI;
 import com.facebook.csslayout.MeasureOutput;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.LayoutShadowNode;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -25,6 +26,8 @@ public class CreditCardControlManager extends ViewGroupManager<RCTCreditCardCont
   public static final String TAG = CreditCardControlManager.class.getName();
 
   public static final String CLASS_NAME = "RCTCreditCardControl";
+
+  private static final int SUBMIT_CARD_DATA = 1;
 
   private Braintree braintreeModule;
   private ReactApplicationContext reactContext;
@@ -71,6 +74,23 @@ public class CreditCardControlManager extends ViewGroupManager<RCTCreditCardCont
   @ReactProp(name = "clientToken")
   public void setClientToken(RCTCreditCardControl control, String clientToken) {
     control.setClientToken(clientToken);
+  }
+
+  @Nullable
+  @Override
+  public Map<String, Integer> getCommandsMap() {
+    return MapBuilder.of(
+            "submitCardData", SUBMIT_CARD_DATA
+    );
+  }
+
+  @Override
+  public void receiveCommand(RCTCreditCardControl root, int commandId, @Nullable ReadableArray args) {
+    switch ( commandId ) {
+      case SUBMIT_CARD_DATA:
+        root.validateAndSubmit();
+        break;
+    }
   }
 
   @Nullable
