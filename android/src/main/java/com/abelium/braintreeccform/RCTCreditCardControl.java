@@ -8,7 +8,6 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.pw.droplet.braintree.Braintree;
 
@@ -22,7 +21,7 @@ public class RCTCreditCardControl extends CreditCardControl
   private double amount;
   private String clientToken;
 
-  public RCTCreditCardControl(ThemedReactContext context, CreditCardControlManager manager) {
+  public RCTCreditCardControl(ReactContext context, CreditCardControlManager manager) {
     super(context);
     this.manager = manager;
     initComponents();       // must call here beacuse onFinishInflate is not called in react native
