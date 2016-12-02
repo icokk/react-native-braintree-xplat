@@ -9,6 +9,9 @@
 #import "RCTBraintree.h"
 #import "RCTUtils.h"
 #import "RCTConvert.h"
+#import "CreditCardUIView.h"
+#import <UIKit/UIKit.h>
+
 
 @implementation RCTBraintree
 
@@ -260,5 +263,62 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
     [viewController dismissViewControllerAnimated:YES completion:nil];
     self.callback(@[@"Drop-In ViewController Closed", [NSNull null]]);
 }
+
+
+-(void)tokenizeAndVerifyNat:(NSString *)cardNumber
+            expirationMonth: (NSString *)expirationMonth
+            expirationYear: (NSString *)expirationYear
+                        cvv: (NSString *)cvv
+               amountNumber: (NSNumber * _Nonnull)amountNumber
+                     verify: (BOOL)verify
+                clientToken: (NSString *)clientToken
+                   callback: (void (^)(NSString *result))completionHandler
+{
+
+    //setup
+    self.braintreeClient = [[BTAPIClient alloc] initWithAuthorization:clientToken];
+    if (self.braintreeClient != nil) { //if setup is successful
+
+        NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[amountNumber decimalValue]];
+        BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
+        BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
+        BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
+        
+        [cardClient tokenizeCard:card
+                      completion:^(BTCardNonce *tokenizedCard, NSError *error) {
+                          
+                          NSArray *args = @[];
+                          if ( error == nil ) {
+                              if ( tokenizedCard ) {
+                                  [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
+                                                                   amount:amount
+                                                               completion:^(BTThreeDSecureCardNonce *secureCard, NSError *error) {
+                                                                   NSArray *args = @[];
+                                                                   if ( error == nil ) {
+                                                                       if ( secureCard ) {
+                                                                           args = @[[NSNull null], secureCard.nonce];
+                                                                           NSLog(@"***** %@", secureCard.nonce);
+                                                                           completionHandler(secureCard.nonce);
+                                                                           
+                                                                       } else {
+                                                                           args = @[[NSNull null], [NSNull null]];
+                                                                       }
+                                                                   } else {
+                                                                       args = @[error.description, [NSNull null]];
+                                                                   }
+                                                               }];
+                              } else {
+                                  args = @[[NSNull null], [NSNull null]];
+                              }
+                          } else {
+                              args = @[error.description, [NSNull null]];
+                          }
+                      }
+         ];
+    
+    }
+}
+
+
 
 @end

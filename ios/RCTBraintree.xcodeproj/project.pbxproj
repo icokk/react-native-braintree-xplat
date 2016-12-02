@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B2441AF1DF19FFC0051252C /* CreditCardUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24419B1DF19FFC0051252C /* CreditCardUIView.m */; };
+		7B2441B01DF19FFC0051252C /* CreditCardUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24419C1DF19FFC0051252C /* CreditCardUI.m */; };
+		7B2441B11DF19FFC0051252C /* CardNumberMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441A11DF19FFC0051252C /* CardNumberMatch.m */; };
+		7B2441B21DF19FFC0051252C /* CreditCardType.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441A31DF19FFC0051252C /* CreditCardType.m */; };
+		7B2441B31DF19FFC0051252C /* CreditCardValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441A51DF19FFC0051252C /* CreditCardValidator.m */; };
+		7B2441B41DF19FFC0051252C /* DateValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441A71DF19FFC0051252C /* DateValidator.m */; };
+		7B2441B51DF19FFC0051252C /* DateValidity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441A91DF19FFC0051252C /* DateValidity.m */; };
+		7B2441B61DF19FFC0051252C /* PartValidity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441AB1DF19FFC0051252C /* PartValidity.m */; };
+		7B2441B71DF19FFC0051252C /* ValidatorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441AD1DF19FFC0051252C /* ValidatorUtils.m */; };
 		DE4F06D21D156AA8005F99CD /* RCTBraintree.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4F06D11D156AA8005F99CD /* RCTBraintree.m */; };
 		DE4F07921D15750D005F99CD /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = DE4F07911D15750D005F99CD /* UI.strings */; };
 		DE4F07A91D15751E005F99CD /* Drop-In.strings in Resources */ = {isa = PBXBuildFile; fileRef = DE4F07A81D15751E005F99CD /* Drop-In.strings */; };
@@ -15,96 +24,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DE6D1C771D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A76B198B1B79707700452CFA;
-			remoteInfo = Demo;
-		};
-		DE6D1C791D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A7ABD6531B702FD800A1223C;
-			remoteInfo = IntegrationTests;
-		};
-		DE6D1C7B1D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 16CD2E9C1B4077FB00E68495;
-			remoteInfo = UnitTests;
-		};
 		DE6D1C7D1D16F56100DA995F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 417404491BB084D3008A5DEA;
 			remoteInfo = Braintree;
-		};
-		DE6D1C7F1D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2D941D881B5D9E8C0016EFB4;
-			remoteInfo = Braintree3DSecure;
-		};
-		DE6D1C811D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A7C889741B5EF5DE007A0E9C;
-			remoteInfo = BraintreeApplePay;
-		};
-		DE6D1C831D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A7C889901B5F043B007A0E9C;
-			remoteInfo = BraintreeCard;
-		};
-		DE6D1C851D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2DE12F091B59BE0100EA1BCF;
-			remoteInfo = BraintreeCore;
-		};
-		DE6D1C871D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A76D7C001BB1CAB00000FA6A;
-			remoteInfo = BraintreeDataCollector;
-		};
-		DE6D1C891D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2D941D381B59C76A0016EFB4;
-			remoteInfo = BraintreePayPal;
-		};
-		DE6D1C8B1D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A77AA29C1B618C7700217B73;
-			remoteInfo = BraintreeVenmo;
-		};
-		DE6D1C8D1D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A77344F71B7A93A10083EC8D;
-			remoteInfo = BraintreeUI;
-		};
-		DE6D1C8F1D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4164B9AC1C9B658E006AE861;
-			remoteInfo = BraintreeUnionPay;
 		};
 		DE6D1C911D16F56100DA995F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -113,40 +38,12 @@
 			remoteGlobalIDString = A50C3B051C19F55C00612D90;
 			remoteInfo = "PayPalDataCollector-StaticLibrary";
 		};
-		DE6D1C931D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A7B463051C3D9C2200048423;
-			remoteInfo = PayPalDataCollector;
-		};
 		DE6D1C951D16F56100DA995F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A50C3AD51C19F00600612D90;
 			remoteInfo = "PayPalOneTouch-StaticLibrary";
-		};
-		DE6D1C971D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A50C3B6F1C1A29C500612D90;
-			remoteInfo = PayPalOneTouch;
-		};
-		DE6D1C991D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7EDE47701CD2C3D00005E22B;
-			remoteInfo = PayPalUtils;
-		};
-		DE6D1C9B1D16F56100DA995F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 03F8B2661C23976000FD184B;
-			remoteInfo = UITests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -163,6 +60,25 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7B24419B1DF19FFC0051252C /* CreditCardUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardUIView.m; sourceTree = "<group>"; };
+		7B24419C1DF19FFC0051252C /* CreditCardUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardUI.m; sourceTree = "<group>"; };
+		7B24419D1DF19FFC0051252C /* CreditCardUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardUIView.h; sourceTree = "<group>"; };
+		7B24419E1DF19FFC0051252C /* CreditCardUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardUI.h; sourceTree = "<group>"; };
+		7B2441A01DF19FFC0051252C /* CardNumberMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardNumberMatch.h; sourceTree = "<group>"; };
+		7B2441A11DF19FFC0051252C /* CardNumberMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardNumberMatch.m; sourceTree = "<group>"; };
+		7B2441A21DF19FFC0051252C /* CreditCardType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardType.h; sourceTree = "<group>"; };
+		7B2441A31DF19FFC0051252C /* CreditCardType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardType.m; sourceTree = "<group>"; };
+		7B2441A41DF19FFC0051252C /* CreditCardValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardValidator.h; sourceTree = "<group>"; };
+		7B2441A51DF19FFC0051252C /* CreditCardValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardValidator.m; sourceTree = "<group>"; };
+		7B2441A61DF19FFC0051252C /* DateValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateValidator.h; sourceTree = "<group>"; };
+		7B2441A71DF19FFC0051252C /* DateValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateValidator.m; sourceTree = "<group>"; };
+		7B2441A81DF19FFC0051252C /* DateValidity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateValidity.h; sourceTree = "<group>"; };
+		7B2441A91DF19FFC0051252C /* DateValidity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateValidity.m; sourceTree = "<group>"; };
+		7B2441AA1DF19FFC0051252C /* PartValidity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartValidity.h; sourceTree = "<group>"; };
+		7B2441AB1DF19FFC0051252C /* PartValidity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartValidity.m; sourceTree = "<group>"; };
+		7B2441AC1DF19FFC0051252C /* ValidatorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidatorUtils.h; sourceTree = "<group>"; };
+		7B2441AD1DF19FFC0051252C /* ValidatorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidatorUtils.m; sourceTree = "<group>"; };
+		7B2441AE1DF19FFC0051252C /* Validity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Validity.h; sourceTree = "<group>"; };
 		DE4F06CC1D156AA8005F99CD /* libRCTBraintree.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTBraintree.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE4F06CF1D156AA8005F99CD /* RCTBraintree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTBraintree.h; sourceTree = "<group>"; };
 		DE4F06D11D156AA8005F99CD /* RCTBraintree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTBraintree.m; sourceTree = "<group>"; };
@@ -244,6 +160,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B24419F1DF19FFC0051252C /* CCValidator */ = {
+			isa = PBXGroup;
+			children = (
+				7B2441A01DF19FFC0051252C /* CardNumberMatch.h */,
+				7B2441A11DF19FFC0051252C /* CardNumberMatch.m */,
+				7B2441A21DF19FFC0051252C /* CreditCardType.h */,
+				7B2441A31DF19FFC0051252C /* CreditCardType.m */,
+				7B2441A41DF19FFC0051252C /* CreditCardValidator.h */,
+				7B2441A51DF19FFC0051252C /* CreditCardValidator.m */,
+				7B2441A61DF19FFC0051252C /* DateValidator.h */,
+				7B2441A71DF19FFC0051252C /* DateValidator.m */,
+				7B2441A81DF19FFC0051252C /* DateValidity.h */,
+				7B2441A91DF19FFC0051252C /* DateValidity.m */,
+				7B2441AA1DF19FFC0051252C /* PartValidity.h */,
+				7B2441AB1DF19FFC0051252C /* PartValidity.m */,
+				7B2441AC1DF19FFC0051252C /* ValidatorUtils.h */,
+				7B2441AD1DF19FFC0051252C /* ValidatorUtils.m */,
+				7B2441AE1DF19FFC0051252C /* Validity.h */,
+			);
+			path = CCValidator;
+			sourceTree = "<group>";
+		};
 		DE4F06C31D156AA8005F99CD = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +205,11 @@
 		DE4F06CE1D156AA8005F99CD /* RCTBraintree */ = {
 			isa = PBXGroup;
 			children = (
+				7B24419B1DF19FFC0051252C /* CreditCardUIView.m */,
+				7B24419C1DF19FFC0051252C /* CreditCardUI.m */,
+				7B24419D1DF19FFC0051252C /* CreditCardUIView.h */,
+				7B24419E1DF19FFC0051252C /* CreditCardUI.h */,
+				7B24419F1DF19FFC0051252C /* CCValidator */,
 				DE4F06CF1D156AA8005F99CD /* RCTBraintree.h */,
 				DE4F06D11D156AA8005F99CD /* RCTBraintree.m */,
 			);
@@ -276,25 +219,9 @@
 		DE6D1C621D16F56100DA995F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DE6D1C781D16F56100DA995F /* Demo.app */,
-				DE6D1C7A1D16F56100DA995F /* IntegrationTests.xctest */,
-				DE6D1C7C1D16F56100DA995F /* UnitTests.xctest */,
 				DE6D1C7E1D16F56100DA995F /* libBraintree.a */,
-				DE6D1C801D16F56100DA995F /* Braintree3DSecure.framework */,
-				DE6D1C821D16F56100DA995F /* BraintreeApplePay.framework */,
-				DE6D1C841D16F56100DA995F /* BraintreeCard.framework */,
-				DE6D1C861D16F56100DA995F /* BraintreeCore.framework */,
-				DE6D1C881D16F56100DA995F /* BraintreeDataCollector.framework */,
-				DE6D1C8A1D16F56100DA995F /* BraintreePayPal.framework */,
-				DE6D1C8C1D16F56100DA995F /* BraintreeVenmo.framework */,
-				DE6D1C8E1D16F56100DA995F /* BraintreeUI.framework */,
-				DE6D1C901D16F56100DA995F /* BraintreeUnionPay.framework */,
 				DE6D1C921D16F56100DA995F /* libPayPalDataCollector-StaticLibrary.a */,
-				DE6D1C941D16F56100DA995F /* PayPalDataCollector.framework */,
 				DE6D1C961D16F56100DA995F /* libPayPalOneTouch-StaticLibrary.a */,
-				DE6D1C981D16F56100DA995F /* PayPalOneTouch.framework */,
-				DE6D1C9A1D16F56100DA995F /* PayPalUtils.framework */,
-				DE6D1C9C1D16F56100DA995F /* UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -358,95 +285,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		DE6D1C781D16F56100DA995F /* Demo.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = Demo.app;
-			remoteRef = DE6D1C771D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C7A1D16F56100DA995F /* IntegrationTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = IntegrationTests.xctest;
-			remoteRef = DE6D1C791D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C7C1D16F56100DA995F /* UnitTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UnitTests.xctest;
-			remoteRef = DE6D1C7B1D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		DE6D1C7E1D16F56100DA995F /* libBraintree.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libBraintree.a;
 			remoteRef = DE6D1C7D1D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C801D16F56100DA995F /* Braintree3DSecure.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Braintree3DSecure.framework;
-			remoteRef = DE6D1C7F1D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C821D16F56100DA995F /* BraintreeApplePay.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BraintreeApplePay.framework;
-			remoteRef = DE6D1C811D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C841D16F56100DA995F /* BraintreeCard.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BraintreeCard.framework;
-			remoteRef = DE6D1C831D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C861D16F56100DA995F /* BraintreeCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BraintreeCore.framework;
-			remoteRef = DE6D1C851D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C881D16F56100DA995F /* BraintreeDataCollector.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BraintreeDataCollector.framework;
-			remoteRef = DE6D1C871D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C8A1D16F56100DA995F /* BraintreePayPal.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BraintreePayPal.framework;
-			remoteRef = DE6D1C891D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C8C1D16F56100DA995F /* BraintreeVenmo.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BraintreeVenmo.framework;
-			remoteRef = DE6D1C8B1D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C8E1D16F56100DA995F /* BraintreeUI.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BraintreeUI.framework;
-			remoteRef = DE6D1C8D1D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C901D16F56100DA995F /* BraintreeUnionPay.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BraintreeUnionPay.framework;
-			remoteRef = DE6D1C8F1D16F56100DA995F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		DE6D1C921D16F56100DA995F /* libPayPalDataCollector-StaticLibrary.a */ = {
@@ -456,39 +299,11 @@
 			remoteRef = DE6D1C911D16F56100DA995F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		DE6D1C941D16F56100DA995F /* PayPalDataCollector.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = PayPalDataCollector.framework;
-			remoteRef = DE6D1C931D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		DE6D1C961D16F56100DA995F /* libPayPalOneTouch-StaticLibrary.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libPayPalOneTouch-StaticLibrary.a";
 			remoteRef = DE6D1C951D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C981D16F56100DA995F /* PayPalOneTouch.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = PayPalOneTouch.framework;
-			remoteRef = DE6D1C971D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C9A1D16F56100DA995F /* PayPalUtils.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = PayPalUtils.framework;
-			remoteRef = DE6D1C991D16F56100DA995F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DE6D1C9C1D16F56100DA995F /* UITests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UITests.xctest;
-			remoteRef = DE6D1C9B1D16F56100DA995F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -511,7 +326,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B2441B71DF19FFC0051252C /* ValidatorUtils.m in Sources */,
+				7B2441B11DF19FFC0051252C /* CardNumberMatch.m in Sources */,
+				7B2441B61DF19FFC0051252C /* PartValidity.m in Sources */,
 				DE4F06D21D156AA8005F99CD /* RCTBraintree.m in Sources */,
+				7B2441B01DF19FFC0051252C /* CreditCardUI.m in Sources */,
+				7B2441B31DF19FFC0051252C /* CreditCardValidator.m in Sources */,
+				7B2441B41DF19FFC0051252C /* DateValidator.m in Sources */,
+				7B2441B51DF19FFC0051252C /* DateValidity.m in Sources */,
+				7B2441AF1DF19FFC0051252C /* CreditCardUIView.m in Sources */,
+				7B2441B21DF19FFC0051252C /* CreditCardType.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +523,7 @@
 					"$(SRCROOT)/../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(PROJECT_DIR)/RCTBraintree/Braintree/**",
+					"$(SRCROOT)/../../../ios/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -715,6 +540,7 @@
 					"$(SRCROOT)/../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 					"$(PROJECT_DIR)/RCTBraintree/Braintree/**",
+					"$(SRCROOT)/../../../ios/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
