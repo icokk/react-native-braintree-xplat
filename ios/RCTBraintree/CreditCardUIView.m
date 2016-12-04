@@ -9,6 +9,7 @@
 #import "CreditCardUI.h"
 
 #import "RCTBraintree.h"
+#import "MDTextField.h"
 
 typedef enum
 {
@@ -37,77 +38,138 @@ typedef enum
         self.requiredCard = NULL;
         self.require3dSecure = NO;
         
-//        self.maximumWidth = 480.0f;
-        
         _backgroundView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
-        [self.backgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.97f alpha:1.0f];
+        self.backgroundView.backgroundColor = [UIColor whiteColor];
         self.backgroundView.layer.cornerRadius = 6.0f;
         [self addSubview:_backgroundView];
         
-        _ccNumber = [[UITextField alloc] initWithFrame:CGRectMake(50, 100, 200, 30)];
-        self.ccNumber.borderStyle = UITextBorderStyleRoundedRect;
-        self.ccNumber.textColor = [UIColor darkGrayColor];
+        //        _submitButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 250, 200, 30)];
+        //        self.submitButton.backgroundColor = [UIColor darkGrayColor];
+        //        [self.submitButton setTitle:@"Pay" forState:UIControlStateNormal];
+        ////        [self.submitButton setTitle:@"Changed" forState:UIControlStateHighlighted];
+        //        [self.submitButton addTarget:self action:@selector(payButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+        //        [self.submitButton setHidden:(self.hidePayButton) ? YES : NO];
+        //        [self.submitButton addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
+        //        [self.submitButton addTarget:self action:@selector(buttonNormal:) forControlEvents:UIControlEventTouchUpInside];
+        //        [self.backgroundView addSubview:self.submitButton];
+        //
+        
+        //
+        
+        _ccNumber = [[MDTextField alloc] init];
+        [self.ccNumber setTranslatesAutoresizingMaskIntoConstraints:NO];
+        self.ccNumber.label = @"Credit card number";
+        self.ccNumber.floatingLabel = YES;
+        self.ccNumber.textColor = [UIColor blackColor];
+        self.ccNumber.highlightColor = [UIColor colorWithRed:0.93 green:0.17 blue:0.45 alpha:1.0];//#ee2b74;
         self.ccNumber.keyboardType = UIKeyboardTypeNumberPad;
-        self.ccNumber.placeholder = @"Credit Card Number";
-        [self.ccNumber addTarget:self action:@selector(ccEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+        self.ccNumber.hasError = NO;
+        self.ccNumber.errorMessage = @"Invalid credit card number";
+        self.ccNumber.errorColor = [UIColor redColor];
         [self.backgroundView addSubview:self.ccNumber];
-
-        _expMonth = [[UITextField alloc] initWithFrame:CGRectMake(50, 150, 90, 30)];
-        self.expMonth.borderStyle = UITextBorderStyleRoundedRect;
-        self.expMonth.textColor = [UIColor darkGrayColor];
+        
+        _expMonth = [[MDTextField alloc] init];
+        [self.expMonth setTranslatesAutoresizingMaskIntoConstraints:NO];
+        self.expMonth.label = @"Month(MM)";
+        self.expMonth.floatingLabel = YES;
+        self.expMonth.textColor = [UIColor blackColor];
+        self.expMonth.highlightColor = [UIColor colorWithRed:0.93 green:0.17 blue:0.45 alpha:1.0];//#ee2b74;
         self.expMonth.keyboardType = UIKeyboardTypeNumberPad;
-        self.expMonth.placeholder = @"Month";
-        [self.expMonth addTarget:self action:@selector(monthEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+        self.expMonth.hasError = NO;
+        self.expMonth.errorMessage = @"Invalid date or expired card";
+        self.expMonth.errorColor = [UIColor redColor];
         [self.backgroundView addSubview:self.expMonth];
         
-        _expYear = [[UITextField alloc] initWithFrame:CGRectMake(150, 150, 90, 30)];
-        self.expYear.borderStyle = UITextBorderStyleRoundedRect;
-        self.expYear.textColor = [UIColor darkGrayColor];
+        _expYear = [[MDTextField alloc] init];
+        [self.expYear setTranslatesAutoresizingMaskIntoConstraints:NO];
+        self.expYear.label = @"Year(YYYY)";
+        self.expYear.floatingLabel = YES;
+        self.expYear.textColor = [UIColor blackColor];
+        self.expYear.highlightColor = [UIColor colorWithRed:0.93 green:0.17 blue:0.45 alpha:1.0];//#ee2b74;
         self.expYear.keyboardType = UIKeyboardTypeNumberPad;
-        self.expYear.placeholder = @"Year";
-        [self.expYear addTarget:self action:@selector(yearEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+        self.expYear.hasError = NO;
+        self.expYear.errorMessage = @"Invalid date or expired card";
+        self.expYear.errorColor = [UIColor redColor];
         [self.backgroundView addSubview:self.expYear];
         
-        _cvvNumber = [[UITextField alloc] initWithFrame:CGRectMake(50, 200, 90, 30)];
-        self.cvvNumber.borderStyle = UITextBorderStyleRoundedRect;
-        self.cvvNumber.textColor = [UIColor darkGrayColor];
+        _cvvNumber = [[MDTextField alloc] init];
+        [self.cvvNumber setTranslatesAutoresizingMaskIntoConstraints:NO];
+        self.cvvNumber.label = @"CVV";
+        self.cvvNumber.floatingLabel = YES;
+        self.cvvNumber.textColor = [UIColor blackColor];
+        self.cvvNumber.highlightColor = [UIColor colorWithRed:0.93 green:0.17 blue:0.45 alpha:1.0];//#ee2b74;
         self.cvvNumber.keyboardType = UIKeyboardTypeNumberPad;
-        self.cvvNumber.placeholder = @"CVV";
-        [self.cvvNumber addTarget:self action:@selector(cvvEditingChanged:) forControlEvents:UIControlEventEditingChanged];
-        [self.cvvNumber setHidden:(self.requireCVV) ? NO : YES];
+        self.cvvNumber.hasError = NO;
+        self.cvvNumber.errorMessage = @"Invalid control code, it must contain 3 or 4 digits";
+        self.cvvNumber.errorColor = [UIColor redColor];
         [self.backgroundView addSubview:self.cvvNumber];
-
-        _submitButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 250, 200, 30)];
-        self.submitButton.backgroundColor = [UIColor darkGrayColor];
+        
+        _submitButton = [[MDButton alloc] init];
+        [self.submitButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+        self.submitButton.backgroundColor = [UIColor colorWithRed:0.93 green:0.17 blue:0.45 alpha:1.0];//#ee2b74;
+        //        self.submitButton.type = 1;
         [self.submitButton setTitle:@"Pay" forState:UIControlStateNormal];
-//        [self.submitButton setTitle:@"Changed" forState:UIControlStateHighlighted];
         [self.submitButton addTarget:self action:@selector(payButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
         [self.submitButton setHidden:(self.hidePayButton) ? YES : NO];
-        [self.submitButton addTarget:self action:@selector(buttonHighlight:) forControlEvents:UIControlEventTouchDown];
-        [self.submitButton addTarget:self action:@selector(buttonNormal:) forControlEvents:UIControlEventTouchUpInside];
         [self.backgroundView addSubview:self.submitButton];
         
-        _fillButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 300, 200, 30)];
-        self.fillButton.backgroundColor = [UIColor grayColor];
-        [self.fillButton setTitle:@"Fill" forState:UIControlStateNormal];
-//        [self.fillButton setTitle:@"Changed" forState:UIControlStateHighlighted];
-        [self.fillButton addTarget:self action:@selector(fillform:) forControlEvents:UIControlEventTouchUpInside];
-        [self.fillButton setHidden:YES];
-        [self.backgroundView addSubview:self.fillButton];
+        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_ccNumber, _expMonth, _expYear, _cvvNumber, _submitButton);
+        
+        //        NSArray *submitButton_Height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_submitButton(redHeight)]"
+        //                                                                            options:0
+        //                                                                            metrics:nil
+        //                                                                              views:viewsDictionary];
+        //
+        //        [self.submitButton addConstraint:submitButton_Height];
+        
+        NSArray *constraint_POS_V = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_ccNumber]-[_expMonth]-[_expYear]-[_cvvNumber]-(40)-[_submitButton]"
+                                                                            options:0
+                                                                            metrics:nil
+                                                                              views:viewsDictionary];
+        
+        NSArray *cc_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_ccNumber]-|"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:viewsDictionary];
+        
+        NSArray *month_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_expMonth]-|"
+                                                                       options:0
+                                                                       metrics:nil
+                                                                         views:viewsDictionary];
+        
+        NSArray *monthYear_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_expMonth]-(10)-[_expYear]-|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:viewsDictionary];
+        
+        NSArray *year_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_expYear]-|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:viewsDictionary];
+        
+        NSArray *cvv_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_cvvNumber]-|"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:viewsDictionary];
+        
+        NSArray *submit_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_submitButton]-|"
+                                                                        options:0
+                                                                        metrics:nil
+                                                                          views:viewsDictionary];
+        
+        [self.backgroundView addConstraints:constraint_POS_V];
+        [self.backgroundView addConstraints:cc_POS_H];
+        [self.backgroundView addConstraints:month_POS_H];
+        [self.backgroundView addConstraints:year_POS_H];
+        [self.backgroundView addConstraints:cvv_POS_H];
+        [self.backgroundView addConstraints:submit_POS_H];
+        
+        
     }
-
     return self;
 }
 
-// Fill button is clicked
--(void)fillform:(UIButton *)sender
-{
-    self.ccNumber.text = @"5555555555554444";
-    self.expMonth.text = @"12";
-    self.expYear.text = @"2038";
-    self.cvvNumber.text = @"123";
-}
+
 
 // Pay button is clicked
 -(void)buttonHighlight:(UIButton *)sender
@@ -159,7 +221,7 @@ typedef enum
     Validity validity = [self validate:YES];
     if(validity == Complete)
     {
-//        [self submit];
+        //        [self submit];
         return YES;
     } else {
         return NO;
@@ -192,7 +254,7 @@ typedef enum
         cardType = [[CreditCardValidator alloc] detectCard:self.ccNumber.text].getCardType;
     
     Validity validity = [[CreditCardValidator alloc] validateCVC:self.cvvNumber.text withCreditCardType:cardType];
-
+    
     [self markField:CVV withValidity:validity with:submit];
     return validity;
 }
@@ -203,7 +265,7 @@ typedef enum
     
     [self markField:Month withValidity:dv.validity with:submit];
     [self markField:Year withValidity:dv.validity with:submit];
-
+    
     return dv.validity;
 }
 
@@ -213,9 +275,9 @@ typedef enum
     {
         [self setError:control with:[self getErrorMessage: control with:validity]];
     }
-//    else {
-//        [self setError:control with:NULL];
-//    }
+    //    else {
+    //        [self setError:control with:NULL];
+    //    }
 }
 
 -(void)setError:(ControlType*)control with:(NSString*)message

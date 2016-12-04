@@ -4,16 +4,18 @@
 
 #import "CreditCardUI.h"
 
+#import "MDTextField.h"
+#import "MDButton.h"
 
 @interface CreditCardUIView : RCTView
 
 @property (nonatomic, readonly) UIView *backgroundView;
-@property UITextField *ccNumber;
-@property UITextField *expMonth;
-@property UITextField *expYear;
-@property UITextField *cvvNumber;
-@property UIButton *submitButton;
-@property UIButton *fillButton;
+
+@property MDTextField *ccNumber;
+@property MDTextField *expMonth;
+@property MDTextField *expYear;
+@property MDTextField *cvvNumber;
+@property MDButton *submitButton;
 
 @property BOOL requireCVV;
 @property BOOL hidePayButton;
