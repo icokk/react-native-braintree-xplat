@@ -87,7 +87,7 @@ public class RCTCreditCardControl extends CreditCardControl
   @Override
   public void requestLayout() {
     super.requestLayout();
-    Log.i(TAG, "requestLayout " + this);
+    // Log.i(TAG, "requestLayout " + this);
     post(measureAndLayout);
   }
 
@@ -122,7 +122,7 @@ public class RCTCreditCardControl extends CreditCardControl
   }
 
   public void setClientToken(String clientToken) {
-    Log.i(TAG, "SET CLIENT TOKEN " + clientToken);
+    // Log.i(TAG, "SET CLIENT TOKEN " + clientToken);
     this.clientToken = clientToken;
   }
 }

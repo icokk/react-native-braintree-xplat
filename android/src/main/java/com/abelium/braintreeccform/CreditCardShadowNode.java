@@ -43,15 +43,14 @@ public class CreditCardShadowNode extends LayoutShadowNode
 
   public final MeasureFunction measureFunction = new MeasureFunction() {
     @Override
-    public void measure(CSSNodeAPI node, float width, CSSMeasureMode widthMode, float height, CSSMeasureMode heightMode, MeasureOutput measureOutput) {
-       Log.i(CreditCardControlManager.TAG, String.format("MEASURE %s, %s %s, %s %s", node, width, widthMode, height, heightMode));
+    public long measure(CSSNodeAPI node, float width, CSSMeasureMode widthMode, float height, CSSMeasureMode heightMode) {
+      // Log.i(CreditCardControlManager.TAG, String.format("MEASURE %s, %s %s, %s %s", node, width, widthMode, height, heightMode));
       //noinspection WrongConstant
       measureControl.measure(
-              View.MeasureSpec.makeMeasureSpec((int) width, translateMeasureSpec(widthMode)),
-              View.MeasureSpec.makeMeasureSpec((int) height, translateMeasureSpec(heightMode)));
-      measureOutput.width = measureControl.getMeasuredWidth();
-      measureOutput.height = measureControl.getMeasuredHeight();
-       Log.i(CreditCardControlManager.TAG, String.format("MEASURE RESULT: width=%s height=%s", measureOutput.width, measureOutput.height));
+        View.MeasureSpec.makeMeasureSpec((int) width, translateMeasureSpec(widthMode)),
+        View.MeasureSpec.makeMeasureSpec((int) height, translateMeasureSpec(heightMode)));
+      // Log.i(CreditCardControlManager.TAG, String.format("MEASURE RESULT: width=%s height=%s", measureControl.getMeasuredWidth(), measureControl.getMeasuredHeight()));
+      return MeasureOutput.make(measureControl.getMeasuredWidth(), measureControl.getMeasuredHeight());
     }
   };
 }
