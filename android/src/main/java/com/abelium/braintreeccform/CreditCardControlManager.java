@@ -73,6 +73,34 @@ public class CreditCardControlManager extends ViewGroupManager<RCTCreditCardCont
     control.setClientToken(clientToken);
   }
 
+  // translations
+
+  @ReactProp(name = "numberString")
+  public void setNumberString(RCTCreditCardControl control, String numberString) {
+    control.setNumberString(numberString);
+  }
+
+  @ReactProp(name = "cvvString")
+  public void setCvvString(RCTCreditCardControl control, String cvvString) {
+    control.setCvvString(cvvString);
+  }
+
+  @ReactProp(name = "monthString")
+  public void setMonthString(RCTCreditCardControl control, String monthString) {
+    control.setMonthString(monthString);
+  }
+
+  @ReactProp(name = "yearString")
+  public void setYearString(RCTCreditCardControl control, String yearString) {
+    control.setYearString(yearString);
+  }
+
+  @ReactProp(name = "invalidString")
+  public void setInvalidString(RCTCreditCardControl control, String invalidString) {
+    control.setInvalidString(invalidString);
+  }
+
+
   @Nullable
   @Override
   public Map<String, Integer> getCommandsMap() {

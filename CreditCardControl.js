@@ -15,6 +15,12 @@ export default class CreditCardControl extends React.Component {
     hidePayButton: PropTypes.bool,
     amount: PropTypes.number,
     onNonceReceived: PropTypes.func,
+    // translations
+    numberString: PropTypes.string,
+    cvvString: PropTypes.string,
+    monthString: PropTypes.string,
+    yearString: PropTypes.string,
+    invalidString: PropTypes.string,
   };
 
   _onNonceReceived(event) {

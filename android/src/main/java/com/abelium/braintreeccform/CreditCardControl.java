@@ -331,7 +331,7 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
     public void setNumberString(String numberString) {
         this.numberString = numberString;
         if ( ccNumber != null )
-            ccNumber.setText(numberString);
+            ccNumber.setLabel(numberString);
     }
 
     public String getCvvString() {
@@ -341,7 +341,7 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
     public void setCvvString(String cvvString) {
         this.cvvString = cvvString;
         if ( ccCVV != null )
-            ccCVV.setText(cvvString);
+            ccCVV.setLabel(cvvString);
     }
 
     public String getMonthString() {
@@ -351,7 +351,7 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
     public void setMonthString(String monthString) {
         this.monthString = monthString;
         if ( ccMonth != null )
-            ccMonth.setText(monthString);
+            ccMonth.setLabel(monthString);
     }
 
     public String getYearString() {
@@ -361,7 +361,7 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
     public void setYearString(String yearString) {
         this.yearString = yearString;
         if ( ccYear != null )
-            ccYear.setText(yearString);
+            ccYear.setLabel(yearString);
     }
 
     public String getInvalidString() {
