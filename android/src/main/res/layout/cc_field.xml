@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:orientation="vertical"
+    tools:context="com.abelium.braintreeccform.CreditCardField"
+    tools:parentTag="LinearLayout">
+
+    <TextView
+        android:text="Field Label"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"
+        android:layout_marginTop="14dp"
+        android:fontFamily="sans-serif-light"
+        android:textSize="12dp"
+        android:id="@+id/cc_label" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        android:id="@+id/cc_field_layout">
+
+        <TextView
+            android:text="&#xf09d;"
+            android:layout_width="60dp"
+            android:layout_height="26dp"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:visibility="gone"
+            android:id="@+id/cc_icon" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:textSize="16dp"
+            android:hint="Hint"
+            android:id="@+id/cc_text"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:text="INVALID"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:textAlignment="center"
+            android:fontFamily="sans-serif"
+            android:textSize="16dp"
+            android:visibility="gone"
+            android:id="@+id/cc_invalid_marker" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="#FF000000"
+        android:layout_height="2dp"
+        android:layout_marginTop="0dp"
+        android:id="@+id/cc_underline" />
+</merge>
+
+    

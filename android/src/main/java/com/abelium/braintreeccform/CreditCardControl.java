@@ -1,7 +1,6 @@
 package com.abelium.braintreeccform;
 
 import android.content.Context;
-import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -10,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.abelium.cardvalidator.CardNumberMatch;
 import com.abelium.cardvalidator.CreditCardType;
@@ -26,7 +23,7 @@ import com.pw.droplet.braintree.R;
 
 import java.util.Locale;
 
-public class CreditCardControl extends FrameLayout implements TextView.OnEditorActionListener, View.OnClickListener
+public class CreditCardControl extends FrameLayout implements CreditCardField.OnEditorActionListener, View.OnClickListener
 {
     public interface SubmitHandler {
         void submit(String number, String cvv, String month, String year);
@@ -72,10 +69,16 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     private boolean hidePayButton = false;
 
     private boolean initialized = false;
-    private EditText ccNumber, ccCVV, ccMonth, ccYear;
-    private TextInputLayout ccNumberLayout, ccCVVLayout, ccMonthLayout, ccYearLayout;
+
+    private CreditCardField ccNumber, ccCVV, ccMonth, ccYear;
     private Button ccPayBtn;
     private ProgressBar ccSpinner;
+
+    private String numberString = "Credit Card Number";
+    private String cvvString = "CVC/CVV";
+    private String monthString = "Month (MM)";
+    private String yearString = "Year (YYYY)";
+    private String invalidString = "INVALID";
 
     public CreditCardControl(Context context) {
         super(context);
@@ -108,21 +111,28 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
         if ( initialized )
             return;
         // set fields
-        this.ccNumber = (EditText) findViewById(R.id.cc_number);
-        this.ccCVV = (EditText) findViewById(R.id.cc_cvv);
-        this.ccMonth = (EditText) findViewById(R.id.cc_month);
-        this.ccYear = (EditText) findViewById(R.id.cc_year);
-        this.ccNumberLayout = (TextInputLayout) findViewById(R.id.cc_number_layout);
-        this.ccCVVLayout = (TextInputLayout) findViewById(R.id.cc_cvv_layout);
-        this.ccMonthLayout = (TextInputLayout) findViewById(R.id.cc_month_layout);
-        this.ccYearLayout = (TextInputLayout) findViewById(R.id.cc_year_layout);
+        this.ccNumber = (CreditCardField) findViewById(R.id.cc_number);
+        this.ccCVV = (CreditCardField) findViewById(R.id.cc_cvv);
+        this.ccMonth = (CreditCardField) findViewById(R.id.cc_month);
+        this.ccYear = (CreditCardField) findViewById(R.id.cc_year);
         this.ccPayBtn = (Button) findViewById(R.id.cc_pay_btn);
         this.ccSpinner = (ProgressBar) findViewById(R.id.ctrlActivityIndicator);
+        // control settings
+        ccNumber.setShowIcon(true);
+        ccNumber.setLabel(getNumberString());
+        ccNumber.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        ccCVV.setLabel(getCvvString());
+        ccCVV.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        ccMonth.setLabel(getMonthString());
+        ccMonth.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        ccYear.setLabel(getYearString());
+        ccYear.setImeOptions(EditorInfo.IME_ACTION_DONE);
         // add handlers
         ccNumber.setOnEditorActionListener(this);
         ccCVV.setOnEditorActionListener(this);
         ccMonth.setOnEditorActionListener(this);
         ccYear.setOnEditorActionListener(this);
+        //
         ccPayBtn.setOnClickListener(this);
         // add validation handlers
         ccNumber.addTextChangedListener(new CCTextWatcher(ControlType.Number));
@@ -137,11 +147,19 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     }
 
     @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+    public boolean onEditorAction(CreditCardField v, int actionId, KeyEvent event) {
         if ( actionId == EditorInfo.IME_ACTION_DONE ) {
             ccPayBtn.requestFocus();
             validateAndSubmit();
             return false;
+        } else if ( actionId == EditorInfo.IME_ACTION_NEXT ) {
+            if ( v == ccNumber )
+                ccCVV.requestFocus();
+            else if ( v == ccCVV )
+                ccMonth.requestFocus();
+            else if ( v == ccMonth )
+                ccYear.requestFocus();
+            return true;
         }
         return false;
     }
@@ -151,54 +169,48 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
         validateAndSubmit();
     }
 
-    private String getErrorMessage(ControlType control, Validity validity) {
-        if ( control == ControlType.Number )
-            return getContext().getString(R.string.invalid_cc_number);
-        if ( control == ControlType.CVV )
-            return getContext().getString(R.string.invalid_cc_cvv);
-        if ( control == ControlType.Month )
-            return getContext().getString(R.string.invalid_cc_date);
-        return " ";  // year doesn't have it's own error message
-    }
-
-    private TextInputLayout getControlLayout(ControlType control) {
+    private CreditCardField getControlLayout(ControlType control) {
         switch ( control ) {
             case Number:
-                return ccNumberLayout;
+                return ccNumber;
             case CVV:
-                return ccCVVLayout;
+                return ccCVV;
             case Month:
-                return ccMonthLayout;
+                return ccMonth;
             case Year:
-                return ccYearLayout;
+                return ccYear;
         }
         throw new UnsupportedOperationException();
     }
 
     private void markField(ControlType control, Validity validity, boolean submit) {
-        if ( validity == Validity.Invalid || (submit && validity == Validity.Partial) ) {
-            setError(control, getErrorMessage(control, validity));
-        } else {
-            setError(control, null);
-        }
+        boolean error = validity == Validity.Invalid || (submit && validity == Validity.Partial);
+        setError(control, error);
     }
 
-    public void setError(ControlType control, String message) {
-        TextInputLayout layout = getControlLayout(control);
-        boolean errorEnabled = layout.isErrorEnabled();
-        if ( message != null ) {
-            layout.setErrorEnabled(true);
-            layout.setError(message);
-        } else {
-            layout.setError(null);
-            layout.setErrorEnabled(false);
-        }
-        if ( errorEnabled != layout.isErrorEnabled() )
+    public static boolean equals(Object a, Object b) {
+        return (a == null) ? (b == null) : a.equals(b);
+    }
+
+    public void setError(ControlType control, boolean error) {
+        CreditCardField field = getControlLayout(control);
+        field.setError(error);
+        String prevMarker = ccNumber.getInvalidMarker();
+        ccNumber.setInvalidMarker(hasAnyError() ? getInvalidString() : null);
+        if ( !equals(prevMarker, ccNumber.getInvalidMarker()) )
             this.requestLayout();
     }
 
+    public boolean hasAnyError() {
+        CreditCardField[] fields = { ccNumber, ccCVV, ccMonth, ccYear };
+        for ( CreditCardField field : fields )
+            if ( field.isError() )
+                return true;
+        return false;
+    }
+
     private Validity validateNumber(boolean submit) {
-        CardNumberMatch ccmatch = CreditCardValidator.detectCard(ccNumber.getText().toString());
+        CardNumberMatch ccmatch = CreditCardValidator.detectCard(ccNumber.getText());
         Validity validity = ccmatch.getValidity();
         if ( requiredCard != null && requiredCard != ccmatch.getCardType() )
             validity = Validity.Invalid;
@@ -209,14 +221,14 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     private Validity validateCVV(boolean submit) {
         CreditCardType cardType = requiredCard;
         if ( requiredCard == null )
-            cardType = CreditCardValidator.detectCard(ccNumber.getText().toString()).getCardType();
-        Validity validity = CreditCardValidator.validateCVC(ccCVV.getText().toString(), cardType);
+            cardType = CreditCardValidator.detectCard(ccNumber.getText()).getCardType();
+        Validity validity = CreditCardValidator.validateCVC(ccCVV.getText(), cardType);
         markField(ControlType.CVV, validity, submit);
         return validity;
     }
 
     private Validity validateDate(boolean submit) {
-        DateValidity dv = DateValidator.validateDate(ccMonth.getText().toString(), ccYear.getText().toString());
+        DateValidity dv = DateValidator.validateDate(ccMonth.getText(), ccYear.getText());
         markField(ControlType.Month, dv.validity(), submit);
         markField(ControlType.Year, dv.validity(), submit);
         return dv.validity();
@@ -244,9 +256,9 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     private void submit() {
         if ( this.onSubmit == null )
             return;
-        String number = ccNumber.getText().toString();
-        String cvv = requireCVV ? ccCVV.getText().toString() : null;
-        DateValidity dv = DateValidator.validateDate(ccMonth.getText().toString(), ccYear.getText().toString());
+        String number = ccNumber.getText();
+        String cvv = requireCVV ? ccCVV.getText() : null;
+        DateValidity dv = DateValidator.validateDate(ccMonth.getText(), ccYear.getText());
         String month = String.format(Locale.US, "%02d", dv.getMonth());
         String year = String.format(Locale.US, "%04d", dv.getYear());
         showSubmitMode(true);
@@ -259,9 +271,7 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     }
 
     private void showSubmitMode(boolean submitting) {
-        View[] controls = { ccNumber, ccCVV, ccMonth, ccYear,
-                ccNumberLayout, ccCVVLayout, ccMonthLayout, ccYearLayout,
-                ccPayBtn };
+        View[] controls = { ccNumber, ccCVV, ccMonth, ccYear, ccPayBtn };
         for ( View control : controls )
             control.setEnabled(!submitting);
         ccSpinner.setVisibility(submitting ? VISIBLE : GONE);
@@ -273,7 +283,7 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
     public void endSubmit(boolean success, String errorMessage) {
         showSubmitMode(false);
         if ( !success && errorMessage != null )
-            setError(ControlType.Number, getContext().getString(R.string.error_cc_not_accepted));
+            setError(ControlType.Number, true);
     }
 
     public SubmitHandler getOnSubmit() {
@@ -310,5 +320,57 @@ public class CreditCardControl extends FrameLayout implements TextView.OnEditorA
 
     public boolean isHidePayButton() {
         return hidePayButton;
+    }
+
+    // string translations
+
+    public String getNumberString() {
+        return numberString;
+    }
+
+    public void setNumberString(String numberString) {
+        this.numberString = numberString;
+        if ( ccNumber != null )
+            ccNumber.setText(numberString);
+    }
+
+    public String getCvvString() {
+        return cvvString;
+    }
+
+    public void setCvvString(String cvvString) {
+        this.cvvString = cvvString;
+        if ( ccCVV != null )
+            ccCVV.setText(cvvString);
+    }
+
+    public String getMonthString() {
+        return monthString;
+    }
+
+    public void setMonthString(String monthString) {
+        this.monthString = monthString;
+        if ( ccMonth != null )
+            ccMonth.setText(monthString);
+    }
+
+    public String getYearString() {
+        return yearString;
+    }
+
+    public void setYearString(String yearString) {
+        this.yearString = yearString;
+        if ( ccYear != null )
+            ccYear.setText(yearString);
+    }
+
+    public String getInvalidString() {
+        return invalidString;
+    }
+
+    public void setInvalidString(String invalidString) {
+        this.invalidString = invalidString;
+        if ( ccNumber != null && ccNumber.getInvalidMarker() != null )
+            ccNumber.setInvalidMarker(invalidString);
     }
 }

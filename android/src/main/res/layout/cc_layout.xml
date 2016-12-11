@@ -6,35 +6,15 @@
     android:theme="@style/Theme.AppCompat.Light"
     android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+    <com.abelium.braintreeccform.CreditCardField
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cc_number_layout">
+        android:layout_height="64dp"
+        android:id="@+id/cc_number" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/credit_card_number"
-            android:id="@+id/cc_number"
-            android:imeOptions="actionNext"
-            android:nextFocusDown="@+id/cc_cvv"
-            android:inputType="number" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
+    <com.abelium.braintreeccform.CreditCardField
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/cc_cvv_layout">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/cvc_cvv"
-            android:id="@+id/cc_cvv"
-            android:imeOptions="actionNext"
-            android:nextFocusDown="@+id/cc_month"
-            android:inputType="number" />
-    </android.support.design.widget.TextInputLayout>
+        android:layout_height="64dp"
+        android:id="@+id/cc_cvv" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,39 +22,23 @@
         android:orientation="horizontal"
         android:baselineAligned="false">
 
-        <android.support.design.widget.TextInputLayout
+        <com.abelium.braintreeccform.CreditCardField
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/cc_month_layout"
-            android:layout_weight="1">
+            android:layout_height="64dp"
+            android:layout_weight="1"
+            android:layout_marginRight="4dp"
+            android:layout_marginEnd="4dp"
+            android:minWidth="120dip"
+            android:id="@+id/cc_month" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minWidth="120dip"
-                android:hint="@string/month"
-                android:id="@+id/cc_month"
-                android:imeOptions="actionNext"
-                android:nextFocusDown="@+id/cc_year"
-                android:inputType="number" />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
+        <com.abelium.braintreeccform.CreditCardField
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/cc_year_layout"
-            android:layout_weight="1">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minWidth="120dip"
-                android:hint="@string/year"
-                android:id="@+id/cc_year"
-                android:imeOptions="actionDone"
-                android:inputType="number" />
-        </android.support.design.widget.TextInputLayout>
-
+            android:layout_height="64dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:minWidth="120dip"
+            android:id="@+id/cc_year" />
     </LinearLayout>
 
     <Button
