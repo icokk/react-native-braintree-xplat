@@ -16,11 +16,13 @@ export default class CreditCardControl extends React.Component {
     amount: PropTypes.number,
     onNonceReceived: PropTypes.func,
     // translations
-    numberString: PropTypes.string,
-    cvvString: PropTypes.string,
-    monthString: PropTypes.string,
-    yearString: PropTypes.string,
-    invalidString: PropTypes.string,
+    translations: PropTypes.shape({
+        cardNumber: PropTypes.string,
+        cvv: PropTypes.string,
+        month: PropTypes.string,
+        year: PropTypes.string,
+        invalid: PropTypes.string,
+    }),
   };
 
   _onNonceReceived(event) {

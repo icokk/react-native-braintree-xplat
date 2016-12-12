@@ -2,6 +2,8 @@ package com.abelium.braintreeccform;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.LayoutShadowNode;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -73,31 +75,30 @@ public class CreditCardControlManager extends ViewGroupManager<RCTCreditCardCont
     control.setClientToken(clientToken);
   }
 
-  // translations
-
-  @ReactProp(name = "numberString")
-  public void setNumberString(RCTCreditCardControl control, String numberString) {
-    control.setNumberString(numberString);
-  }
-
-  @ReactProp(name = "cvvString")
-  public void setCvvString(RCTCreditCardControl control, String cvvString) {
-    control.setCvvString(cvvString);
-  }
-
-  @ReactProp(name = "monthString")
-  public void setMonthString(RCTCreditCardControl control, String monthString) {
-    control.setMonthString(monthString);
-  }
-
-  @ReactProp(name = "yearString")
-  public void setYearString(RCTCreditCardControl control, String yearString) {
-    control.setYearString(yearString);
-  }
-
-  @ReactProp(name = "invalidString")
-  public void setInvalidString(RCTCreditCardControl control, String invalidString) {
-    control.setInvalidString(invalidString);
+  @ReactProp(name = "translations")
+  public void setTranslations(RCTCreditCardControl control, ReadableMap translations) {
+    ReadableMapKeySetIterator iterator = translations.keySetIterator();
+    while ( iterator.hasNextKey() ) {
+      String name = iterator.nextKey();
+      String text = translations.getString(name);
+      switch (name) {
+        case "cardNumber":
+          control.setNumberString(text);
+          break;
+        case "cvv":
+          control.setCvvString(text);
+          break;
+        case "month":
+          control.setMonthString(text);
+          break;
+        case "year":
+          control.setYearString(text);
+          break;
+        case "invalid":
+          control.setInvalidString(text);
+          break;
+      }
+    }
   }
 
 
