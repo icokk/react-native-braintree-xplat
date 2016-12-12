@@ -1,5 +1,7 @@
 package com.abelium.braintreeccform;
 
+import android.util.Log;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
@@ -99,6 +101,31 @@ public class CreditCardControlManager extends ViewGroupManager<RCTCreditCardCont
           break;
       }
     }
+  }
+
+  @ReactProp(name = "focusColor")
+  public void setFocusColor(RCTCreditCardControl control, Integer color) {
+    control.setFocusColor(color);
+  }
+
+  @ReactProp(name = "blurColor")
+  public void setBlurColor(RCTCreditCardControl control, Integer color) {
+    control.setBlurColor(color);
+  }
+
+  @ReactProp(name = "errorColor")
+  public void setErrorColor(RCTCreditCardControl control, Integer color) {
+    control.setErrorColor(color);
+  }
+
+  @ReactProp(name = "iconFont")
+  public void setIconFont(RCTCreditCardControl control, String font) {
+    control.setIconFont(font);
+  }
+
+  @ReactProp(name = "iconGlyph")
+  public void setIconGlyph(RCTCreditCardControl control, String text) {
+    control.setIconGlyph(text);
   }
 
 

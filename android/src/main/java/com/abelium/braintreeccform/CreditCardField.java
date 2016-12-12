@@ -18,6 +18,9 @@ import android.widget.TextView;
 
 import com.pw.droplet.braintree.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CreditCardField extends LinearLayout
 {
     public static final String TAG = CreditCardField.class.getName();
@@ -75,8 +78,7 @@ public class CreditCardField extends LinearLayout
     private TextView ccInvalidMarker;
     private View ccUnderline;
 
-    private static final Object iconFontLock = new Object();
-    private static Typeface iconFont = null;
+    private static final Map<String, Typeface> iconFontCache = new HashMap<>();
 
     protected void initComponents() {
         if (initialized)
@@ -91,18 +93,7 @@ public class CreditCardField extends LinearLayout
         this.ccInvalidMarker = (TextView) findViewById(R.id.cc_invalid_marker);
         this.ccUnderline = (View) findViewById(R.id.cc_underline);
         // set icon font
-        synchronized (iconFontLock) {
-            if (iconFont == null) {
-                try {
-                    AssetManager assets = getActivity().getAssets();
-                    iconFont = Typeface.createFromAsset(assets, "fonts/FontAwesome.ttf");
-                } catch ( Exception e ) {
-                    Log.e(TAG, "Cannot find font FontAwesome.ttf");
-                }
-            }
-        }
-        if ( iconFont != null )
-            ccIcon.setTypeface(iconFont);
+        setIconFont("fonts/FontAwesome.ttf");
         // set focus listener
         ccText.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
@@ -116,12 +107,42 @@ public class CreditCardField extends LinearLayout
         initialized = true;
     }
 
+    private Typeface loadIconFont(String fontName) {
+        synchronized (iconFontCache) {
+            if (!iconFontCache.containsKey(fontName)) {
+                try {
+                    AssetManager assets = getActivity().getAssets();
+                    Typeface iconFont = Typeface.createFromAsset(assets, "fonts/FontAwesome.ttf");
+                    iconFontCache.put(fontName, iconFont);
+                } catch ( Exception e ) {
+                    Log.e(TAG, "Cannot find font FontAwesome.ttf");
+                    iconFontCache.put(fontName, null);
+                }
+            }
+            return iconFontCache.get(fontName);
+        }
+    }
+
+    public void setIconFont(String fontName) {
+        Typeface iconFont = loadIconFont(fontName);
+        if ( iconFont != null )
+            ccIcon.setTypeface(iconFont);
+    }
+
     public boolean getShowIcon() {
         return ccIcon.getVisibility() == VISIBLE;
     }
 
     public void setShowIcon(boolean showIcon) {
         ccIcon.setVisibility(showIcon ? VISIBLE : GONE);
+    }
+
+    public String getIconGlyph() {
+        return ccIcon.getText().toString();
+    }
+
+    public void setIconGlyph(String text) {
+        ccIcon.setText(text);
     }
 
     public String getInvalidMarker() {
@@ -186,10 +207,14 @@ public class CreditCardField extends LinearLayout
         });
     }
 
-    int focusedColor = 0xFF4B4B4B;
-    //int blurColor = 0xFFF2F4F8;
-    int blurColor = 0xFFA0A0A0;
-    int errorColor = 0xFFD0011B;
+    private final static int defaultFocusColor = 0xFF4B4B4B;
+    //private final static int defaultBlurColor = 0xFFF2F4F8;
+    private final static int defaultBlurColor = 0xFFA0A0A0;
+    private final static int defaultErrorColor = 0xFFD0011B;
+
+    private int focusColor = defaultFocusColor;
+    private int blurColor = defaultBlurColor;
+    private int errorColor = defaultErrorColor;
 
     private void setFocusLayout(boolean focused) {
         this.focused = focused;
@@ -215,7 +240,7 @@ public class CreditCardField extends LinearLayout
     }
 
     private int textColor() {
-        return focused ? focusedColor : blurColor;
+        return focused ? focusColor : blurColor;
     }
 
     private int hintColor() {
@@ -232,6 +257,21 @@ public class CreditCardField extends LinearLayout
 
     public void setError(boolean error) {
         this.error = error;
+        updateColors();
+    }
+
+    public void setFocusColor(Integer color) {
+        this.focusColor = color != null ? color : defaultFocusColor;
+        updateColors();
+    }
+
+    public void setBlurColor(Integer color) {
+        this.blurColor = color != null ? color : defaultBlurColor;
+        updateColors();
+    }
+
+    public void setErrorColor(Integer color) {
+        this.errorColor = color != null ? color : defaultErrorColor;
         updateColors();
     }
 }

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { View, requireNativeComponent, Platform, NativeModules, findNodeHandle } from 'react-native'
+import { View, requireNativeComponent, Platform, NativeModules, findNodeHandle, ColorPropType, processColor } from 'react-native'
 
 export default class CreditCardControl extends React.Component {
   static displayName = "CreditCardControl";
@@ -23,6 +23,13 @@ export default class CreditCardControl extends React.Component {
         year: PropTypes.string,
         invalid: PropTypes.string,
     }),
+    // colors
+    focusColor: ColorPropType,
+    blurColor: ColorPropType,
+    errorColor: ColorPropType,
+    // icon font and glyph
+    iconFont: PropTypes.string,
+    iconGlyph: PropTypes.string,
   };
 
   _onNonceReceived(event) {
@@ -57,6 +64,9 @@ export default class CreditCardControl extends React.Component {
   render() {
     return (
       <RCTCreditCardControl {...this.props}
+        focusColor={processColor(this.props.focusColor)}
+        blurColor={processColor(this.props.blurColor)}
+        errorColor={processColor(this.props.errorColor)}
         ref={(ref) => { this.nativeControl = ref; }}
         onNonceReceived={(event) => { this._onNonceReceived(event); }}
       />

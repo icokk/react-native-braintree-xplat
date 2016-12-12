@@ -21,6 +21,8 @@ import com.abelium.cardvalidator.ValidatorUtils;
 import com.abelium.cardvalidator.Validity;
 import com.pw.droplet.braintree.R;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class CreditCardControl extends FrameLayout implements CreditCardField.OnEditorActionListener, View.OnClickListener
@@ -372,5 +374,39 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
         this.invalidString = invalidString;
         if ( ccNumber != null && ccNumber.getInvalidMarker() != null )
             ccNumber.setInvalidMarker(invalidString);
+    }
+
+    private List<CreditCardField> fieldList() {
+        CreditCardField[] fields = { ccNumber, ccCVV, ccMonth, ccYear };
+        List<CreditCardField> result = new ArrayList<>();
+        for ( CreditCardField field : fields )
+            if ( field != null )
+                result.add(field);
+        return result;
+    }
+
+    public void setFocusColor(Integer color) {
+        for ( CreditCardField field : fieldList() )
+            field.setFocusColor(color);
+    }
+
+    public void setBlurColor(Integer color) {
+        for ( CreditCardField field : fieldList() )
+            field.setBlurColor(color);
+    }
+
+    public void setErrorColor(Integer color) {
+        for ( CreditCardField field : fieldList() )
+            field.setErrorColor(color);
+    }
+
+    public void setIconFont(String font) {
+        if ( ccNumber != null )
+            ccNumber.setIconFont(font);
+    }
+
+    public void setIconGlyph(String text) {
+        if ( ccNumber != null )
+            ccNumber.setIconGlyph(text);
     }
 }
