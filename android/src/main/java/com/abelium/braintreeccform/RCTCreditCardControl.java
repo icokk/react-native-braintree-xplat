@@ -24,6 +24,7 @@ public class RCTCreditCardControl extends CreditCardControl
   public RCTCreditCardControl(ReactContext context, CreditCardControlManager manager) {
     super(context);
     this.manager = manager;
+    setHidePayButton(true);
     initComponents();       // must call here beacuse onFinishInflate is not called in react native
     initializeHandlers();
   }
