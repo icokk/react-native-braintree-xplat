@@ -16,50 +16,7 @@
 		7B2441B51DF19FFC0051252C /* DateValidity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441A91DF19FFC0051252C /* DateValidity.m */; };
 		7B2441B61DF19FFC0051252C /* PartValidity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441AB1DF19FFC0051252C /* PartValidity.m */; };
 		7B2441B71DF19FFC0051252C /* ValidatorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441AD1DF19FFC0051252C /* ValidatorUtils.m */; };
-		7B2443701DF481E50051252C /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443151DF481E50051252C /* Makefile */; };
-		7B2443711DF481E50051252C /* AutoResizeTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443181DF481E50051252C /* AutoResizeTextView.m */; };
-		7B2443721DF481E50051252C /* MaterialControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24431A1DF481E50051252C /* MaterialControls.m */; };
-		7B2443731DF481E50051252C /* MDBubbleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24431C1DF481E50051252C /* MDBubbleLabel.m */; };
-		7B2443741DF481E50051252C /* MDButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24431E1DF481E50051252C /* MDButton.m */; };
-		7B2443751DF481E50051252C /* MDCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443201DF481E50051252C /* MDCalendar.m */; };
-		7B2443761DF481E50051252C /* MDCalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443221DF481E50051252C /* MDCalendarCell.m */; };
-		7B2443771DF481E50051252C /* MDCalendarDateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443241DF481E50051252C /* MDCalendarDateHeader.m */; };
-		7B2443781DF481E50051252C /* MDCalendarHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443261DF481E50051252C /* MDCalendarHeader.m */; };
-		7B2443791DF481E50051252C /* MDCalendarYearSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443281DF481E50051252C /* MDCalendarYearSelector.m */; };
-		7B24437A1DF481E50051252C /* MDCalendarYearSelectorViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24432A1DF481E50051252C /* MDCalendarYearSelectorViewCell.m */; };
-		7B24437B1DF481E50051252C /* MDCircularProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24432C1DF481E50051252C /* MDCircularProgressLayer.m */; };
-		7B24437C1DF481E50051252C /* MDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24432E1DF481E50051252C /* MDCollectionViewCell.m */; };
-		7B24437D1DF481E50051252C /* MDDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443311DF481E50051252C /* MDDatePicker.m */; };
-		7B24437E1DF481E50051252C /* MDDatePickerDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443331DF481E50051252C /* MDDatePickerDialog.m */; };
-		7B24437F1DF481E50051252C /* MDDeviceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443351DF481E50051252C /* MDDeviceHelper.m */; };
-		7B2443801DF481E50051252C /* MDLinearProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443371DF481E50051252C /* MDLinearProgressLayer.m */; };
-		7B2443811DF481E50051252C /* MDMathHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443391DF481E50051252C /* MDMathHelper.m */; };
-		7B2443821DF481E50051252C /* MDProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24433B1DF481E50051252C /* MDProgress.m */; };
-		7B2443831DF481E50051252C /* MDProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24433D1DF481E50051252C /* MDProgressLayer.m */; };
-		7B2443841DF481E50051252C /* MDRippleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24433F1DF481E50051252C /* MDRippleLayer.m */; };
-		7B2443851DF481E50051252C /* MDSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443411DF481E50051252C /* MDSlider.m */; };
-		7B2443861DF481E50051252C /* MDSliderIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443431DF481E50051252C /* MDSliderIcon.m */; };
-		7B2443871DF481E50051252C /* MDSliderThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443451DF481E50051252C /* MDSliderThumbView.m */; };
-		7B2443881DF481E50051252C /* MDSliderTickMarksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443471DF481E50051252C /* MDSliderTickMarksView.m */; };
-		7B2443891DF481E50051252C /* MDSnackbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443491DF481E50051252C /* MDSnackbar.m */; };
-		7B24438A1DF481E50051252C /* MDSuggestPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24434B1DF481E50051252C /* MDSuggestPopupView.m */; };
-		7B24438B1DF481E50051252C /* MDSuggestTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24434D1DF481E50051252C /* MDSuggestTableView.m */; };
-		7B24438C1DF481E50051252C /* MDSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24434F1DF481E50051252C /* MDSwitch.m */; };
-		7B24438D1DF481E50051252C /* MDTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443511DF481E50051252C /* MDTabBar.m */; };
-		7B24438E1DF481E50051252C /* MDTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443531DF481E50051252C /* MDTabBarViewController.m */; };
-		7B24438F1DF481E50051252C /* MDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443551DF481E50051252C /* MDTableViewCell.m */; };
-		7B2443901DF481E50051252C /* MDTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443571DF481E50051252C /* MDTextField.m */; };
-		7B2443911DF481E50051252C /* MDTimePickerDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443591DF481E50051252C /* MDTimePickerDialog.m */; };
-		7B2443921DF481E50051252C /* MDToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24435B1DF481E50051252C /* MDToast.m */; };
-		7B2443931DF481E50051252C /* MDTouchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24435D1DF481E50051252C /* MDTouchGestureRecognizer.m */; };
-		7B2443941DF481E50051252C /* NSCalendarHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24435F1DF481E50051252C /* NSCalendarHelper.m */; };
-		7B2443951DF481E50051252C /* NSDate+MDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443611DF481E50051252C /* NSDate+MDExtension.m */; };
-		7B2443961DF481E50051252C /* NSDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443631DF481E50051252C /* NSDateHelper.m */; };
-		7B2443971DF481E50051252C /* UIColorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443651DF481E50051252C /* UIColorHelper.m */; };
-		7B2443981DF481E50051252C /* UIFontHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443671DF481E50051252C /* UIFontHelper.m */; };
-		7B2443991DF481E50051252C /* UIView+MDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2443691DF481E50051252C /* UIView+MDExtension.m */; };
-		7B24439A1DF481E50051252C /* UIViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24436B1DF481E50051252C /* UIViewHelper.m */; };
-		7B24439B1DF481E50051252C /* Readme.md in Sources */ = {isa = PBXBuildFile; fileRef = 7B24436F1DF481E50051252C /* Readme.md */; };
+		7BFA53D31DFFD9560095F389 /* IconTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA53D01DFFD9560095F389 /* IconTextField.m */; };
 		DE4F06D21D156AA8005F99CD /* RCTBraintree.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4F06D11D156AA8005F99CD /* RCTBraintree.m */; };
 		DE4F07921D15750D005F99CD /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = DE4F07911D15750D005F99CD /* UI.strings */; };
 		DE4F07A91D15751E005F99CD /* Drop-In.strings in Resources */ = {isa = PBXBuildFile; fileRef = DE4F07A81D15751E005F99CD /* Drop-In.strings */; };
@@ -68,13 +25,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7B2443A01DF481E50051252C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7B24436C1DF481E50051252C /* MaterialControls.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 92D48EE01DAF7412007CF4EC;
-			remoteInfo = MaterialControls;
-		};
 		DE6D1C7D1D16F56100DA995F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
@@ -130,94 +80,9 @@
 		7B2441AC1DF19FFC0051252C /* ValidatorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidatorUtils.h; sourceTree = "<group>"; };
 		7B2441AD1DF19FFC0051252C /* ValidatorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidatorUtils.m; sourceTree = "<group>"; };
 		7B2441AE1DF19FFC0051252C /* Validity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Validity.h; sourceTree = "<group>"; };
-		7B2443151DF481E50051252C /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		7B2443171DF481E50051252C /* AutoResizeTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoResizeTextView.h; sourceTree = "<group>"; };
-		7B2443181DF481E50051252C /* AutoResizeTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoResizeTextView.m; sourceTree = "<group>"; };
-		7B2443191DF481E50051252C /* MaterialControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialControls.h; sourceTree = "<group>"; };
-		7B24431A1DF481E50051252C /* MaterialControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaterialControls.m; sourceTree = "<group>"; };
-		7B24431B1DF481E50051252C /* MDBubbleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDBubbleLabel.h; sourceTree = "<group>"; };
-		7B24431C1DF481E50051252C /* MDBubbleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDBubbleLabel.m; sourceTree = "<group>"; };
-		7B24431D1DF481E50051252C /* MDButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDButton.h; sourceTree = "<group>"; };
-		7B24431E1DF481E50051252C /* MDButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDButton.m; sourceTree = "<group>"; };
-		7B24431F1DF481E50051252C /* MDCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCalendar.h; sourceTree = "<group>"; };
-		7B2443201DF481E50051252C /* MDCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCalendar.m; sourceTree = "<group>"; };
-		7B2443211DF481E50051252C /* MDCalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCalendarCell.h; sourceTree = "<group>"; };
-		7B2443221DF481E50051252C /* MDCalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCalendarCell.m; sourceTree = "<group>"; };
-		7B2443231DF481E50051252C /* MDCalendarDateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCalendarDateHeader.h; sourceTree = "<group>"; };
-		7B2443241DF481E50051252C /* MDCalendarDateHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCalendarDateHeader.m; sourceTree = "<group>"; };
-		7B2443251DF481E50051252C /* MDCalendarHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCalendarHeader.h; sourceTree = "<group>"; };
-		7B2443261DF481E50051252C /* MDCalendarHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCalendarHeader.m; sourceTree = "<group>"; };
-		7B2443271DF481E50051252C /* MDCalendarYearSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCalendarYearSelector.h; sourceTree = "<group>"; };
-		7B2443281DF481E50051252C /* MDCalendarYearSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCalendarYearSelector.m; sourceTree = "<group>"; };
-		7B2443291DF481E50051252C /* MDCalendarYearSelectorViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCalendarYearSelectorViewCell.h; sourceTree = "<group>"; };
-		7B24432A1DF481E50051252C /* MDCalendarYearSelectorViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCalendarYearSelectorViewCell.m; sourceTree = "<group>"; };
-		7B24432B1DF481E50051252C /* MDCircularProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCircularProgressLayer.h; sourceTree = "<group>"; };
-		7B24432C1DF481E50051252C /* MDCircularProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCircularProgressLayer.m; sourceTree = "<group>"; };
-		7B24432D1DF481E50051252C /* MDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCollectionViewCell.h; sourceTree = "<group>"; };
-		7B24432E1DF481E50051252C /* MDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCollectionViewCell.m; sourceTree = "<group>"; };
-		7B24432F1DF481E50051252C /* MDConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDConstants.h; sourceTree = "<group>"; };
-		7B2443301DF481E50051252C /* MDDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDatePicker.h; sourceTree = "<group>"; };
-		7B2443311DF481E50051252C /* MDDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDDatePicker.m; sourceTree = "<group>"; };
-		7B2443321DF481E50051252C /* MDDatePickerDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDatePickerDialog.h; sourceTree = "<group>"; };
-		7B2443331DF481E50051252C /* MDDatePickerDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDDatePickerDialog.m; sourceTree = "<group>"; };
-		7B2443341DF481E50051252C /* MDDeviceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDeviceHelper.h; sourceTree = "<group>"; };
-		7B2443351DF481E50051252C /* MDDeviceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDDeviceHelper.m; sourceTree = "<group>"; };
-		7B2443361DF481E50051252C /* MDLinearProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDLinearProgressLayer.h; sourceTree = "<group>"; };
-		7B2443371DF481E50051252C /* MDLinearProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDLinearProgressLayer.m; sourceTree = "<group>"; };
-		7B2443381DF481E50051252C /* MDMathHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMathHelper.h; sourceTree = "<group>"; };
-		7B2443391DF481E50051252C /* MDMathHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMathHelper.m; sourceTree = "<group>"; };
-		7B24433A1DF481E50051252C /* MDProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDProgress.h; sourceTree = "<group>"; };
-		7B24433B1DF481E50051252C /* MDProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDProgress.m; sourceTree = "<group>"; };
-		7B24433C1DF481E50051252C /* MDProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDProgressLayer.h; sourceTree = "<group>"; };
-		7B24433D1DF481E50051252C /* MDProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDProgressLayer.m; sourceTree = "<group>"; };
-		7B24433E1DF481E50051252C /* MDRippleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDRippleLayer.h; sourceTree = "<group>"; };
-		7B24433F1DF481E50051252C /* MDRippleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDRippleLayer.m; sourceTree = "<group>"; };
-		7B2443401DF481E50051252C /* MDSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSlider.h; sourceTree = "<group>"; };
-		7B2443411DF481E50051252C /* MDSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSlider.m; sourceTree = "<group>"; };
-		7B2443421DF481E50051252C /* MDSliderIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSliderIcon.h; sourceTree = "<group>"; };
-		7B2443431DF481E50051252C /* MDSliderIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSliderIcon.m; sourceTree = "<group>"; };
-		7B2443441DF481E50051252C /* MDSliderThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSliderThumbView.h; sourceTree = "<group>"; };
-		7B2443451DF481E50051252C /* MDSliderThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSliderThumbView.m; sourceTree = "<group>"; };
-		7B2443461DF481E50051252C /* MDSliderTickMarksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSliderTickMarksView.h; sourceTree = "<group>"; };
-		7B2443471DF481E50051252C /* MDSliderTickMarksView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSliderTickMarksView.m; sourceTree = "<group>"; };
-		7B2443481DF481E50051252C /* MDSnackbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSnackbar.h; sourceTree = "<group>"; };
-		7B2443491DF481E50051252C /* MDSnackbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSnackbar.m; sourceTree = "<group>"; };
-		7B24434A1DF481E50051252C /* MDSuggestPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSuggestPopupView.h; sourceTree = "<group>"; };
-		7B24434B1DF481E50051252C /* MDSuggestPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSuggestPopupView.m; sourceTree = "<group>"; };
-		7B24434C1DF481E50051252C /* MDSuggestTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSuggestTableView.h; sourceTree = "<group>"; };
-		7B24434D1DF481E50051252C /* MDSuggestTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSuggestTableView.m; sourceTree = "<group>"; };
-		7B24434E1DF481E50051252C /* MDSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSwitch.h; sourceTree = "<group>"; };
-		7B24434F1DF481E50051252C /* MDSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSwitch.m; sourceTree = "<group>"; };
-		7B2443501DF481E50051252C /* MDTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDTabBar.h; sourceTree = "<group>"; };
-		7B2443511DF481E50051252C /* MDTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDTabBar.m; sourceTree = "<group>"; };
-		7B2443521DF481E50051252C /* MDTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDTabBarViewController.h; sourceTree = "<group>"; };
-		7B2443531DF481E50051252C /* MDTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDTabBarViewController.m; sourceTree = "<group>"; };
-		7B2443541DF481E50051252C /* MDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDTableViewCell.h; sourceTree = "<group>"; };
-		7B2443551DF481E50051252C /* MDTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDTableViewCell.m; sourceTree = "<group>"; };
-		7B2443561DF481E50051252C /* MDTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDTextField.h; sourceTree = "<group>"; };
-		7B2443571DF481E50051252C /* MDTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDTextField.m; sourceTree = "<group>"; };
-		7B2443581DF481E50051252C /* MDTimePickerDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDTimePickerDialog.h; sourceTree = "<group>"; };
-		7B2443591DF481E50051252C /* MDTimePickerDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDTimePickerDialog.m; sourceTree = "<group>"; };
-		7B24435A1DF481E50051252C /* MDToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDToast.h; sourceTree = "<group>"; };
-		7B24435B1DF481E50051252C /* MDToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDToast.m; sourceTree = "<group>"; };
-		7B24435C1DF481E50051252C /* MDTouchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDTouchGestureRecognizer.h; sourceTree = "<group>"; };
-		7B24435D1DF481E50051252C /* MDTouchGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDTouchGestureRecognizer.m; sourceTree = "<group>"; };
-		7B24435E1DF481E50051252C /* NSCalendarHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCalendarHelper.h; sourceTree = "<group>"; };
-		7B24435F1DF481E50051252C /* NSCalendarHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSCalendarHelper.m; sourceTree = "<group>"; };
-		7B2443601DF481E50051252C /* NSDate+MDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MDExtension.h"; sourceTree = "<group>"; };
-		7B2443611DF481E50051252C /* NSDate+MDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MDExtension.m"; sourceTree = "<group>"; };
-		7B2443621DF481E50051252C /* NSDateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateHelper.h; sourceTree = "<group>"; };
-		7B2443631DF481E50051252C /* NSDateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateHelper.m; sourceTree = "<group>"; };
-		7B2443641DF481E50051252C /* UIColorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColorHelper.h; sourceTree = "<group>"; };
-		7B2443651DF481E50051252C /* UIColorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColorHelper.m; sourceTree = "<group>"; };
-		7B2443661DF481E50051252C /* UIFontHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFontHelper.h; sourceTree = "<group>"; };
-		7B2443671DF481E50051252C /* UIFontHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFontHelper.m; sourceTree = "<group>"; };
-		7B2443681DF481E50051252C /* UIView+MDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MDExtension.h"; sourceTree = "<group>"; };
-		7B2443691DF481E50051252C /* UIView+MDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MDExtension.m"; sourceTree = "<group>"; };
-		7B24436A1DF481E50051252C /* UIViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewHelper.h; sourceTree = "<group>"; };
-		7B24436B1DF481E50051252C /* UIViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewHelper.m; sourceTree = "<group>"; };
-		7B24436C1DF481E50051252C /* MaterialControls.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MaterialControls.xcodeproj; sourceTree = "<group>"; };
-		7B24436F1DF481E50051252C /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		7BFA53D01DFFD9560095F389 /* IconTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconTextField.m; sourceTree = "<group>"; };
+		7BFA53D11DFFD9560095F389 /* Constants_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants_helper.h; sourceTree = "<group>"; };
+		7BFA53D21DFFD9560095F389 /* IconTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconTextField.h; sourceTree = "<group>"; };
 		DE4F06CC1D156AA8005F99CD /* libRCTBraintree.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTBraintree.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE4F06CF1D156AA8005F99CD /* RCTBraintree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTBraintree.h; sourceTree = "<group>"; };
 		DE4F06D11D156AA8005F99CD /* RCTBraintree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTBraintree.m; sourceTree = "<group>"; };
@@ -321,117 +186,6 @@
 			path = CCValidator;
 			sourceTree = "<group>";
 		};
-		7B2443141DF481E50051252C /* MaterialControls */ = {
-			isa = PBXGroup;
-			children = (
-				7B2443151DF481E50051252C /* Makefile */,
-				7B2443161DF481E50051252C /* MaterialControls */,
-				7B24436C1DF481E50051252C /* MaterialControls.xcodeproj */,
-				7B24436F1DF481E50051252C /* Readme.md */,
-			);
-			path = MaterialControls;
-			sourceTree = "<group>";
-		};
-		7B2443161DF481E50051252C /* MaterialControls */ = {
-			isa = PBXGroup;
-			children = (
-				7B2443171DF481E50051252C /* AutoResizeTextView.h */,
-				7B2443181DF481E50051252C /* AutoResizeTextView.m */,
-				7B2443191DF481E50051252C /* MaterialControls.h */,
-				7B24431A1DF481E50051252C /* MaterialControls.m */,
-				7B24431B1DF481E50051252C /* MDBubbleLabel.h */,
-				7B24431C1DF481E50051252C /* MDBubbleLabel.m */,
-				7B24431D1DF481E50051252C /* MDButton.h */,
-				7B24431E1DF481E50051252C /* MDButton.m */,
-				7B24431F1DF481E50051252C /* MDCalendar.h */,
-				7B2443201DF481E50051252C /* MDCalendar.m */,
-				7B2443211DF481E50051252C /* MDCalendarCell.h */,
-				7B2443221DF481E50051252C /* MDCalendarCell.m */,
-				7B2443231DF481E50051252C /* MDCalendarDateHeader.h */,
-				7B2443241DF481E50051252C /* MDCalendarDateHeader.m */,
-				7B2443251DF481E50051252C /* MDCalendarHeader.h */,
-				7B2443261DF481E50051252C /* MDCalendarHeader.m */,
-				7B2443271DF481E50051252C /* MDCalendarYearSelector.h */,
-				7B2443281DF481E50051252C /* MDCalendarYearSelector.m */,
-				7B2443291DF481E50051252C /* MDCalendarYearSelectorViewCell.h */,
-				7B24432A1DF481E50051252C /* MDCalendarYearSelectorViewCell.m */,
-				7B24432B1DF481E50051252C /* MDCircularProgressLayer.h */,
-				7B24432C1DF481E50051252C /* MDCircularProgressLayer.m */,
-				7B24432D1DF481E50051252C /* MDCollectionViewCell.h */,
-				7B24432E1DF481E50051252C /* MDCollectionViewCell.m */,
-				7B24432F1DF481E50051252C /* MDConstants.h */,
-				7B2443301DF481E50051252C /* MDDatePicker.h */,
-				7B2443311DF481E50051252C /* MDDatePicker.m */,
-				7B2443321DF481E50051252C /* MDDatePickerDialog.h */,
-				7B2443331DF481E50051252C /* MDDatePickerDialog.m */,
-				7B2443341DF481E50051252C /* MDDeviceHelper.h */,
-				7B2443351DF481E50051252C /* MDDeviceHelper.m */,
-				7B2443361DF481E50051252C /* MDLinearProgressLayer.h */,
-				7B2443371DF481E50051252C /* MDLinearProgressLayer.m */,
-				7B2443381DF481E50051252C /* MDMathHelper.h */,
-				7B2443391DF481E50051252C /* MDMathHelper.m */,
-				7B24433A1DF481E50051252C /* MDProgress.h */,
-				7B24433B1DF481E50051252C /* MDProgress.m */,
-				7B24433C1DF481E50051252C /* MDProgressLayer.h */,
-				7B24433D1DF481E50051252C /* MDProgressLayer.m */,
-				7B24433E1DF481E50051252C /* MDRippleLayer.h */,
-				7B24433F1DF481E50051252C /* MDRippleLayer.m */,
-				7B2443401DF481E50051252C /* MDSlider.h */,
-				7B2443411DF481E50051252C /* MDSlider.m */,
-				7B2443421DF481E50051252C /* MDSliderIcon.h */,
-				7B2443431DF481E50051252C /* MDSliderIcon.m */,
-				7B2443441DF481E50051252C /* MDSliderThumbView.h */,
-				7B2443451DF481E50051252C /* MDSliderThumbView.m */,
-				7B2443461DF481E50051252C /* MDSliderTickMarksView.h */,
-				7B2443471DF481E50051252C /* MDSliderTickMarksView.m */,
-				7B2443481DF481E50051252C /* MDSnackbar.h */,
-				7B2443491DF481E50051252C /* MDSnackbar.m */,
-				7B24434A1DF481E50051252C /* MDSuggestPopupView.h */,
-				7B24434B1DF481E50051252C /* MDSuggestPopupView.m */,
-				7B24434C1DF481E50051252C /* MDSuggestTableView.h */,
-				7B24434D1DF481E50051252C /* MDSuggestTableView.m */,
-				7B24434E1DF481E50051252C /* MDSwitch.h */,
-				7B24434F1DF481E50051252C /* MDSwitch.m */,
-				7B2443501DF481E50051252C /* MDTabBar.h */,
-				7B2443511DF481E50051252C /* MDTabBar.m */,
-				7B2443521DF481E50051252C /* MDTabBarViewController.h */,
-				7B2443531DF481E50051252C /* MDTabBarViewController.m */,
-				7B2443541DF481E50051252C /* MDTableViewCell.h */,
-				7B2443551DF481E50051252C /* MDTableViewCell.m */,
-				7B2443561DF481E50051252C /* MDTextField.h */,
-				7B2443571DF481E50051252C /* MDTextField.m */,
-				7B2443581DF481E50051252C /* MDTimePickerDialog.h */,
-				7B2443591DF481E50051252C /* MDTimePickerDialog.m */,
-				7B24435A1DF481E50051252C /* MDToast.h */,
-				7B24435B1DF481E50051252C /* MDToast.m */,
-				7B24435C1DF481E50051252C /* MDTouchGestureRecognizer.h */,
-				7B24435D1DF481E50051252C /* MDTouchGestureRecognizer.m */,
-				7B24435E1DF481E50051252C /* NSCalendarHelper.h */,
-				7B24435F1DF481E50051252C /* NSCalendarHelper.m */,
-				7B2443601DF481E50051252C /* NSDate+MDExtension.h */,
-				7B2443611DF481E50051252C /* NSDate+MDExtension.m */,
-				7B2443621DF481E50051252C /* NSDateHelper.h */,
-				7B2443631DF481E50051252C /* NSDateHelper.m */,
-				7B2443641DF481E50051252C /* UIColorHelper.h */,
-				7B2443651DF481E50051252C /* UIColorHelper.m */,
-				7B2443661DF481E50051252C /* UIFontHelper.h */,
-				7B2443671DF481E50051252C /* UIFontHelper.m */,
-				7B2443681DF481E50051252C /* UIView+MDExtension.h */,
-				7B2443691DF481E50051252C /* UIView+MDExtension.m */,
-				7B24436A1DF481E50051252C /* UIViewHelper.h */,
-				7B24436B1DF481E50051252C /* UIViewHelper.m */,
-			);
-			path = MaterialControls;
-			sourceTree = "<group>";
-		};
-		7B24436D1DF481E50051252C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7B2443A11DF481E50051252C /* libMaterialControls.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		DE4F06C31D156AA8005F99CD = {
 			isa = PBXGroup;
 			children = (
@@ -455,7 +209,9 @@
 		DE4F06CE1D156AA8005F99CD /* RCTBraintree */ = {
 			isa = PBXGroup;
 			children = (
-				7B2443141DF481E50051252C /* MaterialControls */,
+				7BFA53D01DFFD9560095F389 /* IconTextField.m */,
+				7BFA53D11DFFD9560095F389 /* Constants_helper.h */,
+				7BFA53D21DFFD9560095F389 /* IconTextField.h */,
 				7B24419B1DF19FFC0051252C /* CreditCardUIView.m */,
 				7B24419C1DF19FFC0051252C /* CreditCardUI.m */,
 				7B24419D1DF19FFC0051252C /* CreditCardUIView.h */,
@@ -527,10 +283,6 @@
 					ProductGroup = DE6D1C621D16F56100DA995F /* Products */;
 					ProjectRef = DE6D1C611D16F56100DA995F /* Braintree.xcodeproj */;
 				},
-				{
-					ProductGroup = 7B24436D1DF481E50051252C /* Products */;
-					ProjectRef = 7B24436C1DF481E50051252C /* MaterialControls.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -540,13 +292,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		7B2443A11DF481E50051252C /* libMaterialControls.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libMaterialControls.a;
-			remoteRef = 7B2443A01DF481E50051252C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		DE6D1C7E1D16F56100DA995F /* libBraintree.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -588,60 +333,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B2443931DF481E50051252C /* MDTouchGestureRecognizer.m in Sources */,
 				7B2441B71DF19FFC0051252C /* ValidatorUtils.m in Sources */,
-				7B2443981DF481E50051252C /* UIFontHelper.m in Sources */,
-				7B2443731DF481E50051252C /* MDBubbleLabel.m in Sources */,
-				7B2443751DF481E50051252C /* MDCalendar.m in Sources */,
 				7B2441B11DF19FFC0051252C /* CardNumberMatch.m in Sources */,
-				7B2443791DF481E50051252C /* MDCalendarYearSelector.m in Sources */,
 				7B2441B61DF19FFC0051252C /* PartValidity.m in Sources */,
-				7B2443701DF481E50051252C /* Makefile in Sources */,
-				7B2443801DF481E50051252C /* MDLinearProgressLayer.m in Sources */,
-				7B2443781DF481E50051252C /* MDCalendarHeader.m in Sources */,
-				7B2443911DF481E50051252C /* MDTimePickerDialog.m in Sources */,
-				7B2443721DF481E50051252C /* MaterialControls.m in Sources */,
-				7B24438F1DF481E50051252C /* MDTableViewCell.m in Sources */,
-				7B2443901DF481E50051252C /* MDTextField.m in Sources */,
-				7B24438E1DF481E50051252C /* MDTabBarViewController.m in Sources */,
 				DE4F06D21D156AA8005F99CD /* RCTBraintree.m in Sources */,
-				7B2443861DF481E50051252C /* MDSliderIcon.m in Sources */,
-				7B2443831DF481E50051252C /* MDProgressLayer.m in Sources */,
-				7B2443741DF481E50051252C /* MDButton.m in Sources */,
-				7B24439A1DF481E50051252C /* UIViewHelper.m in Sources */,
+				7BFA53D31DFFD9560095F389 /* IconTextField.m in Sources */,
 				7B2441B01DF19FFC0051252C /* CreditCardUI.m in Sources */,
 				7B2441B31DF19FFC0051252C /* CreditCardValidator.m in Sources */,
 				7B2441B41DF19FFC0051252C /* DateValidator.m in Sources */,
-				7B2443881DF481E50051252C /* MDSliderTickMarksView.m in Sources */,
-				7B24437D1DF481E50051252C /* MDDatePicker.m in Sources */,
-				7B2443991DF481E50051252C /* UIView+MDExtension.m in Sources */,
-				7B24438B1DF481E50051252C /* MDSuggestTableView.m in Sources */,
-				7B2443811DF481E50051252C /* MDMathHelper.m in Sources */,
-				7B24437B1DF481E50051252C /* MDCircularProgressLayer.m in Sources */,
-				7B24438C1DF481E50051252C /* MDSwitch.m in Sources */,
 				7B2441B51DF19FFC0051252C /* DateValidity.m in Sources */,
-				7B2443941DF481E50051252C /* NSCalendarHelper.m in Sources */,
-				7B24437E1DF481E50051252C /* MDDatePickerDialog.m in Sources */,
-				7B24437A1DF481E50051252C /* MDCalendarYearSelectorViewCell.m in Sources */,
-				7B24438D1DF481E50051252C /* MDTabBar.m in Sources */,
 				7B2441AF1DF19FFC0051252C /* CreditCardUIView.m in Sources */,
-				7B2443821DF481E50051252C /* MDProgress.m in Sources */,
-				7B2443871DF481E50051252C /* MDSliderThumbView.m in Sources */,
-				7B2443841DF481E50051252C /* MDRippleLayer.m in Sources */,
-				7B2443851DF481E50051252C /* MDSlider.m in Sources */,
-				7B24437C1DF481E50051252C /* MDCollectionViewCell.m in Sources */,
-				7B2443951DF481E50051252C /* NSDate+MDExtension.m in Sources */,
-				7B2443711DF481E50051252C /* AutoResizeTextView.m in Sources */,
-				7B24439B1DF481E50051252C /* Readme.md in Sources */,
-				7B24437F1DF481E50051252C /* MDDeviceHelper.m in Sources */,
-				7B2443761DF481E50051252C /* MDCalendarCell.m in Sources */,
-				7B2443971DF481E50051252C /* UIColorHelper.m in Sources */,
-				7B2443891DF481E50051252C /* MDSnackbar.m in Sources */,
-				7B2443921DF481E50051252C /* MDToast.m in Sources */,
 				7B2441B21DF19FFC0051252C /* CreditCardType.m in Sources */,
-				7B2443961DF481E50051252C /* NSDateHelper.m in Sources */,
-				7B2443771DF481E50051252C /* MDCalendarDateHeader.m in Sources */,
-				7B24438A1DF481E50051252C /* MDSuggestPopupView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
