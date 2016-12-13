@@ -264,24 +264,25 @@ typedef enum
 -(void)executePayment
 {
     if([self validateAndSubmit]) {
-        
-        //TODO - try->catch->exception
+        //TODO
         [[RCTBraintree alloc] tokenizeAndVerifyNat:self.ccNumberField.textField.text expirationMonth:self.monthField.textField.text expirationYear:self.yearField.textField.text cvv:self.cvvField.textField.text amountNumber:self.amount verify:self.require3dSecure clientToken:self.clientToken callback:^(NSString *nonce){
             NSLog(@"*** nonce %@ ", nonce);
             if(nonce) {
                 self.onNonceReceived(@{@"nonce":  nonce});
-                [self showSubmitMode:NO];
+//                [self showSubmitMode:NO];
             } else {
-                
+                self.onNonceReceived(@{@"nonce":  nonce});
                 //set error - something went wrong in label
-                NSLog(@"*** no nonce");
-                [self showSubmitMode:NO];
+                NSLog(@"*** no nonce %@", nonce);
+//                [self showSubmitMode:NO];
             }
         }];
-        //        [self.activitIndicator stopAnimating];
+//        self.onNonceReceived(@{@"nonce":  @[]});
     }
-    else NSLog(@"********* No Good");
-    //validation is not ok -> textfield errors
+    else {
+        //validation error
+        self.onNonceReceived(@{@"nonce":  @[]});
+    }
 }
 
 -(BOOL)validateAndSubmit
@@ -289,10 +290,10 @@ typedef enum
     Validity validity = [self validate:YES];
     if(validity == Complete)
     {
-        [self showSubmitMode:YES];
+//        [self showSubmitMode:YES];
         return YES;
     } else {
-        [self showSubmitMode:NO];
+//        [self showSubmitMode:NO];
         return NO;
     }
 }
@@ -308,14 +309,9 @@ typedef enum
 
 -(Validity)validateNumber:(BOOL)submit
 {
-    NSLog(@"*** %@ ", self.ccNumberField);
     CardNumberMatch *ccmatch = [[CreditCardValidator alloc] detectCard:self.ccNumberField.textField.text];
     Validity validity = ccmatch.getValidity;
-//    NSLog(@"*** %@", self.requiredCard);
-//    NSLog(@"*** %@   %d", ccmatch.getCardType, [self.requiredCard isEqual:ccmatch.getCardType]);
-    NSLog(@"**? %@", ccType);
-    NSLog(@"**- %@", ccmatch.getCardType);
-    if( ccType != NULL && ![ccType isEqualToCreditCardType:ccmatch.getCardType] )//       ![ccType isEqual:ccmatch.getCardType])
+    if( ccType != NULL && ![ccType isEqualToCreditCardType:ccmatch.getCardType] )
         validity = Invalid;
     [self markField:Number withValidity:validity with:submit];
     return validity;
@@ -604,10 +600,31 @@ typedef enum
 -(void)setBlurColor:(NSInteger)blurColor
 {
     _blurColor = blurColor;
-    if(_ccNumberField != NULL) _ccNumberField.dividerLineColor = UIColorFromRGB(blurColor);
-    if(_cvvField != NULL) _cvvField.dividerLineColor = UIColorFromRGB(blurColor);
-    if(_monthField != NULL) _monthField.dividerLineColor = UIColorFromRGB(blurColor);
-    if(_yearField != NULL) _yearField.dividerLineColor = UIColorFromRGB(blurColor);
+    if(_ccNumberField != NULL)
+    {
+        _ccNumberField.dividerLineColor = UIColorFromRGB(blurColor);
+        _ccNumberField.placeholderColor = UIColorFromRGB(blurColor);
+        _ccNumberField.upperPlaceholderColor = UIColorFromRGB(blurColor);
+        _ccNumberField.iconLabelColor = UIColorFromRGB(blurColor);
+    }
+    if(_cvvField != NULL)
+    {
+        _cvvField.dividerLineColor = UIColorFromRGB(blurColor);
+        _cvvField.placeholderColor = UIColorFromRGB(blurColor);
+        _cvvField.upperPlaceholderColor = UIColorFromRGB(blurColor);
+    }
+    if(_monthField != NULL)
+    {
+        _monthField.dividerLineColor = UIColorFromRGB(blurColor);
+        _monthField.placeholderColor = UIColorFromRGB(blurColor);
+        _monthField.upperPlaceholderColor = UIColorFromRGB(blurColor);
+    }
+    if(_yearField != NULL)
+    {
+        _yearField.dividerLineColor = UIColorFromRGB(blurColor);
+        _yearField.placeholderColor = UIColorFromRGB(blurColor);
+        _yearField.upperPlaceholderColor = UIColorFromRGB(blurColor);
+    }
 }
 -(NSInteger)getFocusColor
 {
@@ -635,12 +652,19 @@ typedef enum
     monthString = [translations valueForKey:@"month"];
     yearString = [translations valueForKey:@"year"];
     invalidString = [translations valueForKey:@"invalid"];
-    if(_ccNumberField != NULL) _ccNumberField.placeholderText = [self getNumberString];
-    if(_cvvField != NULL) _cvvField.placeholderText = [self getCvvString];
-    if(_monthField != NULL) _monthField.placeholderText = [self getMonthString];
-    if(_yearField != NULL) _yearField.placeholderText = [self getYearString];
-    if(_ccNumberField != NULL && _cvvField != NULL && _monthField != NULL && _yearField != NULL) setInvalidString:invalidString;
-    
+    if(_ccNumberField != NULL && !_ccNumberField.hideComponent)
+        _ccNumberField.placeholderText = [self getNumberString];
+    if(_cvvField != NULL && !_cvvField.hideComponent)
+    {
+       if([cvvString isEqual:[NSNull null]])
+           cvvString = @"CVV";
+        _cvvField.placeholderText = [self getCvvString];
+    }
+    if(_monthField != NULL && !_monthField.hideComponent)
+        _monthField.placeholderText = [self getMonthString];
+    if(_yearField != NULL && !_yearField.hideComponent)
+        _yearField.placeholderText = [self getYearString];
+//    [self setInvalidString:invalidString];
 }
 
 //TODO

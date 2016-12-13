@@ -16,6 +16,7 @@
 #define UPPER_PLACEHOLDER_TOP_MARGIN 14
 #define UPPER_PLACEHOLDER_TOP_HEIGHT 14
 #define TEXT_FIELD_FULL_TOP_MARGIN 32
+#define CHEAT_MARGIN_FOR_REACT 40
 
 @implementation IconTextField
 
@@ -55,7 +56,7 @@
     self.textFieldFull = NO;
     self.hideComponent = NO;
     
-    _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, FIELD_HEIGHT)];
+    _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width - CHEAT_MARGIN_FOR_REACT, FIELD_HEIGHT)];
     
     _iconLabelView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
 
@@ -445,13 +446,10 @@
 -(void)setIconLabelText:(NSString*)iconLabelText
 {
     NSString const* name= iconLabelText;
-//    _iconLabelText = iconLabelText;
-//    const char *iconText[iconLabelText.length];
     const char *iconText = [iconLabelText cStringUsingEncoding:NSUTF8StringEncoding];
 //    &iconText[1];
-    NSLog(@"*** %s", &iconText[1]);
 //    NSLog(@"*** %d", [@"\ue90b" isEqualToString:iconLabelText]);
-    if(_iconLabel != NULL)  [self.iconLabel setText:name];
+    if(_iconLabel != NULL)  [self.iconLabel setText:@"\ue90b"];
 }
 -(UIColor*)getIconLabelColor
 {

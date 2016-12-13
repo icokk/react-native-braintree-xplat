@@ -57,9 +57,7 @@ RCT_EXPORT_METHOD(showPaymentViewController:(NSDictionary *)options callback:(RC
     dispatch_async(dispatch_get_main_queue(), ^{
         BTDropInViewController *dropInViewController = [[BTDropInViewController alloc] initWithAPIClient:self.braintreeClient];
         dropInViewController.delegate = self;
-        
-        NSLog(@"%@", options);
-        
+                
         UIColor *tintColor = options[@"tintColor"];
         UIColor *bgColor = options[@"bgColor"];
         UIColor *barBgColor = options[@"barBgColor"];
@@ -296,22 +294,22 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
                                                                    NSArray *args = @[];
                                                                    if ( error == nil ) {
                                                                        if ( secureCard ) {
-                                                                           args = @[[NSNull null], secureCard.nonce];
-                                                                           NSLog(@"***** %@", secureCard.nonce);
                                                                            completionHandler(secureCard.nonce);
                                                                            
                                                                        } else {
-                                                                           args = @[[NSNull null], [NSNull null]];
+                                                                           completionHandler(args);
                                                                        }
                                                                    } else {
-                                                                       args = @[error.description, [NSNull null]];
+                                                                       args = @[error.description];
+                                                                       completionHandler(args);
                                                                    }
                                                                }];
                               } else {
-                                  args = @[[NSNull null], [NSNull null]];
+                                  completionHandler(args);
                               }
                           } else {
-                              args = @[error.description, [NSNull null]];
+                              args = @[error.description];
+                              completionHandler(args);
                           }
                       }
          ];

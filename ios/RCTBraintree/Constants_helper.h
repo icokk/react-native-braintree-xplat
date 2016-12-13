@@ -11,7 +11,7 @@
 #define UPPER_PLACEHOLDER_FONT [UIFont fontWithName:@"Roboto-Light" size:12];
 #define UPPER_PLACEHOLDER_COLOR [UIColor lightGrayColor];
 #define INPUT_TEXT_FONT [UIFont fontWithName:@"Roboto-Regular" size:16];
-#define INPUT_TEXT_COLOR [UIColor blackColor];
+#define INPUT_TEXT_COLOR [UIColor colorWithRed:0.29 green:0.29 blue:0.29 alpha:1.0];
 #define DIVIDER_LINE_COLOR [UIColor lightGrayColor];
 #define DIVIDER_LINE_HIGHLIGHT_COLOR [UIColor blackColor];
 #define DIVIDER_LINE_ERROR_COLOR [UIColor colorWithRed:0.82 green:0.00 blue:0.11 alpha:1.0]; //red
