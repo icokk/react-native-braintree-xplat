@@ -3,24 +3,21 @@
 #import "RCTBraintree.h"
 #import "CreditCardType.h"
 #import "RCTBridgeModule.h"
+#import "CreditCardUIView.h"
 
+@implementation CreditCardUI{
+    CreditCardUIView *rctView;
 
-@implementation CreditCardUI
+}
 
 RCT_EXPORT_MODULE(RCTCreditCardUI);
 
 @synthesize bridge = _bridge;
 
 -(UIView*) view {
-    
-    CreditCardUIView *v = [[CreditCardUIView alloc] init];
-    [v initWithFrame:[UIScreen mainScreen].applicationFrame];
-    
-    return v;
+    rctView = [[CreditCardUIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
+    return rctView;
 }
-
-
-
 
 RCT_EXPORT_VIEW_PROPERTY(requiredCard, NSString);
 RCT_EXPORT_VIEW_PROPERTY(require3dSecure, BOOL);
@@ -30,7 +27,18 @@ RCT_EXPORT_VIEW_PROPERTY(amount, NSNumber);
 RCT_EXPORT_VIEW_PROPERTY(clientToken, NSString);
 RCT_EXPORT_VIEW_PROPERTY(onNonceReceived, RCTBubblingEventBlock);
 
+RCT_EXPORT_VIEW_PROPERTY(iconFont, NSString);
+RCT_EXPORT_VIEW_PROPERTY(iconGlyph, NSString);
 
+RCT_EXPORT_VIEW_PROPERTY(focusColor, NSInteger);
+RCT_EXPORT_VIEW_PROPERTY(blurColor, NSInteger);
+RCT_EXPORT_VIEW_PROPERTY(errorColor, NSInteger);
 
+RCT_EXPORT_VIEW_PROPERTY(translations, NSDictionary);
+
+RCT_EXPORT_METHOD(submitCardData:(nonnull NSNumber *)reactTag)
+{
+    [rctView executePayment];
+}
 
 @end

@@ -1,11 +1,7 @@
 import React, { PropTypes } from 'react'
-import { View, requireNativeComponent, Platform, NativeModules, findNodeHandle } from 'react-native'
+import { View, requireNativeComponent, Platform, NativeModules, findNodeHandle, ColorPropType, processColor } from 'react-native'
 
-// // requireNativeComponent automatically resolves this to “MapBoxManager”
-// module.exports = requireNativeComponent("CrediCardUI", null);
-
-
-export default class CrediCardUI extends React.Component {//control za komponento
+export default class CrediCardUI extends React.Component {
   static displayName = "CrediCardUI";
 
   static propTypes = {
@@ -19,11 +15,26 @@ export default class CrediCardUI extends React.Component {//control za komponent
     hidePayButton: PropTypes.bool,
     amount: PropTypes.number,
     onNonceReceived: PropTypes.func,
+    // translations
+    translations: PropTypes.shape({
+        cardNumber: PropTypes.string,
+        cvv: PropTypes.string,
+        month: PropTypes.string,
+        year: PropTypes.string,
+        invalid: PropTypes.string,
+    }),
+    // colors
+    focusColor: ColorPropType,
+    blurColor: ColorPropType,
+    errorColor: ColorPropType,
+    // icon font and glyph
+    iconFont: PropTypes.string,
+    iconGlyph: PropTypes.string,
   };
 
   _onNonceReceived(event) {
     if ( this.props.onNonceReceived )
-      this.props.onNonceReceived(event.nativeEvent.nonce); //iz callbacka
+      this.props.onNonceReceived(event.nativeEvent.nonce);
   }
 
   submitCardData() {
@@ -40,13 +51,10 @@ export default class CrediCardUI extends React.Component {//control za komponent
         );
         break;
       case 'ios':
-      console.log(name);
-      console.log(NativeModules);
-      console.log(findNodeHandle(this.nativeControl));
-      console.log(NativeModules.UIManager.RCTCreditCardUI["get Commands"]);
-        NativeModules.CrediCardUI[name].apply(
-            NativeModules.CrediCardUI[name],
-            [findNodeHandle(this.nativeControl), ...args]
+        NativeModules.UIManager.dispatchViewManagerCommand(
+            findNodeHandle(this.nativeControl),
+            NativeModules.UIManager.RCTCreditCardUI.Commands[name],
+            args
         );
         break;
       default:
@@ -57,8 +65,11 @@ export default class CrediCardUI extends React.Component {//control za komponent
   render() {
     return (
       <RCTCreditCardUI {...this.props}
-        ref={(ref) => { console.log(this.nativeControl); this.nativeControl = ref; }}
-        onNonceReceived={(event) => { console.log(event); this._onNonceReceived(event); }}
+        focusColor={processColor(this.props.focusColor)}
+        blurColor={processColor(this.props.blurColor)}
+        errorColor={processColor(this.props.errorColor)}
+        ref={(ref) => { this.nativeControl = ref; }}
+        onNonceReceived={(event) => { this._onNonceReceived(event); }}
       />
     );
   }
