@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		7B2441AF1DF19FFC0051252C /* CreditCardUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24419B1DF19FFC0051252C /* CreditCardUIView.m */; };
 		7B2441B01DF19FFC0051252C /* CreditCardUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B24419C1DF19FFC0051252C /* CreditCardUI.m */; };
-		7B2441B11DF19FFC0051252C /* CardNumberMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441A11DF19FFC0051252C /* CardNumberMatch.m */; };
-		7B2441B21DF19FFC0051252C /* CreditCardType.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441A31DF19FFC0051252C /* CreditCardType.m */; };
-		7B2441B31DF19FFC0051252C /* CreditCardValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441A51DF19FFC0051252C /* CreditCardValidator.m */; };
-		7B2441B41DF19FFC0051252C /* DateValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441A71DF19FFC0051252C /* DateValidator.m */; };
-		7B2441B51DF19FFC0051252C /* DateValidity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441A91DF19FFC0051252C /* DateValidity.m */; };
-		7B2441B61DF19FFC0051252C /* PartValidity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441AB1DF19FFC0051252C /* PartValidity.m */; };
-		7B2441B71DF19FFC0051252C /* ValidatorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2441AD1DF19FFC0051252C /* ValidatorUtils.m */; };
 		7BFA53D31DFFD9560095F389 /* IconTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA53D01DFFD9560095F389 /* IconTextField.m */; };
+		7BFA53E41DFFDA120095F389 /* CardNumberMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA53D61DFFDA120095F389 /* CardNumberMatch.m */; };
+		7BFA53E51DFFDA120095F389 /* CreditCardType.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA53D81DFFDA120095F389 /* CreditCardType.m */; };
+		7BFA53E61DFFDA120095F389 /* CreditCardValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA53DA1DFFDA120095F389 /* CreditCardValidator.m */; };
+		7BFA53E71DFFDA120095F389 /* DateValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA53DC1DFFDA120095F389 /* DateValidator.m */; };
+		7BFA53E81DFFDA120095F389 /* DateValidity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA53DE1DFFDA120095F389 /* DateValidity.m */; };
+		7BFA53E91DFFDA120095F389 /* PartValidity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA53E01DFFDA120095F389 /* PartValidity.m */; };
+		7BFA53EA1DFFDA120095F389 /* ValidatorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BFA53E21DFFDA120095F389 /* ValidatorUtils.m */; };
 		DE4F06D21D156AA8005F99CD /* RCTBraintree.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4F06D11D156AA8005F99CD /* RCTBraintree.m */; };
 		DE4F07921D15750D005F99CD /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = DE4F07911D15750D005F99CD /* UI.strings */; };
 		DE4F07A91D15751E005F99CD /* Drop-In.strings in Resources */ = {isa = PBXBuildFile; fileRef = DE4F07A81D15751E005F99CD /* Drop-In.strings */; };
@@ -65,24 +65,24 @@
 		7B24419C1DF19FFC0051252C /* CreditCardUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardUI.m; sourceTree = "<group>"; };
 		7B24419D1DF19FFC0051252C /* CreditCardUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardUIView.h; sourceTree = "<group>"; };
 		7B24419E1DF19FFC0051252C /* CreditCardUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardUI.h; sourceTree = "<group>"; };
-		7B2441A01DF19FFC0051252C /* CardNumberMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardNumberMatch.h; sourceTree = "<group>"; };
-		7B2441A11DF19FFC0051252C /* CardNumberMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardNumberMatch.m; sourceTree = "<group>"; };
-		7B2441A21DF19FFC0051252C /* CreditCardType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardType.h; sourceTree = "<group>"; };
-		7B2441A31DF19FFC0051252C /* CreditCardType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardType.m; sourceTree = "<group>"; };
-		7B2441A41DF19FFC0051252C /* CreditCardValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardValidator.h; sourceTree = "<group>"; };
-		7B2441A51DF19FFC0051252C /* CreditCardValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardValidator.m; sourceTree = "<group>"; };
-		7B2441A61DF19FFC0051252C /* DateValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateValidator.h; sourceTree = "<group>"; };
-		7B2441A71DF19FFC0051252C /* DateValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateValidator.m; sourceTree = "<group>"; };
-		7B2441A81DF19FFC0051252C /* DateValidity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateValidity.h; sourceTree = "<group>"; };
-		7B2441A91DF19FFC0051252C /* DateValidity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateValidity.m; sourceTree = "<group>"; };
-		7B2441AA1DF19FFC0051252C /* PartValidity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartValidity.h; sourceTree = "<group>"; };
-		7B2441AB1DF19FFC0051252C /* PartValidity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartValidity.m; sourceTree = "<group>"; };
-		7B2441AC1DF19FFC0051252C /* ValidatorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidatorUtils.h; sourceTree = "<group>"; };
-		7B2441AD1DF19FFC0051252C /* ValidatorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidatorUtils.m; sourceTree = "<group>"; };
-		7B2441AE1DF19FFC0051252C /* Validity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Validity.h; sourceTree = "<group>"; };
 		7BFA53D01DFFD9560095F389 /* IconTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconTextField.m; sourceTree = "<group>"; };
 		7BFA53D11DFFD9560095F389 /* Constants_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants_helper.h; sourceTree = "<group>"; };
 		7BFA53D21DFFD9560095F389 /* IconTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconTextField.h; sourceTree = "<group>"; };
+		7BFA53D51DFFDA120095F389 /* CardNumberMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardNumberMatch.h; sourceTree = "<group>"; };
+		7BFA53D61DFFDA120095F389 /* CardNumberMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardNumberMatch.m; sourceTree = "<group>"; };
+		7BFA53D71DFFDA120095F389 /* CreditCardType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardType.h; sourceTree = "<group>"; };
+		7BFA53D81DFFDA120095F389 /* CreditCardType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardType.m; sourceTree = "<group>"; };
+		7BFA53D91DFFDA120095F389 /* CreditCardValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardValidator.h; sourceTree = "<group>"; };
+		7BFA53DA1DFFDA120095F389 /* CreditCardValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardValidator.m; sourceTree = "<group>"; };
+		7BFA53DB1DFFDA120095F389 /* DateValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateValidator.h; sourceTree = "<group>"; };
+		7BFA53DC1DFFDA120095F389 /* DateValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateValidator.m; sourceTree = "<group>"; };
+		7BFA53DD1DFFDA120095F389 /* DateValidity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateValidity.h; sourceTree = "<group>"; };
+		7BFA53DE1DFFDA120095F389 /* DateValidity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateValidity.m; sourceTree = "<group>"; };
+		7BFA53DF1DFFDA120095F389 /* PartValidity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartValidity.h; sourceTree = "<group>"; };
+		7BFA53E01DFFDA120095F389 /* PartValidity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartValidity.m; sourceTree = "<group>"; };
+		7BFA53E11DFFDA120095F389 /* ValidatorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidatorUtils.h; sourceTree = "<group>"; };
+		7BFA53E21DFFDA120095F389 /* ValidatorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidatorUtils.m; sourceTree = "<group>"; };
+		7BFA53E31DFFDA120095F389 /* Validity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Validity.h; sourceTree = "<group>"; };
 		DE4F06CC1D156AA8005F99CD /* libRCTBraintree.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTBraintree.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE4F06CF1D156AA8005F99CD /* RCTBraintree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTBraintree.h; sourceTree = "<group>"; };
 		DE4F06D11D156AA8005F99CD /* RCTBraintree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTBraintree.m; sourceTree = "<group>"; };
@@ -164,24 +164,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7B24419F1DF19FFC0051252C /* CCValidator */ = {
+		7BFA53D41DFFDA120095F389 /* CCValidator */ = {
 			isa = PBXGroup;
 			children = (
-				7B2441A01DF19FFC0051252C /* CardNumberMatch.h */,
-				7B2441A11DF19FFC0051252C /* CardNumberMatch.m */,
-				7B2441A21DF19FFC0051252C /* CreditCardType.h */,
-				7B2441A31DF19FFC0051252C /* CreditCardType.m */,
-				7B2441A41DF19FFC0051252C /* CreditCardValidator.h */,
-				7B2441A51DF19FFC0051252C /* CreditCardValidator.m */,
-				7B2441A61DF19FFC0051252C /* DateValidator.h */,
-				7B2441A71DF19FFC0051252C /* DateValidator.m */,
-				7B2441A81DF19FFC0051252C /* DateValidity.h */,
-				7B2441A91DF19FFC0051252C /* DateValidity.m */,
-				7B2441AA1DF19FFC0051252C /* PartValidity.h */,
-				7B2441AB1DF19FFC0051252C /* PartValidity.m */,
-				7B2441AC1DF19FFC0051252C /* ValidatorUtils.h */,
-				7B2441AD1DF19FFC0051252C /* ValidatorUtils.m */,
-				7B2441AE1DF19FFC0051252C /* Validity.h */,
+				7BFA53D51DFFDA120095F389 /* CardNumberMatch.h */,
+				7BFA53D61DFFDA120095F389 /* CardNumberMatch.m */,
+				7BFA53D71DFFDA120095F389 /* CreditCardType.h */,
+				7BFA53D81DFFDA120095F389 /* CreditCardType.m */,
+				7BFA53D91DFFDA120095F389 /* CreditCardValidator.h */,
+				7BFA53DA1DFFDA120095F389 /* CreditCardValidator.m */,
+				7BFA53DB1DFFDA120095F389 /* DateValidator.h */,
+				7BFA53DC1DFFDA120095F389 /* DateValidator.m */,
+				7BFA53DD1DFFDA120095F389 /* DateValidity.h */,
+				7BFA53DE1DFFDA120095F389 /* DateValidity.m */,
+				7BFA53DF1DFFDA120095F389 /* PartValidity.h */,
+				7BFA53E01DFFDA120095F389 /* PartValidity.m */,
+				7BFA53E11DFFDA120095F389 /* ValidatorUtils.h */,
+				7BFA53E21DFFDA120095F389 /* ValidatorUtils.m */,
+				7BFA53E31DFFDA120095F389 /* Validity.h */,
 			);
 			path = CCValidator;
 			sourceTree = "<group>";
@@ -209,6 +209,7 @@
 		DE4F06CE1D156AA8005F99CD /* RCTBraintree */ = {
 			isa = PBXGroup;
 			children = (
+				7BFA53D41DFFDA120095F389 /* CCValidator */,
 				7BFA53D01DFFD9560095F389 /* IconTextField.m */,
 				7BFA53D11DFFD9560095F389 /* Constants_helper.h */,
 				7BFA53D21DFFD9560095F389 /* IconTextField.h */,
@@ -216,7 +217,6 @@
 				7B24419C1DF19FFC0051252C /* CreditCardUI.m */,
 				7B24419D1DF19FFC0051252C /* CreditCardUIView.h */,
 				7B24419E1DF19FFC0051252C /* CreditCardUI.h */,
-				7B24419F1DF19FFC0051252C /* CCValidator */,
 				DE4F06CF1D156AA8005F99CD /* RCTBraintree.h */,
 				DE4F06D11D156AA8005F99CD /* RCTBraintree.m */,
 			);
@@ -333,17 +333,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B2441B71DF19FFC0051252C /* ValidatorUtils.m in Sources */,
-				7B2441B11DF19FFC0051252C /* CardNumberMatch.m in Sources */,
-				7B2441B61DF19FFC0051252C /* PartValidity.m in Sources */,
 				DE4F06D21D156AA8005F99CD /* RCTBraintree.m in Sources */,
 				7BFA53D31DFFD9560095F389 /* IconTextField.m in Sources */,
+				7BFA53EA1DFFDA120095F389 /* ValidatorUtils.m in Sources */,
+				7BFA53E51DFFDA120095F389 /* CreditCardType.m in Sources */,
 				7B2441B01DF19FFC0051252C /* CreditCardUI.m in Sources */,
-				7B2441B31DF19FFC0051252C /* CreditCardValidator.m in Sources */,
-				7B2441B41DF19FFC0051252C /* DateValidator.m in Sources */,
-				7B2441B51DF19FFC0051252C /* DateValidity.m in Sources */,
+				7BFA53E61DFFDA120095F389 /* CreditCardValidator.m in Sources */,
+				7BFA53E81DFFDA120095F389 /* DateValidity.m in Sources */,
+				7BFA53E91DFFDA120095F389 /* PartValidity.m in Sources */,
 				7B2441AF1DF19FFC0051252C /* CreditCardUIView.m in Sources */,
-				7B2441B21DF19FFC0051252C /* CreditCardType.m in Sources */,
+				7BFA53E71DFFDA120095F389 /* DateValidator.m in Sources */,
+				7BFA53E41DFFDA120095F389 /* CardNumberMatch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,6 +33,7 @@
 -(NSString *)getCvcName;
 -(NSInteger)getCvcLength;
 -(NSArray *)createCardList;
+-(BOOL)isEqualToCreditCardType:(CreditCardType *)creditCardType;
 
 @end
 

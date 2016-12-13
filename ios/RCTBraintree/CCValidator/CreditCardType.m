@@ -93,5 +93,14 @@ return [NSArray arrayWithObjects:
         [[CreditCardType alloc ] initWithCreditCardType:@"jcb" withNiceName:@"JCB" withPattern:@"^((2|21|213|2131\\d*)|(1|18|180|1800\\d*)|(3|35\\d*))$" withLength:[NSArray arrayWithObjects: @16, nil] withCvcName:@"CVV" withCvcLength:3]];
 }
 
+- (BOOL)isEqualToCreditCardType:(CreditCardType *)creditCardType {
+    return [self.name isEqualToString:creditCardType.name] &&
+    [self.niceName isEqualToString:creditCardType.niceName] &&
+    [self.cvcName isEqualToString:creditCardType.cvcName] &&
+    (self.maxLength == creditCardType.maxLength) &&
+    (self.cvcLength == creditCardType.cvcLength) &&
+    [self.lengths isEqual:creditCardType.lengths] &&
+    [self.pattern isEqual:creditCardType.pattern];
+}
 
 @end
