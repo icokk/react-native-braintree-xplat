@@ -205,6 +205,8 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
         BTPayPalRequest *request = [[BTPayPalRequest alloc] initWithAmount:amount];
         request.currencyCode = currency;
         
+        payPalDriver.viewControllerPresentingDelegate = self;
+
         [payPalDriver requestOneTimePayment:request
                                  completion:^(BTPayPalAccountNonce * _Nullable tokenizedPayPalAccount, NSError *error) {
 
@@ -224,23 +226,23 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
     });
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    
-    if ([url.scheme localizedCaseInsensitiveCompare:URLScheme] == NSOrderedSame) {
-        return [BTAppSwitch handleOpenURL:url sourceApplication:sourceApplication];
-    }
-    return NO;
-}
-
 #pragma mark - BTViewControllerPresentingDelegate
 
 - (void)paymentDriver:(id)paymentDriver requestsPresentationOfViewController:(UIViewController *)viewController {
     self.reactRoot = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    while (self.reactRoot.presentedViewController)
+    {
+        self.reactRoot = self.reactRoot.presentedViewController;
+    }
     [self.reactRoot presentViewController:viewController animated:YES completion:nil];
 }
 
 - (void)paymentDriver:(id)paymentDriver requestsDismissalOfViewController:(UIViewController *)viewController {
     self.reactRoot = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    while (self.reactRoot.presentedViewController)
+    {
+        self.reactRoot = self.reactRoot.presentedViewController;
+    }
     [self.reactRoot dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -262,58 +264,73 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
     self.callback(@[@"Drop-In ViewController Closed", [NSNull null]]);
 }
 
+#pragma mark - TokenizeAndVerifyNative
 
 -(void)tokenizeAndVerifyNat:(NSString *)cardNumber
             expirationMonth: (NSString *)expirationMonth
-            expirationYear: (NSString *)expirationYear
+             expirationYear: (NSString *)expirationYear
                         cvv: (NSString *)cvv
                amountNumber: (NSNumber * _Nonnull)amountNumber
                      verify: (BOOL)verify
                 clientToken: (NSString *)clientToken
                    callback: (void (^)(NSString *result))completionHandler
 {
-
     //setup
     self.braintreeClient = [[BTAPIClient alloc] initWithAuthorization:clientToken];
     if (self.braintreeClient != nil) { //if setup is successful
-
-        NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[amountNumber decimalValue]];
-        BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
-        BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
-        BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
         
-        [cardClient tokenizeCard:card
-                      completion:^(BTCardNonce *tokenizedCard, NSError *error) {
-                          
-                          NSArray *args = @[];
-                          if ( error == nil ) {
-                              if ( tokenizedCard ) {
-                                  [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
-                                                                   amount:amount
-                                                               completion:^(BTThreeDSecureCardNonce *secureCard, NSError *error) {
-                                                                   NSArray *args = @[];
-                                                                   if ( error == nil ) {
-                                                                       if ( secureCard ) {
-                                                                           completionHandler(secureCard.nonce);
-                                                                           
-                                                                       } else {
-                                                                           completionHandler(args);
-                                                                       }
-                                                                   } else {
-                                                                       args = @[error.description];
-                                                                       completionHandler(args);
-                                                                   }
-                                                               }];
-                              } else {
-                                  completionHandler(args);
-                              }
-                          } else {
-                              args = @[error.description];
-                              completionHandler(args);
-                          }
-                      }
-         ];
-    
+        BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
+        BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
+        
+        if(verify)
+        {
+            NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[amountNumber decimalValue]];
+            BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
+        
+            [cardClient tokenizeCard:card completion:^(BTCardNonce *tokenizedCard, NSError *error) {
+                NSArray *args = @[];
+                    if ( error == nil ) {
+                        if ( tokenizedCard ) {
+                            [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
+                                                             amount:amount
+                                                         completion:^(BTThreeDSecureCardNonce *secureCard, NSError *error) {
+                                                            NSArray *args = @[];
+                                                            if ( error == nil ) {
+                                                                if ( secureCard ) {
+                                                                    completionHandler(secureCard.nonce);
+                                                                } else {
+                                                                    completionHandler(args);
+                                                                }
+                                                            } else {
+                                                                args = @[error.description];
+                                                                completionHandler(args);
+                                                            }
+                            }];
+                        } else {
+                            completionHandler(args);
+                        }
+                    } else {
+                        args = @[error.description];
+                        completionHandler(args);
+                    }
+            }];
+        }
+        else
+        {
+            [cardClient tokenizeCard:card completion:^(BTCardNonce *tokenizedCard, NSError *error) {
+                NSArray *args = @[];
+                if ( error == nil ) {
+                    if ( tokenizedCard ) {
+                        completionHandler(tokenizedCard.nonce);
+                    } else {
+                        completionHandler(args);
+                    }
+                } else {
+                    args = @[error.description];
+                    completionHandler(args);
+                }
+            }];
+        }
     }
 }
 

@@ -376,58 +376,6 @@
     self.iconLabel.textColor = self.dividerLineColor;
 }
 
--(void)transitionToFullTextField
-{
-    NSDictionary *viewsDictionary = [self getDictionary];
-    NSDictionary *metrics = [self getMetrics];
-    //set textfield v1
-    NSArray *textField_pos_v_v1 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(textFieldFullTopMargin)-[textField]"
-                                                                          options:0
-                                                                          metrics:metrics
-                                                                            views:viewsDictionary];
-    NSArray *textField_pos_h_v1 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[textField]-(0)-|"
-                                                                          options:0
-                                                                          metrics:metrics
-                                                                            views:viewsDictionary];
-    
-    //textFieldSize
-    NSArray *textField_height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[textField(textFieldHeight)]"
-                                                                        options:0
-                                                                        metrics:metrics
-                                                                          views:viewsDictionary];
-    
-    [self.textField removeFromSuperview];
-    [self.textFieldView addSubview:_textField];
-    [self.textFieldView addConstraints:textField_pos_v_v1];
-    [self.textFieldView addConstraints:textField_pos_h_v1];
-    [self.textField addConstraints:textField_height];
-}
-
--(void)transitionToEmptyTextField
-{
-    NSDictionary *viewsDictionary = [self getDictionary];
-    NSDictionary *metrics = [self getMetrics];
-    //set textfield v1
-    NSArray *textField_pos_v_v1 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(textFieldTopMargin)-[textField]"
-                                                                          options:0
-                                                                          metrics:metrics
-                                                                            views:viewsDictionary];
-    NSArray *textField_pos_h_v1 = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[textField]-(0)-|"
-                                                                          options:0
-                                                                          metrics:metrics
-                                                                            views:viewsDictionary];
-    //textFieldSize
-    NSArray *textField_height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[textField(textFieldHeight)]"
-                                                                        options:0
-                                                                        metrics:metrics
-                                                                          views:viewsDictionary];
-    [self.textField removeFromSuperview];
-    [self.textFieldView addSubview:_textField];
-    [self.textFieldView addConstraints:textField_pos_v_v1];
-    [self.textFieldView addConstraints:textField_pos_h_v1];
-    [self.textField addConstraints:textField_height];
-}
-
 //icon label settings
 -(NSString*)getIconLabelFontString
 {
@@ -449,7 +397,7 @@
     const char *iconText = [iconLabelText cStringUsingEncoding:NSUTF8StringEncoding];
 //    &iconText[1];
 //    NSLog(@"*** %d", [@"\ue90b" isEqualToString:iconLabelText]);
-    if(_iconLabel != NULL)  [self.iconLabel setText:@"\ue90b"];
+    if(_iconLabel != NULL)  [self.iconLabel setText:@"\ue924"];
 }
 -(UIColor*)getIconLabelColor
 {
