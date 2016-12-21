@@ -90,7 +90,7 @@ return [NSArray arrayWithObjects:
         [[CreditCardType alloc ] initWithCreditCardType:@"diners-club" withNiceName:@"Diners Club" withPattern:@"^3((0([0-5]\\d*)?)|[689]\\d*)?$" withLength:[NSArray arrayWithObjects: @14, nil] withCvcName:@"CVV" withCvcLength:3],
         [[CreditCardType alloc ] initWithCreditCardType:@"maestro" withNiceName:@"Maestro" withPattern:@"^((5((0|[6-9])\\d*)?)|(6|6[37]\\d*))$" withLength:[NSArray arrayWithObjects: @12, @13, @14, @15, @16, @17, @18, @19, nil] withCvcName:@"CVC" withCvcLength:3],
         [[CreditCardType alloc ] initWithCreditCardType:@"discover" withNiceName:@"Discover" withPattern:@"^6(0|01|011\\d*|5\\d*|4|4[4-9]\\d*)?$" withLength:[NSArray arrayWithObjects: @16, @19, nil] withCvcName:@"CID" withCvcLength:3],
-        [[CreditCardType alloc ] initWithCreditCardType:@"jcb" withNiceName:@"JCB" withPattern:@"^((2|21|213|2131\\d*)|(1|18|180|1800\\d*)|(3|35\\d*))$" withLength:[NSArray arrayWithObjects: @16, nil] withCvcName:@"CVV" withCvcLength:3]];
+        [[CreditCardType alloc ] initWithCreditCardType:@"jcb" withNiceName:@"JCB" withPattern:@"^((2|21|213|2131\\d*)|(1|18|180|1800\\d*)|(3|35\\d*))$" withLength:[NSArray arrayWithObjects: @16, nil] withCvcName:@"CVV" withCvcLength:3], nil];
 }
 
 - (BOOL)isEqualToCreditCardType:(CreditCardType *)creditCardType {
