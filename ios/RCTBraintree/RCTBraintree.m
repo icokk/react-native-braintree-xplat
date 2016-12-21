@@ -281,6 +281,7 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
         
         BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
         BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
+        card.shouldValidate = YES; //
         
         if(verify)
         {
