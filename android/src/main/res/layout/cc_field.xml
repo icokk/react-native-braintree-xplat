@@ -27,7 +27,7 @@
         android:id="@+id/cc_field_layout">
 
         <TextView
-            android:text="&#xf09d;"
+            android:text="&#xe924;"
             android:layout_width="60dp"
             android:layout_height="26dp"
             android:textAlignment="center"

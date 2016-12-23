@@ -2,12 +2,15 @@ package com.abelium.braintreeccform;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
+import java.util.ArrayList;
 
 import com.abelium.cardvalidator.CreditCardType;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableArray;
+
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.pw.droplet.braintree.Braintree;
 
@@ -45,8 +48,10 @@ public class RCTCreditCardControl extends CreditCardControl
         String nonce = (String) args[0];
         endSubmit(true, null);
         // emit event
+        WritableArray res = Arguments.createArray();
+        res.pushString(nonce); res.pushNull();
         WritableMap eventArgs = Arguments.createMap();
-        eventArgs.putString("nonce", nonce);
+        eventArgs.putArray("nonce", res);
         emitEvent("onNonceReceived", eventArgs);
       }
     };
@@ -56,6 +61,12 @@ public class RCTCreditCardControl extends CreditCardControl
         String errorMessage = (String) args[0];
         Log.w(TAG, "BRAINTREE ERROR " + errorMessage);
         endSubmit(false, errorMessage);
+        // emit event
+        WritableArray res = Arguments.createArray();
+        res.pushNull(); res.pushString(errorMessage);
+        WritableMap eventArgs = Arguments.createMap();
+        eventArgs.putArray("nonce", res);
+        emitEvent("onNonceReceived", eventArgs);
       }
     };
     try {

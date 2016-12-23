@@ -93,7 +93,7 @@ public class CreditCardField extends LinearLayout
         this.ccInvalidMarker = (TextView) findViewById(R.id.cc_invalid_marker);
         this.ccUnderline = (View) findViewById(R.id.cc_underline);
         // set icon font
-        setIconFont("fonts/FontAwesome.ttf");
+        setIconFont("fonts/goopti.ttf");
         // set focus listener
         ccText.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
@@ -112,10 +112,10 @@ public class CreditCardField extends LinearLayout
             if (!iconFontCache.containsKey(fontName)) {
                 try {
                     AssetManager assets = getActivity().getAssets();
-                    Typeface iconFont = Typeface.createFromAsset(assets, "fonts/FontAwesome.ttf");
+                    Typeface iconFont = Typeface.createFromAsset(assets, "fonts/goopti.ttf");
                     iconFontCache.put(fontName, iconFont);
                 } catch ( Exception e ) {
-                    Log.e(TAG, "Cannot find font FontAwesome.ttf");
+                    Log.e(TAG, "Cannot find font goopti.ttf");
                     iconFontCache.put(fontName, null);
                 }
             }
