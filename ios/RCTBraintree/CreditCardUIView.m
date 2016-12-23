@@ -98,8 +98,9 @@ typedef enum
         self.monthField.textField.delegate = self;
         self.monthField.textField.keyboardType = UIKeyboardTypeNumberPad;
         self.monthField.hasIcon = NO;
-//        self.monthField.errorMessageLabelText = [self getInvalidString];
+        self.monthField.errorMessageLabelText = [self getInvalidString];
         self.monthField.hasError = NO;
+        self.monthField.textField.text = @"";
         [self.monthField setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.monthField.textField addTarget:self action:@selector(textFieldDidEndEditing:) forControlEvents:UIControlEventEditingDidEnd];
         [self.monthField.textField addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
@@ -113,6 +114,7 @@ typedef enum
         self.yearField.hasIcon = NO;
         self.yearField.errorMessageLabelText = [self getInvalidString];
         self.yearField.hasError = NO;
+        self.yearField.textField.text = @"";
         [self.yearField setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.yearField.textField addTarget:self action:@selector(textFieldDidEndEditing:) forControlEvents:UIControlEventEditingDidEnd];
         [self.yearField.textField addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
@@ -210,25 +212,32 @@ typedef enum
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     
-    if(textField == self.monthField.textField || textField == self.yearField.textField)
-    {
-        self.monthField.hasError = NO;
-        self.yearField.hasError = NO;
-        self.monthField.dividerLine.backgroundColor = self.monthField.dividerLineHighlightColor;
-        self.yearField.dividerLine.backgroundColor = self.yearField.dividerLineHighlightColor;
-    }
+//    if(textField == self.monthField.textField || textField == self.yearField.textField)
+//    {
+//        self.monthField.hasError = NO;
+//        self.yearField.hasError = NO;
+//        self.monthField.dividerLine.backgroundColor = self.monthField.dividerLineHighlightColor;
+//        self.yearField.dividerLine.backgroundColor = self.yearField.dividerLineHighlightColor;
+//    }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     if(textField == self.ccNumberField.textField)
          [self validateNumber:YES];
-    if(textField == self.monthField.textField || textField == self.yearField.textField)
+    if(textField == self.monthField.textField)
     {
-        self.monthField.dividerLine.backgroundColor = self.monthField.dividerLineColor;
-        self.yearField.dividerLine.backgroundColor = self.yearField.dividerLineColor;
-        [self validateDate:YES];
+        if(self.yearField.textField.text.length == 0)
+            [self validateMonth:YES];
+        else
+            [self validateDate:YES];
+            
+//        self.monthField.dividerLine.backgroundColor = self.monthField.dividerLineColor;
+//        self.yearField.dividerLine.backgroundColor = self.yearField.dividerLineColor;
+//        [self validateDate:YES];
     }
+    if(textField == self.yearField.textField)
+        [self validateDate:YES];
     if(textField == self.cvvField.textField)
         [self validateCCV:YES];
 }
@@ -332,9 +341,11 @@ typedef enum
 -(Validity)validateDate:(BOOL)submit
 {
     DateValidity *dv = [[DateValidator alloc] validateDate:self.monthField.textField.text withYear:self.yearField.textField.text];
+    //if Invalid and year == currentYear -> month error
+    //else year Error
     
-    [self markField:Month withValidity:dv.validity with:submit];
-    [self markField:Year withValidity:dv.validity with:submit];
+        [self markField:Month withValidity:dv.month.validity with:submit];
+        [self markField:Year withValidity:dv.year.validity with:submit];
 
     return dv.validity;
 }
@@ -353,9 +364,20 @@ typedef enum
     {
         [self setError:control with:invalidString];//[self getErrorMessage: control with:validity]];
     }
-//    else {
-//        [self setError:control with:NULL];
-//    }
+    else {
+        [self removeError:control];
+    }
+}
+-(void)removeError:(ControlType*)control
+{
+    if(control == Number)
+        self.ccNumberField.hasError = NO;
+    if(control == CVV)
+        self.cvvField.hasError = NO;
+    if(control == Month)
+        self.monthField.hasError = NO;
+    if(control == Year)
+        self.yearField.hasError = NO;
 }
 
 -(void)setError:(ControlType*)control with:(NSString*)message
@@ -370,11 +392,9 @@ typedef enum
     }
     if(control == Month) {
         self.monthField.hasError = YES;
-        self.yearField.hasError = YES;
-        self.yearField.errorMessageLabelText = message;
+        self.monthField.errorMessageLabelText = message;
     }
     if(control == Year) {
-        self.monthField.hasError = YES;
         self.yearField.hasError = YES;
         self.yearField.errorMessageLabelText = message;
 
@@ -538,7 +558,7 @@ typedef enum
     self.invalidString = invalidString;
     if(self.ccNumberField != NULL) self.ccNumberField.errorMessageLabelText = invalidString;
     if(self.cvvField != NULL) self.cvvField.errorMessageLabelText = invalidString;
-//    if(self.monthField != NULL) self.monthField.errorMessageLabelText = invalidString;
+    if(self.monthField != NULL) self.monthField.errorMessageLabelText = invalidString;
     if(self.yearField != NULL) self.yearField.errorMessageLabelText = invalidString;
 }
 

@@ -45,7 +45,7 @@ NSInteger const VALIDITY_YEARS_MAX = 30;
     NSDateComponents *components = [calendar components:units fromDate:now];
     
     NSInteger currentYear = [components year];
-
+    
     if ( yearInt < currentYear || yearInt > (currentYear + VALIDITY_YEARS_MAX) ) {
         if ([year isEqualToString:CENTURY])    // special case - may be completed
             return [[PartValidity alloc] partial:yearInt];
@@ -69,7 +69,7 @@ NSInteger const VALIDITY_YEARS_MAX = 30;
     NSDateComponents *components = [calendar components:units fromDate:now];
     
     NSInteger currentMonth = [components month]; //TODO int currentMonth = date.get(Calendar.MONTH) - Calendar.JANUARY + 1;
-    
+
     NSInteger currentYear = [components year];
     // check date to be at least current date
     if(yearV.value > currentYear)
@@ -81,7 +81,7 @@ NSInteger const VALIDITY_YEARS_MAX = 30;
     // (month 1 can still be completed to valid 11 or 12)
     PartValidity *monthValidity = monthV.value == 1 ? [[PartValidity alloc] partial:monthV.value] : [[PartValidity alloc] invalid:monthV.value];
     return [[DateValidity alloc] initDateValidity:monthValidity withPartValidity:yearV];
-    
+
     
 }
 @end
