@@ -57,7 +57,7 @@ RCT_EXPORT_METHOD(showPaymentViewController:(NSDictionary *)options callback:(RC
     dispatch_async(dispatch_get_main_queue(), ^{
         BTDropInViewController *dropInViewController = [[BTDropInViewController alloc] initWithAPIClient:self.braintreeClient];
         dropInViewController.delegate = self;
-                
+        
         UIColor *tintColor = options[@"tintColor"];
         UIColor *bgColor = options[@"bgColor"];
         UIColor *barBgColor = options[@"barBgColor"];
@@ -119,7 +119,7 @@ RCT_EXPORT_METHOD(getCardNonce: (NSString *)cardNumber
                       }
                       callback(args);
                   }
-    ];
+     ];
 }
 
 RCT_EXPORT_METHOD(verify3DSecure: (NSString *)paymentNonce
@@ -132,20 +132,20 @@ RCT_EXPORT_METHOD(verify3DSecure: (NSString *)paymentNonce
     [threeDSecureDriver verifyCardWithNonce:paymentNonce
                                      amount:amount
                                  completion:^(BTThreeDSecureCardNonce *card, NSError *error){
-
-                                      NSArray *args = @[];
-                                      if ( error == nil ) {
-                                          if ( card ) {
-                                              args = @[[NSNull null], card.nonce];
-                                          } else {
-                                              args = @[[NSNull null], [NSNull null]];
-                                          }
-                                      } else {
-                                          args = @[error.description, [NSNull null]];
-                                      }
-                                      callback(args);
-                                  }
-    ];
+                                     
+                                     NSArray *args = @[];
+                                     if ( error == nil ) {
+                                         if ( card ) {
+                                             args = @[[NSNull null], card.nonce];
+                                         } else {
+                                             args = @[[NSNull null], [NSNull null]];
+                                         }
+                                     } else {
+                                         args = @[error.description, [NSNull null]];
+                                     }
+                                     callback(args);
+                                 }
+     ];
 }
 
 RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
@@ -161,7 +161,7 @@ RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
     BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
     BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
     BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
-
+    
     [cardClient tokenizeCard:card
                   completion:^(BTCardNonce *tokenizedCard, NSError *error) {
                       
@@ -171,18 +171,18 @@ RCT_EXPORT_METHOD(tokenizeCardAndVerify: (NSString *)cardNumber
                               [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
                                                                amount:amount
                                                            completion:^(BTThreeDSecureCardNonce *secureCard, NSError *error) {
-                                                                    NSArray *args = @[];
-                                                                    if ( error == nil ) {
-                                                                        if ( secureCard ) {
-                                                                            args = @[[NSNull null], secureCard.nonce];
-                                                                        } else {
-                                                                            args = @[[NSNull null], [NSNull null]];
-                                                                        }
-                                                                    } else {
-                                                                        args = @[error.description, [NSNull null]];
-                                                                    }
-                                                                    callback(args);
-                              }];
+                                                               NSArray *args = @[];
+                                                               if ( error == nil ) {
+                                                                   if ( secureCard ) {
+                                                                       args = @[[NSNull null], secureCard.nonce];
+                                                                   } else {
+                                                                       args = @[[NSNull null], [NSNull null]];
+                                                                   }
+                                                               } else {
+                                                                   args = @[error.description, [NSNull null]];
+                                                               }
+                                                               callback(args);
+                                                           }];
                           } else {
                               args = @[[NSNull null], [NSNull null]];
                               callback(args);
@@ -206,23 +206,23 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
         request.currencyCode = currency;
         
         payPalDriver.viewControllerPresentingDelegate = self;
-
+        
         [payPalDriver requestOneTimePayment:request
                                  completion:^(BTPayPalAccountNonce * _Nullable tokenizedPayPalAccount, NSError *error) {
-
-                                  NSArray *args = @[];
-                                  if ( error == nil ) {
-                                      if ( tokenizedPayPalAccount ) {
-                                          args = @[[NSNull null], tokenizedPayPalAccount.nonce];
-                                      } else {
-                                          args = @[[NSNull null], [NSNull null]];
-                                      }
-                                  } else {
-                                      args = @[error.description, [NSNull null]];
-                                  }
-                                  callback(args);
-                              }
-        ];
+                                     
+                                     NSArray *args = @[];
+                                     if ( error == nil ) {
+                                         if ( tokenizedPayPalAccount ) {
+                                             args = @[[NSNull null], tokenizedPayPalAccount.nonce];
+                                         } else {
+                                             args = @[[NSNull null], [NSNull null]];
+                                         }
+                                     } else {
+                                         args = @[error.description, [NSNull null]];
+                                     }
+                                     callback(args);
+                                 }
+         ];
     });
 }
 
@@ -287,33 +287,36 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
         {
             NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[amountNumber decimalValue]];
             BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
-        
+            
             [cardClient tokenizeCard:card completion:^(BTCardNonce *tokenizedCard, NSError *error) {
                 NSArray *args = @[];
-                    if ( error == nil ) {
-                        if ( tokenizedCard ) {
-                            [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
-                                                             amount:amount
-                                                         completion:^(BTThreeDSecureCardNonce *secureCard, NSError *error) {
-                                                            NSArray *args = @[];
-                                                            if ( error == nil ) {
-                                                                if ( secureCard ) {
-                                                                    completionHandler(secureCard.nonce);
-                                                                } else {
-                                                                    completionHandler(args);
-                                                                }
-                                                            } else {
-                                                                args = @[error.description];
-                                                                completionHandler(args);
-                                                            }
-                            }];
-                        } else {
-                            completionHandler(args);
-                        }
+                if ( error == nil ) {
+                    if ( tokenizedCard ) {
+                        [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
+                                                         amount:amount
+                                                     completion:^(BTThreeDSecureCardNonce *secureCard, NSError *error) {
+                                                         NSArray *args = @[];
+                                                         if ( error == nil ) {
+                                                             if ( secureCard ) {
+                                                                 args = @[tokenizedCard.nonce, [NSNull null]];
+                                                                 completionHandler(args);
+                                                             } else {
+                                                                 args = @[[NSNull null], @"secureCard is null"];
+                                                                 completionHandler(args);
+                                                             }
+                                                         } else {
+                                                             args = @[[NSNull null], error.description];
+                                                             completionHandler(args);
+                                                         }
+                                                     }];
                     } else {
-                        args = @[error.description];
+                        args = @[[NSNull null], @"tokenizedCard is null"];
                         completionHandler(args);
                     }
+                } else {
+                    args = @[[NSNull null], error.description];
+                    completionHandler(args);
+                }
             }];
         }
         else
@@ -322,12 +325,14 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
                 NSArray *args = @[];
                 if ( error == nil ) {
                     if ( tokenizedCard ) {
-                        completionHandler(tokenizedCard.nonce);
+                        args = @[tokenizedCard.nonce, [NSNull null]];
+                        completionHandler(args);
                     } else {
+                        args = @[[NSNull null], @"tokenizedCard is null"];
                         completionHandler(args);
                     }
                 } else {
-                    args = @[error.description];
+                    args = @[[NSNull null], error.description];
                     completionHandler(args);
                 }
             }];
