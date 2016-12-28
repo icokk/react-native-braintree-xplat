@@ -21,6 +21,13 @@ import com.abelium.cardvalidator.ValidatorUtils;
 import com.abelium.cardvalidator.Validity;
 import com.pw.droplet.braintree.R;
 
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Callback;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -251,6 +258,20 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
             return true;
         } else {
             showSubmitMode(false);
+            Callback errorCallback = new Callback() {
+                @Override
+                public void invoke(Object... args) {
+                    String errorMessage = (String) args[0];
+                    // Log.w(TAG, "BRAINTREE ERROR " + errorMessage);
+                    // emit event
+                    WritableArray res = Arguments.createArray();
+                    res.pushNull(); res.pushString(errorMessage);
+                    WritableMap eventArgs = Arguments.createMap();
+                    eventArgs.putArray("nonce", res);
+                    emitEvent("onNonceReceived", eventArgs);
+                }
+            };
+            errorCallback.invoke("Error - Validation Failed.");
             return false;
         }
     }
