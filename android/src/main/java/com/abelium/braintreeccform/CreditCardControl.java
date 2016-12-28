@@ -276,6 +276,12 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
         }
     }
 
+    private void emitEvent(String name, WritableMap eventArgs) {
+        ReactContext reactContext = (ReactContext) getContext();
+        RCTEventEmitter eventEmitter = reactContext.getJSModule(RCTEventEmitter.class);
+        eventEmitter.receiveEvent(getId(), name, eventArgs);
+    }
+    
     private void submit() {
         if ( this.onSubmit == null )
             return;
