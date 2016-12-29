@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -135,6 +134,11 @@ public class CreditCardField extends LinearLayout
 
     public void setShowIcon(boolean showIcon) {
         ccIcon.setVisibility(showIcon ? VISIBLE : GONE);
+        if(showIcon) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)ccInvalidMarker.getLayoutParams();
+            params.topMargin = 70;
+            ccInvalidMarker.setLayoutParams(params);
+        }
     }
 
     public String getIconGlyph() {
@@ -217,19 +221,18 @@ public class CreditCardField extends LinearLayout
     private int errorColor = defaultErrorColor;
 
     private void setFocusLayout(boolean focused) {
-        this.focused = focused;
-        //
-        ccLabel.setVisibility(focused ? VISIBLE : GONE);
-        // margins
-        MarginLayoutParams margin = (MarginLayoutParams) ccFieldLayout.getLayoutParams();
-        margin.topMargin = focused ? 4 : 22;
-        margin.bottomMargin = focused ? 4 : 15;
-        ViewGroup.LayoutParams underlineParams = ccUnderline.getLayoutParams();
-        underlineParams.height = focused ? 2 : 1;
-        // colors
-        updateColors();
-        ccText.getNextFocusDownId();
-    }
+    this.focused = focused;
+    //
+    ccLabel.setVisibility((focused || ccText.getText().length() > 0) ? VISIBLE : GONE); //-ok
+    // margins
+    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    params.topMargin = (focused || ccText.getText().length() > 0) ? 5 : 20;
+    ccText.setLayoutParams(params);
+
+    // colors
+    updateColors();
+    ccText.getNextFocusDownId();
+}
 
     private void updateColors() {
         ccText.setTextColor(textColor());

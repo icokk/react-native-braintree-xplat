@@ -8,66 +8,78 @@
     tools:context="com.abelium.braintreeccform.CreditCardField"
     tools:parentTag="LinearLayout">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:orientation="horizontal"
+        android:id="@+id/cc_field_wrap"
+        >
+
     <TextView
-        android:text="Field Label"
-        android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:layout_marginTop="14dp"
-        android:fontFamily="sans-serif-light"
-        android:textSize="12dp"
-        android:id="@+id/cc_label" />
+        android:text="&#xe924;"
+        android:layout_width="60dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="19dp"
+        android:textAlignment="center"
+        android:textSize="26dp"
+        android:visibility="gone"
+        android:id="@+id/cc_icon" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="26dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:orientation="horizontal"
+        android:layout_height="38dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="60dp"
+        android:orientation="vertical"
         android:baselineAligned="false"
-        android:id="@+id/cc_field_layout">
+        android:id="@+id/cc_field_layout"
+        >
 
         <TextView
-            android:text="&#xe924;"
-            android:layout_width="60dp"
-            android:layout_height="26dp"
+            android:text="Field Label"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginTop="-2dp"
+            android:fontFamily="sans-serif-light"
+            android:textSize="14dp"
             android:textAlignment="center"
-            android:textSize="24dp"
-            android:visibility="gone"
-            android:id="@+id/cc_icon" />
+            android:id="@+id/cc_label" />
 
         <EditText
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:textSize="16dp"
+            android:layout_marginTop="4dp"
             android:hint="Hint"
             android:id="@+id/cc_text"
             android:imeOptions="actionNext"
             android:inputType="number"
             android:background="@android:color/transparent" />
 
-        <TextView
-            android:text="INVALID"
-            android:layout_width="60dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:textAlignment="center"
-            android:fontFamily="sans-serif"
-            android:textSize="16dp"
-            android:visibility="gone"
-            android:id="@+id/cc_invalid_marker" />
+    </LinearLayout>
+
+    <TextView
+        android:text="INVALID"
+        android:layout_width="60dp"
+        android:layout_marginLeft="-60dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="32dp"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif"
+        android:textSize="16dp"
+        android:visibility="gone"
+        android:id="@+id/cc_invalid_marker" />
+
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:background="#FF000000"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_marginTop="0dp"
         android:id="@+id/cc_underline" />
+
 </merge>
 
     

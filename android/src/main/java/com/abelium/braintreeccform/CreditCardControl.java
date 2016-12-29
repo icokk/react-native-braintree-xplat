@@ -65,6 +65,13 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
                     validateCVV(false);
                     break;
                 case Month:
+                {
+                   if (ccYear != null && ccYear.getText().length() == 0)
+                       validateMonth(false);
+                   else validateDate(false);
+
+                    break;
+                }
                 case Year:
                     validateDate(false);
                     break;
@@ -204,9 +211,9 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
     public void setError(ControlType control, boolean error) {
         CreditCardField field = getControlLayout(control);
         field.setError(error);
-        String prevMarker = ccNumber.getInvalidMarker();
-        ccNumber.setInvalidMarker(hasAnyError() ? getInvalidString() : null);
-        if ( !equals(prevMarker, ccNumber.getInvalidMarker()) )
+        String prevMarker = field.getInvalidMarker();
+        field.setInvalidMarker(field.isError() ? getInvalidString() : null);
+        if ( !equals(prevMarker, field.getInvalidMarker()) )
             this.requestLayout();
     }
 
@@ -236,10 +243,16 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
         return validity;
     }
 
+    private Validity validateMonth(boolean submit) {
+        DateValidity dv = DateValidator.validateDate(ccMonth.getText(), ccYear.getText());
+        markField(ControlType.Month, dv.monthValidity() , submit);
+        return dv.monthValidity();
+    }
+
     private Validity validateDate(boolean submit) {
         DateValidity dv = DateValidator.validateDate(ccMonth.getText(), ccYear.getText());
-        markField(ControlType.Month, dv.validity(), submit);
-        markField(ControlType.Year, dv.validity(), submit);
+        markField(ControlType.Month, dv.monthValidity(), submit);
+        markField(ControlType.Year, dv.yearValidity(), submit);
         return dv.validity();
     }
 
