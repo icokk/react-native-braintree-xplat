@@ -7,7 +7,8 @@
 #define ICON_SIZE 26
 #define SIDE_MARGIN 60
 #define ICON_TOP_MARGIN 19
-#define ICON_LEFT_MARGIN 17
+#define ICON_LEFT_MARGIN 0 //17
+#define ICON_SIDE_LEFT_MARGIN 43 // using with ICON_LEFT_MARGIN = 0
 #define TEXT_FIELD_TOP_MARGIN 22
 #define ERROR_TOP_MARGIN 32
 #define DIVIDER_LINE_HEIGHT 1
@@ -159,7 +160,7 @@
                                                                             options:0
                                                                             metrics:metrics
                                                                               views:viewsDictionary];
-    NSArray *iconLabelView_width = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[iconLabelView(sideMargin)]"
+    NSArray *iconLabelView_width = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[iconLabelView(iconSideLeftMargin)]"
                                                                            options:0
                                                                            metrics:metrics
                                                                              views:viewsDictionary];
@@ -298,6 +299,7 @@
             @"fieldHeight" : @(FIELD_HEIGHT),
             @"iconTopMargin" : @(ICON_TOP_MARGIN),
             @"iconLeftMargin" : @(ICON_LEFT_MARGIN),
+            @"iconSideLeftMargin" : @(ICON_SIDE_LEFT_MARGIN),
             @"textFieldTopMargin" : @(TEXT_FIELD_TOP_MARGIN),
             @"dividerLineHeight" : @(DIVIDER_LINE_HEIGHT),
             @"errorTopMargin" : @(ERROR_TOP_MARGIN),
