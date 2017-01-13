@@ -17,10 +17,9 @@
 
     <TextView
         android:text="&#xe924;"
-        android:layout_width="60dp"
+        android:layout_width="43dp"
         android:layout_height="26dp"
         android:layout_marginTop="19dp"
-        android:textAlignment="center"
         android:textSize="26dp"
         android:visibility="gone"
         android:id="@+id/cc_icon" />
@@ -29,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_marginTop="14dp"
-        android:layout_marginRight="60dp"
+        android:layout_marginRight="43dp"
         android:orientation="vertical"
         android:baselineAligned="false"
         android:id="@+id/cc_field_layout"
