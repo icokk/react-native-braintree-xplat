@@ -3,13 +3,14 @@
 #import "UIView+React.h"
 
 #define FIELD_HEIGHT 64
-#define TEXT_FIELD_HEIGHT 20
+#define TEXT_FIELD_HEIGHT 42 //20
+#define ERROR_MESSAGE_HEIGHT 20
 #define ICON_SIZE 26
 #define SIDE_MARGIN 60
 #define ICON_TOP_MARGIN 19
 #define ICON_LEFT_MARGIN 0 //17
 #define ICON_SIDE_LEFT_MARGIN 43 // using with ICON_LEFT_MARGIN = 0
-#define TEXT_FIELD_TOP_MARGIN 22
+#define TEXT_FIELD_TOP_MARGIN 11 //22 because of extending TEXT_FIELD_HEIGHT to 42
 #define ERROR_TOP_MARGIN 32
 #define DIVIDER_LINE_HEIGHT 1
 #define DIVIDER_LINE_SIDE_MARGIN 20
@@ -144,7 +145,7 @@
     [self.textField addConstraints:textField_height];
     
     //errorMessageLabelSize
-    NSArray *errorMessageLabel_height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[errorMessageLabel(textFieldHeight)]"
+    NSArray *errorMessageLabel_height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[errorMessageLabel(errorMessageHeight)]"
                                                                                 options:0
                                                                                 metrics:metrics
                                                                                   views:viewsDictionary];
@@ -295,6 +296,7 @@
     return @{
             @"iconSize" : @(ICON_SIZE),
             @"textFieldHeight" : @(TEXT_FIELD_HEIGHT),
+            @"errorMessageHeight" : @(ERROR_MESSAGE_HEIGHT),
             @"sideMargin" : @(SIDE_MARGIN),
             @"fieldHeight" : @(FIELD_HEIGHT),
             @"iconTopMargin" : @(ICON_TOP_MARGIN),
@@ -349,7 +351,7 @@
         [UIView animateWithDuration:0.0 animations:^{ //version 2
             CGRect frame;
             frame = self.textField.frame;
-            frame.origin.y = 32;
+            frame.origin.y = 21; //32; because of extending TEXT_FIELD_HEIGHT to 42
             self.textField.frame = frame;
         }];
     }
@@ -366,7 +368,7 @@
         [UIView animateWithDuration:0.0 animations:^{ //version 1
             CGRect frame;
             frame = self.textField.frame;
-            frame.origin.y = 22;
+            frame.origin.y = 11; //22; because of extending TEXT_FIELD_HEIGHT to 42
             self.textField.frame = frame;
         }];
     }
