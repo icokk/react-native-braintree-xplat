@@ -104,6 +104,15 @@ public class CreditCardField extends LinearLayout
         setFocusLayout(false);
         //
         initialized = true;
+        // set focus to ccText when click on ccFieldLayout
+        ccFieldLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ccText.requestFocus();
+            }
+        });
+
+
     }
 
     private Typeface loadIconFont(String fontName) {
