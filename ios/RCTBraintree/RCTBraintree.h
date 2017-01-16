@@ -13,8 +13,6 @@
 #import "BraintreeUI.h"
 #import "Braintree3DSecure.h"
 
-#import "CreditCardUIView.h"
-
 typedef void (^Callback_block)(NSString *callbackNonce);
 
 @interface RCTBraintree : UIViewController <RCTBridgeModule, BTDropInViewControllerDelegate, BTViewControllerPresentingDelegate>
@@ -28,6 +26,5 @@ typedef void (^Callback_block)(NSString *callbackNonce);
 + (instancetype)sharedInstance;
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;
 -(void)tokenizeAndVerifyNat:(NSString *)cardNumber expirationMonth:(NSString *)expirationMonth expirationYear:(NSString *)expirationYear cvv:(NSString *)cvv amountNumber:(NSNumber * _Nonnull)amountNumber verify:(BOOL)verify clientToken:(NSString *)clientToken callback:(void (^)(NSString *result))completionHandler;
-
 
 @end

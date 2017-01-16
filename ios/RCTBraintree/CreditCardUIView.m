@@ -274,8 +274,8 @@ typedef enum
 {
     if([self validateAndSubmit]) {
         //TODO
-        [[RCTBraintree alloc] tokenizeAndVerifyNat:self.ccNumberField.textField.text expirationMonth:self.monthField.textField.text expirationYear:self.yearField.textField.text cvv:self.cvvField.textField.text amountNumber:self.amount verify:self.require3dSecure clientToken:self.clientToken callback:^(NSString *nonce){
-            NSLog(@"*** nonce %@ ", nonce);
+        self.rctBraintree = [RCTBraintree alloc];
+        [self.rctBraintree tokenizeAndVerifyNat:self.ccNumberField.textField.text expirationMonth:self.monthField.textField.text expirationYear:self.yearField.textField.text cvv:self.cvvField.textField.text amountNumber:self.amount verify:self.require3dSecure clientToken:self.clientToken callback:^(NSString *nonce){
             if(nonce) {
                 self.onNonceReceived(@{@"nonce":  nonce});
 //                [self showSubmitMode:NO];

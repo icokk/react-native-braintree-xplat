@@ -129,6 +129,7 @@ RCT_EXPORT_METHOD(verify3DSecure: (NSString *)paymentNonce
 {
     NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[amountNumber decimalValue]];
     BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
+ 
     [threeDSecureDriver verifyCardWithNonce:paymentNonce
                                      amount:amount
                                  completion:^(BTThreeDSecureCardNonce *card, NSError *error){
@@ -204,7 +205,7 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
         BTPayPalDriver *payPalDriver = [[BTPayPalDriver alloc] initWithAPIClient:self.braintreeClient];
         BTPayPalRequest *request = [[BTPayPalRequest alloc] initWithAmount:amount];
         request.currencyCode = currency;
-        
+
         payPalDriver.viewControllerPresentingDelegate = self;
         
         [payPalDriver requestOneTimePayment:request
@@ -285,23 +286,24 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
         
         if(verify)
         {
-            NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[amountNumber decimalValue]];
-            BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
-            
             [cardClient tokenizeCard:card completion:^(BTCardNonce *tokenizedCard, NSError *error) {
                 NSArray *args = @[];
                 if ( error == nil ) {
                     if ( tokenizedCard ) {
+                        
+                        NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[amountNumber decimalValue]];
+                        BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
+                        
                         [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
                                                          amount:amount
                                                      completion:^(BTThreeDSecureCardNonce *secureCard, NSError *error) {
                                                          NSArray *args = @[];
-                                                         if ( error == nil ) {
-                                                             if ( secureCard ) {
-                                                                 args = @[tokenizedCard.nonce, [NSNull null]];
+                                                         if (error == nil) {
+                                                             if (secureCard) {
+                                                                 args = @[secureCard.nonce, [NSNull null]];
                                                                  completionHandler(args);
                                                              } else {
-                                                                 args = @[[NSNull null], @"secureCard is null"];
+                                                                 args = @[[NSNull null], [NSNull null]];
                                                                  completionHandler(args);
                                                              }
                                                          } else {
@@ -310,7 +312,7 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
                                                          }
                                                      }];
                     } else {
-                        args = @[[NSNull null], @"tokenizedCard is null"];
+                        args = @[[NSNull null], [NSNull null]];
                         completionHandler(args);
                     }
                 } else {
@@ -339,7 +341,5 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
         }
     }
 }
-
-
 
 @end

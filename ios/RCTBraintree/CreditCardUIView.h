@@ -3,6 +3,7 @@
 #import "CreditCardType.h"
 #import "CreditCardUI.h"
 #import "IconTextField.h"
+#import "RCTBraintree.h"
 
 @interface CreditCardUIView : RCTView
 
@@ -15,6 +16,8 @@
 
 @property UIButton *submitButton;
 @property UIActivityIndicatorView *activityIndicator;
+
+@property RCTBraintree *rctBraintree;
 
 //props
 @property BOOL requireCVV;
@@ -49,4 +52,7 @@
 
 -(BOOL)validateAndSubmit;
 -(void)executePayment;
+
+
+
 @end
