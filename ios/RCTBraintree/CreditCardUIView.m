@@ -281,8 +281,6 @@ typedef enum
 //                [self showSubmitMode:NO];
             } else {
                 self.onNonceReceived(@{@"nonce":  nonce});
-                //set error - something went wrong in label
-                NSLog(@"*** no nonce %@", nonce);
 //                [self showSubmitMode:NO];
             }
         }];
@@ -290,7 +288,9 @@ typedef enum
     }
     else {
         //validation error
-        self.onNonceReceived(@{@"nonce":  @[]});
+        NSArray *args = @[];
+        args = @[[NSNull null], @"Validation error"];
+        self.onNonceReceived(@{@"nonce":  args});
     }
 }
 
