@@ -77,7 +77,7 @@ public class RCTCreditCardControl extends CreditCardControl
         successCallback, errorCallback);
     } catch (Exception e) {
       Log.e(TAG, "Could not initialize payment gateway", e);
-      errorCallback.invoke("Could not initialize payment gateway");
+      errorCallback.invoke("Could not initialize payment gateway. " + e.getMessage());
     }
   }
 
