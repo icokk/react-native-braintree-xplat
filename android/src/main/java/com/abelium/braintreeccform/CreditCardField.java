@@ -104,14 +104,6 @@ public class CreditCardField extends LinearLayout
         setFocusLayout(false);
         //
         initialized = true;
-        // set focus to ccText when click on ccFieldLayout
-        ccFieldLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ccText.requestFocus();
-            }
-        });
-
 
     }
 
@@ -230,18 +222,18 @@ public class CreditCardField extends LinearLayout
     private int errorColor = defaultErrorColor;
 
     private void setFocusLayout(boolean focused) {
-    this.focused = focused;
-    //
-    ccLabel.setVisibility((focused || ccText.getText().length() > 0) ? VISIBLE : GONE); //-ok
-    // margins
-    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-    params.topMargin = (focused || ccText.getText().length() > 0) ? 5 : 20;
-    ccText.setLayoutParams(params);
+        this.focused = focused;
+        //
+        ccLabel.setVisibility((focused || ccText.getText().length() > 0) ? VISIBLE : GONE); //-ok
+        // margins
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        params.topMargin = (focused || ccText.getText().length() > 0) ? 5 : 20;
+        ccText.setLayoutParams(params);
 
-    // colors
-    updateColors();
-    ccText.getNextFocusDownId();
-}
+        // colors
+        updateColors();
+        ccText.getNextFocusDownId();
+    }
 
     private void updateColors() {
         ccText.setTextColor(textColor());

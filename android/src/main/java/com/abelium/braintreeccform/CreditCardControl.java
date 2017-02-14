@@ -138,11 +138,11 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
         ccNumber.setLabel(getNumberString());
         ccNumber.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         ccCVV.setLabel(getCvvString());
-        ccCVV.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+        ccCVV.setImeOptions(EditorInfo.IME_ACTION_DONE);
         ccMonth.setLabel(getMonthString());
         ccMonth.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         ccYear.setLabel(getYearString());
-        ccYear.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        ccYear.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         // add handlers
         ccNumber.setOnEditorActionListener(this);
         ccCVV.setOnEditorActionListener(this);
@@ -170,11 +170,11 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
             return false;
         } else if ( actionId == EditorInfo.IME_ACTION_NEXT ) {
             if ( v == ccNumber )
-                ccCVV.requestFocus();
-            else if ( v == ccCVV )
                 ccMonth.requestFocus();
             else if ( v == ccMonth )
                 ccYear.requestFocus();
+            else if ( v == ccYear )
+                ccCVV.requestFocus();
             return true;
         }
         return false;
