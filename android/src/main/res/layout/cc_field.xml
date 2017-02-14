@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_marginTop="14dp"
-        android:layout_marginRight="43dp"
+        android:layout_marginRight="60dp"
         android:orientation="vertical"
         android:baselineAligned="false"
         android:id="@+id/cc_field_layout"
@@ -45,10 +45,9 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="match_parent"
             android:fontFamily="sans-serif"
             android:textSize="16dp"
-            android:layout_marginTop="4dp"
             android:hint="Hint"
             android:id="@+id/cc_text"
             android:imeOptions="actionNext"
@@ -60,8 +59,8 @@
     <TextView
         android:text="INVALID"
         android:layout_width="60dp"
-        android:layout_marginLeft="-60dp"
         android:layout_height="20dp"
+        android:layout_marginLeft="-60dp"
         android:layout_marginTop="32dp"
         android:textAlignment="center"
         android:fontFamily="sans-serif"

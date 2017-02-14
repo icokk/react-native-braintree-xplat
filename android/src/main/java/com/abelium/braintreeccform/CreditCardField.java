@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -71,7 +72,6 @@ public class CreditCardField extends LinearLayout
     }
 
     private TextView ccLabel;
-    private LinearLayout ccFieldLayout;
     private TextView ccIcon;
     private EditText ccText;
     private TextView ccInvalidMarker;
@@ -86,7 +86,6 @@ public class CreditCardField extends LinearLayout
         this.setOrientation(VERTICAL);
         // save components
         this.ccLabel = (TextView) findViewById(R.id.cc_label);
-        this.ccFieldLayout = (LinearLayout) findViewById(R.id.cc_field_layout);
         this.ccIcon = (TextView) findViewById(R.id.cc_icon);
         this.ccText = (EditText) findViewById(R.id.cc_text);
         this.ccInvalidMarker = (TextView) findViewById(R.id.cc_invalid_marker);
@@ -94,7 +93,7 @@ public class CreditCardField extends LinearLayout
         // set icon font
         setIconFont("fonts/goopti.ttf");
         // set focus listener
-        ccText.setOnFocusChangeListener(new OnFocusChangeListener() {
+        ccText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 setFocusLayout(hasFocus);
@@ -104,7 +103,6 @@ public class CreditCardField extends LinearLayout
         setFocusLayout(false);
         //
         initialized = true;
-
     }
 
     private Typeface loadIconFont(String fontName) {
@@ -223,17 +221,23 @@ public class CreditCardField extends LinearLayout
 
     private void setFocusLayout(boolean focused) {
         this.focused = focused;
-        //
         ccLabel.setVisibility((focused || ccText.getText().length() > 0) ? VISIBLE : GONE); //-ok
         // margins
-        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        params.topMargin = (focused || ccText.getText().length() > 0) ? 5 : 20;
-        ccText.setLayoutParams(params);
-
+        setMargins(ccText, 0,(focused || ccText.getText().length() > 0) ? 5 : 0,0,0);
         // colors
         updateColors();
         ccText.getNextFocusDownId();
     }
+
+
+    public static void setMargins (View v, int left, int top, int right, int bottom) {
+        if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+            p.setMargins(left, top, right, bottom);
+            v.requestLayout();
+        }
+    }
+
 
     private void updateColors() {
         ccText.setTextColor(textColor());

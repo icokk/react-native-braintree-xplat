@@ -114,7 +114,7 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
     private void initializeViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.cc_control, this);
+        inflater.inflate(R.layout.cc_layout, this);
     }
 
     @Override
@@ -160,6 +160,7 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
         this.ccPayBtn.setVisibility(hidePayButton ? GONE : VISIBLE);
         //
         initialized = true;
+
     }
 
     @Override
@@ -412,8 +413,8 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
 
     public void setInvalidString(String invalidString) {
         this.invalidString = invalidString;
-        if ( ccNumber != null && ccNumber.getInvalidMarker() != null )
-            ccNumber.setInvalidMarker(invalidString);
+        //if ( ccNumber != null && ccNumber.getInvalidMarker() != null )
+          //  ccNumber.setInvalidMarker(invalidString);
     }
 
     private List<CreditCardField> fieldList() {

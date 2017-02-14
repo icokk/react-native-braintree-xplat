@@ -2,7 +2,6 @@ package com.abelium.braintreeccform;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
-import java.util.ArrayList;
 
 import com.abelium.cardvalidator.CreditCardType;
 import com.facebook.react.bridge.Arguments;
