@@ -7,11 +7,13 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +26,8 @@ import java.util.Map;
 public class CreditCardField extends LinearLayout
 {
     public static final String TAG = CreditCardField.class.getName();
+
+    public static final int BOUNDARY_WIDTH = 480;
 
     public interface OnEditorActionListener {
         boolean onEditorAction(CreditCardField v, int actionId, KeyEvent event);
@@ -132,6 +136,13 @@ public class CreditCardField extends LinearLayout
     }
 
     public void setShowIcon(boolean showIcon) {
+      if(getActivity() != null){
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(displaymetrics);
+        if(displaymetrics.widthPixels <= BOUNDARY_WIDTH)
+          return;
+      }
         ccIcon.setVisibility(showIcon ? VISIBLE : GONE);
         if(showIcon) {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)ccInvalidMarker.getLayoutParams();
@@ -220,7 +231,6 @@ public class CreditCardField extends LinearLayout
     private int errorColor = defaultErrorColor;
 
     private void setFocusLayout(boolean focused) {
-
         this.focused = focused;
         if(ccText.getText().length() == 0) ccText.setText(""); //To force requestLayout() on RCTCreditCardControl
         ccLabel.setVisibility((focused || ccText.getText().length() > 0) ? VISIBLE : GONE); //-ok
