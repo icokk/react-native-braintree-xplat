@@ -220,7 +220,9 @@ public class CreditCardField extends LinearLayout
     private int errorColor = defaultErrorColor;
 
     private void setFocusLayout(boolean focused) {
+
         this.focused = focused;
+        if(ccText.getText().length() == 0) ccText.setText(""); //To force requestLayout() on RCTCreditCardControl
         ccLabel.setVisibility((focused || ccText.getText().length() > 0) ? VISIBLE : GONE); //-ok
         // margins
         setMargins(ccText, 0,(focused || ccText.getText().length() > 0) ? 5 : 0,0,0);

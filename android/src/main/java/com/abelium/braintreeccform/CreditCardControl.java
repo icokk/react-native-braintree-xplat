@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
 
 import com.abelium.cardvalidator.CardNumberMatch;
 import com.abelium.cardvalidator.CreditCardType;
@@ -50,16 +49,21 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
         }
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+          layoutRequest();
+        }
 
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+          layoutRequest();
+        }
 
         @Override
         public void afterTextChanged(Editable s) {
             switch ( control ) {
                 case Number:
-                    validateNumber(false);
+                    if(ccNumber.getText().length() != 0) validateNumber(false);
+                    else markField(ControlType.Number, Validity.Complete, false);
                     break;
                 case CVV:
                     validateCVV(false);
@@ -88,7 +92,6 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
 
     private CreditCardField ccNumber, ccCVV, ccMonth, ccYear;
     private Button ccPayBtn;
-    private ProgressBar ccSpinner;
 
     private String numberString = "Credit Card Number";
     private String cvvString = "CVC/CVV";
@@ -123,6 +126,10 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
         initComponents();
     }
 
+    private void layoutRequest() {
+      this.requestLayout();
+    }
+
     protected void initComponents() {
         if ( initialized )
             return;
@@ -132,7 +139,6 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
         this.ccMonth = (CreditCardField) findViewById(R.id.cc_month);
         this.ccYear = (CreditCardField) findViewById(R.id.cc_year);
         this.ccPayBtn = (Button) findViewById(R.id.cc_pay_btn);
-        this.ccSpinner = (ProgressBar) findViewById(R.id.ctrlActivityIndicator);
         // control settings
         ccNumber.setShowIcon(true);
         ccNumber.setLabel(getNumberString());
@@ -160,7 +166,6 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
         this.ccPayBtn.setVisibility(hidePayButton ? GONE : VISIBLE);
         //
         initialized = true;
-
     }
 
     @Override
@@ -215,7 +220,7 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
         String prevMarker = field.getInvalidMarker();
         field.setInvalidMarker(field.isError() ? getInvalidString() : null);
         if ( !equals(prevMarker, field.getInvalidMarker()) )
-            this.requestLayout();
+            layoutRequest();
     }
 
     public boolean hasAnyError() {
@@ -317,16 +322,15 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
         View[] controls = { ccNumber, ccCVV, ccMonth, ccYear, ccPayBtn };
         for ( View control : controls )
             control.setEnabled(!submitting);
-        ccSpinner.setVisibility(submitting ? VISIBLE : GONE);
-        this.requestLayout();
+        layoutRequest();
     }
 
     // public interface
 
     public void endSubmit(boolean success, String errorMessage) {
         showSubmitMode(false);
-        if ( !success && errorMessage != null )
-            setError(ControlType.Number, true);
+        //if ( !success && errorMessage != null )
+          //  setError(ControlType.Number, true);
     }
 
     public SubmitHandler getOnSubmit() {
@@ -413,8 +417,6 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
 
     public void setInvalidString(String invalidString) {
         this.invalidString = invalidString;
-        //if ( ccNumber != null && ccNumber.getInvalidMarker() != null )
-          //  ccNumber.setInvalidMarker(invalidString);
     }
 
     private List<CreditCardField> fieldList() {
