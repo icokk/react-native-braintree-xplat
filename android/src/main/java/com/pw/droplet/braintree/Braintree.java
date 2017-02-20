@@ -7,6 +7,7 @@ import android.app.Activity;
 import com.braintreepayments.api.PayPal;
 import com.braintreepayments.api.PaymentRequest;
 import com.braintreepayments.api.ThreeDSecure;
+import com.braintreepayments.api.interfaces.BraintreeCancelListener;
 import com.braintreepayments.api.interfaces.BraintreeErrorListener;
 import com.braintreepayments.api.models.PayPalRequest;
 import com.braintreepayments.api.models.PaymentMethodNonce;
@@ -76,6 +77,12 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
       @Override
       public void onError(Exception error) {
         errorHandler(error.getMessage());
+      }
+    });
+    this.mBraintreeFragment.addListener(new BraintreeCancelListener() {
+      @Override
+      public void onCancel(int requestCode) {
+        errorHandler("Cancelled by user.");
       }
     });
     this.setToken(token);
