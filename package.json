@@ -11,7 +11,7 @@
   "license": "MIT",
   "respository": {
     "type": "git",
-    "url": "git@github.com:kraffslol/react-native-braintree-xplat.git"
+    "url": "git@github.com:icokk/react-native-braintree-xplat.git"
   },
   "devDependencies": {
     "react": "15.3.2",
