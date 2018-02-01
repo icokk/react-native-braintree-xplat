@@ -118,6 +118,11 @@ public class CreditCardControlManager extends ViewGroupManager<RCTCreditCardCont
     control.setErrorColor(color);
   }
 
+  @ReactProp(name = "showIcon")
+  public void setShowIcon(RCTCreditCardControl control, boolean show) {
+    control.setShowIcon(show);
+  }
+
   @ReactProp(name = "iconFont")
   public void setIconFont(RCTCreditCardControl control, String font) {
     control.setIconFont(font);

@@ -443,6 +443,11 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
             field.setErrorColor(color);
     }
 
+    public void setShowIcon(boolean show) {
+        if ( ccNumber != null )
+            ccNumber.setShowIcon(show);
+    }
+
     public void setIconFont(String font) {
         if ( ccNumber != null )
             ccNumber.setIconFont(font);

@@ -28,6 +28,7 @@ export default class CreditCardControl extends React.Component {
     blurColor: ColorPropType,
     errorColor: ColorPropType,
     // icon font and glyph
+    showIcon: PropTypes.bool,
     iconFont: PropTypes.string,
     iconGlyph: PropTypes.string,
   };
