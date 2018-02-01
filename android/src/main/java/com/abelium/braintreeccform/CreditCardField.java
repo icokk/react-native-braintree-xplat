@@ -136,16 +136,16 @@ public class CreditCardField extends LinearLayout
     }
 
     public void setShowIcon(boolean showIcon) {
-      if(getActivity() != null){
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-        wm.getDefaultDisplay().getMetrics(displaymetrics);
-        if(displaymetrics.widthPixels <= BOUNDARY_WIDTH)
-          return;
-      }
+        if (getActivity() != null) {
+            DisplayMetrics displaymetrics = new DisplayMetrics();
+            WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+            wm.getDefaultDisplay().getMetrics(displaymetrics);
+            if (displaymetrics.widthPixels <= BOUNDARY_WIDTH)
+                return;
+        }
         ccIcon.setVisibility(showIcon ? VISIBLE : GONE);
-        if(showIcon) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)ccInvalidMarker.getLayoutParams();
+        if (showIcon) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) ccInvalidMarker.getLayoutParams();
             params.topMargin = 70;
             ccInvalidMarker.setLayoutParams(params);
         }
