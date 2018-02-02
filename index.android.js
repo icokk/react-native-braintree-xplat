@@ -42,6 +42,12 @@ module.exports = {
                                       (nonce) => resolve(nonce), (error) => reject(error));
 		});
 	},
+
+	collectDeviceData() {
+		return new Promise(function(resolve, reject) {
+			Braintree.collectDeviceData((data) => resolve(data), (error) => reject(error));
+		});
+	},
   
   CreditCardControl: CreditCardControl,
 };
