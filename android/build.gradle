@@ -24,6 +24,8 @@ dependencies {
     // Braintree 2.3.4 is the last version that works with ReactNative's Android SDK 23
     compile 'com.braintreepayments.api:braintree:2.3.4'
     compile 'com.braintreepayments.api:drop-in:2.3.4'
+    compile 'com.braintreepayments.api:data-collector:2.3.4'
+    // ReactNative works with ancient v23 SDK
     compile 'com.android.support:design:23.0.1'
     compile 'com.android.support:appcompat-v7:23.0.1'
 }

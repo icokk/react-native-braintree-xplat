@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.content.Context;
 import android.app.Activity;
 
+import com.braintreepayments.api.DataCollector;
 import com.braintreepayments.api.PayPal;
 import com.braintreepayments.api.PaymentRequest;
 import com.braintreepayments.api.ThreeDSecure;
 import com.braintreepayments.api.interfaces.BraintreeCancelListener;
 import com.braintreepayments.api.interfaces.BraintreeErrorListener;
+import com.braintreepayments.api.interfaces.BraintreeResponseListener;
 import com.braintreepayments.api.models.PayPalRequest;
 import com.braintreepayments.api.models.PaymentMethodNonce;
 import com.braintreepayments.api.BraintreePaymentActivity;
@@ -221,6 +223,22 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
       PayPal.requestOneTimePayment(mBraintreeFragment, request);
     } catch (Exception e) {
       errorCallback.invoke(e.getMessage());
+    }
+  }
+
+  @ReactMethod
+  public void collectDeviceData(final Callback successCallback, final Callback errorCallback) {
+    try {
+      DataCollector.collectDeviceData(mBraintreeFragment, new BraintreeResponseListener<String>() {
+        @Override
+        public void onResponse(String deviceData) {
+          if (successCallback != null)
+            successCallback.invoke(deviceData);
+        }
+      });
+    } catch (Exception e) {
+      if (errorCallback != null)
+        errorCallback.invoke(e.getMessage());
     }
   }
 

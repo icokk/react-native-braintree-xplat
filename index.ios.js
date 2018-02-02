@@ -45,13 +45,13 @@ var Braintree = {
 		});
 	},
 
-    getCardNonce(cardNumber, expirationMonth, expirationYear) {
-    	return new Promise(function(resolve, reject) {
-    		RCTBraintree.getCardNonce(cardNumber, expirationMonth, expirationYear, function(err, nonce) {
-    			nonce != null ? resolve(nonce) : reject(err);
-    		});
-    	});
-    },
+	getCardNonce(cardNumber, expirationMonth, expirationYear) {
+		return new Promise(function(resolve, reject) {
+			RCTBraintree.getCardNonce(cardNumber, expirationMonth, expirationYear, function(err, nonce) {
+				nonce != null ? resolve(nonce) : reject(err);
+			});
+		});
+	},
 
 	showPayPalCheckoutController(amount, currency) {
 		return new Promise(function(resolve, reject) {
@@ -74,6 +74,13 @@ var Braintree = {
 			RCTBraintree.tokenizeCardAndVerify(cardNumber, expirationMonth, expirationYear, cvv, amount, !!verify, function(err, nonce) {
     			nonce != null ? resolve(nonce) : reject(err);
     		});
+		});
+	},
+
+	collectDeviceData() {
+		return new Promise(function(resolve, reject) {
+			// Braintree.collectDeviceData((data) => resolve(data), (error) => reject(error));
+			resolve(null);	// do nothing until iOS code is implemented
 		});
 	},
 

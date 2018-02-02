@@ -14,6 +14,7 @@ export default class CreditCardControl extends React.Component {
     requireCVV: PropTypes.bool,
     hidePayButton: PropTypes.bool,
     amount: PropTypes.number,
+    // callbacks
     onNonceReceived: PropTypes.func,
     // translations
     translations: PropTypes.shape({
@@ -34,8 +35,17 @@ export default class CreditCardControl extends React.Component {
   };
 
   _onNonceReceived(event) {
-    if ( this.props.onNonceReceived )
-      this.props.onNonceReceived(event.nativeEvent.nonce);
+    if ( this.props.onNonceReceived ) {
+      var nonce = null, error = null;
+      var result = event.nativeEvent.nonce;
+      if (Array.isArray(result)) {
+        nonce = result[0];
+        error = result[1];
+      } else {
+        nonce = result;
+      }
+      this.props.onNonceReceived(nonce, error);
+    }
   }
 
   submitCardData() {
