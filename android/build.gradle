@@ -20,7 +20,7 @@ android {
 
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.facebook.react:react-native:0.38.+"
+    compile "com.facebook.react:react-native:+"
     // Braintree 2.3.4 is the last version that works with ReactNative's Android SDK 23
     compile 'com.braintreepayments.api:braintree:2.3.4'
     compile 'com.braintreepayments.api:drop-in:2.3.4'

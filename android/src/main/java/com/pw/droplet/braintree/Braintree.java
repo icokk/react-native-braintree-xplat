@@ -60,7 +60,10 @@ public class Braintree extends ReactContextBaseJavaModule implements ActivityEve
   @ReactMethod
   public void setup(final String token, final Callback successCallback, final Callback errorCallback) {
     try {
-      this.setup(token);
+      if (token == null)
+        throw new InvalidArgumentException("Client token must not be null");
+      if (mBraintreeFragment == null || !token.equals(this.getToken()))
+        this.setup(token);
       successCallback.invoke(this.getToken());
     } catch (InvalidArgumentException e) {
       errorCallback.invoke(e.getMessage());
