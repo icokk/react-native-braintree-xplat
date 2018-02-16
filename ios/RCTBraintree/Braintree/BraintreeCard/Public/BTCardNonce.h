@@ -4,37 +4,37 @@
 #else
 #import <BraintreeCore/BraintreeCore.h>
 #endif
-
-/// Card type
-typedef NS_ENUM(NSInteger, BTCardNetwork) {
-    BTCardNetworkUnknown = 0,
-    BTCardNetworkAMEX,
-    BTCardNetworkDinersClub,
-    BTCardNetworkDiscover,
-    BTCardNetworkMasterCard,
-    BTCardNetworkVisa,
-    BTCardNetworkJCB,
-    BTCardNetworkLaser,
-    BTCardNetworkMaestro,
-    BTCardNetworkUnionPay,
-    BTCardNetworkSolo,
-    BTCardNetworkSwitch,
-    BTCardNetworkUKMaestro,
-};
+#import "BTThreeDSecureInfo.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTCardNonce : BTPaymentMethodNonce
 
-/// The card network.
+/**
+ @brief The card network.
+*/
 @property (nonatomic, readonly, assign) BTCardNetwork cardNetwork;
 
-/// The last two digits of the card, if available.
+/**
+ @brief The last two digits of the card, if available.
+*/
 @property (nonatomic, nullable, readonly, copy) NSString *lastTwo;
+
+/**
+ @brief The BIN data for the card number associated with this nonce.
+ */
+@property (nonatomic, readonly, strong) BTBinData *binData;
+
+/**
+ @brief The 3D Secure info for the card number associated with this nonce.
+ */
+@property (nonatomic, readonly, strong) BTThreeDSecureInfo *threeDSecureInfo;
 
 #pragma mark - Internal
 
-/// Create a `BTCardNonce` object from JSON.
+/**
+ @brief Create a `BTCardNonce` object from JSON.
+*/
 + (instancetype)cardNonceWithJSON:(BTJSON *)cardJSON;
 
 @end

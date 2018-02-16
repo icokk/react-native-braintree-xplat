@@ -9,12 +9,17 @@
 #import "PPOTAnalyticsDefines.h"
 #import "PPOTAppSwitchUtil.h"
 #import "PPOTConfiguration.h"
-#import "PPOTDevice.h"
-#import "PPOTMacros.h"
 #import "PPOTOAuth2SwitchRequest.h"
 #import "PPOTAnalyticsTracker.h"
 #import "PPOTPersistentRequestData.h"
 #import "PPOTError.h"
+#if __has_include("PayPalUtils.h")
+#import "PPOTDevice.h"
+#import "PPOTMacros.h"
+#else
+#import <PayPalUtils/PPOTDevice.h>
+#import <PayPalUtils/PPOTMacros.h>
+#endif
 
 #import <UIKit/UIKit.h>
 
@@ -116,7 +121,6 @@ NSString *const PayPalEnvironmentMock = PPRequestEnvironmentNoNetwork;
             if (appSwitchRequest) {
                 appSwitchURL = [appSwitchRequest encodedURL];
                 requestClientMetadataId = appSwitchRequest.clientMetadataID;
-                PPLog(@"URL to open %@", appSwitchURL);
 
                 NSString *analyticsPage = nil;
                 if ([[appSwitchURL.absoluteString lowercaseString] hasPrefix:kPPOTAppSwitchSchemeToCheck]) {
@@ -167,7 +171,7 @@ NSString *const PayPalEnvironmentMock = PPRequestEnvironmentNoNetwork;
 
 #pragma mark - configuration methods
 
-- (void)determineConfigurationRecipe:(void (^)())completionBlock {
+- (void)determineConfigurationRecipe:(void (^)(void))completionBlock {
     PPAssert(completionBlock, @"establishConfigurationRecipe: completionBlock is required");
 
     if (self.configurationRecipe) {
@@ -195,11 +199,7 @@ NSString *const PayPalEnvironmentMock = PPRequestEnvironmentNoNetwork;
 
     switch (configurationRecipe.target) {
         case PPOTRequestTargetOnDeviceApplication: {
-            // Always return a Browser switch URL on >= iOS9 so that it can be opened with SFSafariViewController or Universal Links (which is how it will link to the wallet)
-            if (self.forcedTarget.integerValue == PPOTRequestTargetBrowser || iOS_9_PLUS) {
-                return NO;
-            }
-            return [PPOTAppSwitchUtil isAuthenticatorInstalledForTargetAppURLScheme:configurationRecipe.targetAppURLScheme];
+            return NO;
         }
         case PPOTRequestTargetBrowser: {
             if (self.forcedTarget.integerValue == PPOTRequestTargetOnDeviceApplication) {

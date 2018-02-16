@@ -10,20 +10,27 @@
 #import "PPOTResult_Internal.h"
 #import "PPOTRequest_Internal.h"
 #import "PPOTConfiguration.h"
+#import "PPOTPersistentRequestData.h"
+#if __has_include("PayPalUtils.h")
 #import "PPOTDevice.h"
 #import "PPOTMacros.h"
-#import "PPOTPersistentRequestData.h"
-#import "PPDataCollector.h"
 #import "PPOTVersion.h"
+#else
+#import <PayPalUtils/PPOTDevice.h>
+#import <PayPalUtils/PPOTMacros.h>
+#import <PayPalUtils/PPOTVersion.h>
+#endif
+#if __has_include("PayPalDataCollector.h")
+#import "PPDataCollector.h"
+#else
+#import <PayPalDataCollector/PPDataCollector.h>
+#endif
 
 // PayPalTouch v1 version
 #import "PPOTAppSwitchUtil.h"
 
 #define kPPOTSafariViewService            CARDIO_STR(@"com.apple.safariviewservice")
 #define kPPOTSafariSourceApplication      CARDIO_STR(@"com.apple.mobilesafari")
-#define kPPOTWalletURLSchemeV1            CARDIO_STR(@"com.paypal.ppclient.touch.v1")
-#define kPPOTWalletURLSchemeV2            CARDIO_STR(@"com.paypal.ppclient.touch.v2")
-#define kPPOTWalletURLSchemeV3            CARDIO_STR(@"com.paypal.ppclient.touch.v3")
 
 @implementation PPOTCore
 
@@ -45,15 +52,7 @@
 + (BOOL)isWalletAppInstalled {
     [PPOTConfiguration updateCacheAsNecessary]; // called by all public methods
 
-    if (iOS_9_PLUS) {
-        // Don't check canOpenUrl and don't fire analytics because we can't find out if the app is installed
-        return NO;
-    }
-    else {
-        return ([PPOTAppSwitchUtil isAuthenticatorInstalledForTargetAppURLScheme:kPPOTWalletURLSchemeV1] ||
-                [PPOTAppSwitchUtil isAuthenticatorInstalledForTargetAppURLScheme:kPPOTWalletURLSchemeV2] ||
-                [PPOTAppSwitchUtil isAuthenticatorInstalledForTargetAppURLScheme:kPPOTWalletURLSchemeV3] );
-    }
+    return NO;
 }
 
 + (BOOL)canParseURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication {

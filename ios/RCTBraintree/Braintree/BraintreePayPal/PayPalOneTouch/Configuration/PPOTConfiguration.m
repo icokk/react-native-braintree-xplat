@@ -6,10 +6,17 @@
 //
 
 #import "PPOTConfiguration.h"
+#if __has_include("PayPalUtils.h")
 #import "PPOTJSONHelper.h"
 #import "PPOTMacros.h"
 #import "PPOTSimpleKeychain.h"
 #import "PPOTURLSession.h"
+#else
+#import <PayPalUtils/PPOTJSONHelper.h>
+#import <PayPalUtils/PPOTMacros.h>
+#import <PayPalUtils/PPOTSimpleKeychain.h>
+#import <PayPalUtils/PPOTURLSession.h>
+#endif
 #if __has_include("BraintreeCore.h")
 #import "BTLogger_Internal.h"
 #else
@@ -359,6 +366,8 @@ static BOOL alwaysUseHardcodedConfiguration = NO;
 
     static int nobodyIsWorkingOnThisAtTheMoment = 1;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if (OSAtomicCompareAndSwapInt(1, 0, &nobodyIsWorkingOnThisAtTheMoment)) {
 
         PPOTConfiguration *currentConfiguration = [PPOTConfiguration fetchPersistentConfiguration];
@@ -401,6 +410,7 @@ static BOOL alwaysUseHardcodedConfiguration = NO;
 
         nobodyIsWorkingOnThisAtTheMoment = 1;
     }
+#pragma clang diagnostic pop
 }
 
 + (PPOTConfiguration *)getCurrentConfiguration {
@@ -492,10 +502,9 @@ static BOOL alwaysUseHardcodedConfiguration = NO;
     NSMutableArray *prioritizedRecipes = [NSMutableArray arrayWithCapacity:[recipes count]];
     for (NSDictionary *recipeDictionary in recipes) {
         PPOTConfigurationRecipe *recipe = recipeAdapter(recipeDictionary);
-        if (!recipe) {
-            LOG_ERROR_AND_RETURN_NIL
+        if (recipe) {
+            [prioritizedRecipes addObject:recipe];
         }
-        [prioritizedRecipes addObject:recipe];
     }
     return prioritizedRecipes;
 }
