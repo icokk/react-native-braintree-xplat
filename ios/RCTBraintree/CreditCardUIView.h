@@ -32,6 +32,7 @@
 
 @property NSString *iconFont;
 @property NSString *iconGlyph;
+@property BOOL showIcon;
 
 // colors
 @property NSInteger focusColor;

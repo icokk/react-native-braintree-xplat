@@ -79,10 +79,13 @@ var Braintree = {
 
 	collectDeviceData() {
 		return new Promise(function(resolve, reject) {
-			// Braintree.collectDeviceData((data) => resolve(data), (error) => reject(error));
-			resolve(null);	// do nothing until iOS code is implemented
+			RCTBraintree.collectDeviceData(function(err, nonce) {
+				nonce != null ? resolve(nonce) : reject(err);
+			});
 		});
 	},
+
+
 
   CreditCardUI: CreditCardUI,
 };

@@ -58,6 +58,7 @@ typedef enum
         
         self.iconFont = @"";
         self.iconGlyph = @"";
+        self.showIcon = YES;
         
         _backgroundView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
         [self addSubview:_backgroundView];
@@ -67,6 +68,7 @@ typedef enum
         self.ccNumberField.placeholderText = [self getNumberString];
         self.ccNumberField.textField.delegate = self;
         self.ccNumberField.textField.keyboardType = UIKeyboardTypeNumberPad;
+        self.ccNumberField.hasIcon = self.showIcon;
         self.ccNumberField.errorMessageLabelText = [self getInvalidString];
         self.ccNumberField.hasError = NO;
         self.ccNumberField.iconLabelFontString = [self getIconFont];
@@ -580,6 +582,20 @@ typedef enum
 {
     _iconGlyph = iconGlyph;
     if(_ccNumberField != NULL) self.ccNumberField.iconLabelText = iconGlyph;
+}
+
+-(BOOL)getShowIcon
+{
+    return _showIcon;
+}
+-(void)setShowIcon:(BOOL)showIcon
+{
+    _showIcon = showIcon;
+    if(_ccNumberField != NULL) {
+        self.ccNumberField.hasIcon = showIcon;
+        self.ccNumberField.iconLabelFontString = [self getIconFont];
+        self.ccNumberField.iconLabelText = [self getIconGlyph];
+    }
 }
 
 -(NSInteger)getErrorColor

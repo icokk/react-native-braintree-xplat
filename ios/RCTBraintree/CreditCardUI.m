@@ -29,6 +29,7 @@ RCT_EXPORT_VIEW_PROPERTY(onNonceReceived, RCTBubblingEventBlock);
 
 RCT_EXPORT_VIEW_PROPERTY(iconFont, NSString);
 RCT_EXPORT_VIEW_PROPERTY(iconGlyph, NSString);
+RCT_EXPORT_VIEW_PROPERTY(showIcon, BOOL);
 
 RCT_EXPORT_VIEW_PROPERTY(focusColor, NSInteger);
 RCT_EXPORT_VIEW_PROPERTY(blurColor, NSInteger);

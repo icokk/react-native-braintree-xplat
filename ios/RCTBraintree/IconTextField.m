@@ -1,6 +1,6 @@
-#import "IconTextField.h";
+#import "IconTextField.h"
 #import "Constants_helper.h"
-#import "UIView+React.h"
+#import <React/UIView+React.h>
 
 #define FIELD_HEIGHT 64
 #define TEXT_FIELD_HEIGHT 42 //20

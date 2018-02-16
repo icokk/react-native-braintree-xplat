@@ -276,31 +276,33 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
                 clientToken: (NSString *)clientToken
                    callback: (void (^)(NSString *result))completionHandler
 {
-    //setup
+    
     self.braintreeClient = [[BTAPIClient alloc] initWithAuthorization:clientToken];
     if (self.braintreeClient != nil) { //if setup is successful
         
-        BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
-        BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
-        card.shouldValidate = YES; //
+        self.dataCollector = [[BTDataCollector alloc] initWithAPIClient:self.braintreeClient];
+        [self.dataCollector collectCardFraudData:^(NSString * _Nonnull deviceData) {
+            BTCard *card = [[BTCard alloc] initWithNumber:cardNumber expirationMonth:expirationMonth expirationYear:expirationYear cvv:cvv];
+            BTCardClient *cardClient = [[BTCardClient alloc] initWithAPIClient: self.braintreeClient];
+            card.shouldValidate = YES; //
         
-        if(verify)
-        {
-            [cardClient tokenizeCard:card completion:^(BTCardNonce *tokenizedCard, NSError *error) {
-                NSArray *args = @[];
-                if ( error == nil ) {
-                    if ( tokenizedCard ) {
+            if(verify)
+            {
+                [cardClient tokenizeCard:card completion:^(BTCardNonce *tokenizedCard, NSError *error) {
+                    NSArray *args = @[];
+                    if ( error == nil ) {
+                        if ( tokenizedCard ) {
                         
-                        NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[amountNumber decimalValue]];
-                        BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
+                            NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithDecimal:[amountNumber decimalValue]];
+                            BTThreeDSecureDriver *threeDSecureDriver = [[BTThreeDSecureDriver alloc] initWithAPIClient: self.braintreeClient delegate: self];
                         
-                        [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
+                            [threeDSecureDriver verifyCardWithNonce:tokenizedCard.nonce
                                                          amount:amount
                                                      completion:^(BTThreeDSecureCardNonce *secureCard, NSError *error) {
                                                          NSArray *args = @[];
                                                          if (error == nil) {
                                                              if (secureCard) {
-                                                                 args = @[secureCard.nonce, [NSNull null]];
+                                                                 args = @[secureCard.nonce, [NSNull null], deviceData];
                                                                  completionHandler(args);
                                                              } else {
                                                                  args = @[[NSNull null], [NSNull null]];
@@ -311,34 +313,51 @@ RCT_EXPORT_METHOD(payWithPayPal: (NSString *)amount
                                                              completionHandler(args);
                                                          }
                                                      }];
+                        } else {
+                            args = @[[NSNull null], [NSNull null]];
+                            completionHandler(args);
+                        }
                     } else {
-                        args = @[[NSNull null], [NSNull null]];
+                        args = @[[NSNull null], error.description];
                         completionHandler(args);
                     }
-                } else {
-                    args = @[[NSNull null], error.description];
-                    completionHandler(args);
-                }
-            }];
-        }
-        else
-        {
-            [cardClient tokenizeCard:card completion:^(BTCardNonce *tokenizedCard, NSError *error) {
-                NSArray *args = @[];
-                if ( error == nil ) {
-                    if ( tokenizedCard ) {
-                        args = @[tokenizedCard.nonce, [NSNull null]];
-                        completionHandler(args);
+                }];
+            }
+            else
+            {
+                [cardClient tokenizeCard:card completion:^(BTCardNonce *tokenizedCard, NSError *error) {
+                    NSArray *args = @[];
+                    if ( error == nil ) {
+                        if ( tokenizedCard ) {
+                            args = @[tokenizedCard.nonce, [NSNull null], deviceData];
+                            completionHandler(args);
+                        } else {
+                            args = @[[NSNull null], @"tokenizedCard is null"];
+                            completionHandler(args);
+                        }
                     } else {
-                        args = @[[NSNull null], @"tokenizedCard is null"];
+                        args = @[[NSNull null], error.description];
                         completionHandler(args);
                     }
-                } else {
-                    args = @[[NSNull null], error.description];
-                    completionHandler(args);
-                }
-            }];
-        }
+                }];
+            }
+        }];
+    }
+}
+
+#pragma mark - collectDeviceData
+
+RCT_EXPORT_METHOD(collectDeviceData:(RCTResponseSenderBlock)callback)
+{
+    if(self.braintreeClient != nil) {
+        self.dataCollector = [[BTDataCollector alloc] initWithAPIClient:self.braintreeClient];
+        [self.dataCollector collectCardFraudData:^(NSString * _Nonnull deviceData) {
+            NSArray *args  = @[[NSNull null], deviceData];
+            callback(args);
+        }];
+    } else {
+        NSArray *args = @[@"No server session", [NSNull null]];
+        callback(args);
     }
 }
 

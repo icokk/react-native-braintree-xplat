@@ -6,12 +6,13 @@
 //  Copyright © 2016 Rickard Ekman. All rights reserved.
 //
 
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 #import "BraintreeCore.h"
 #import "BraintreePayPal.h"
 #import "BraintreeCard.h"
 #import "BraintreeUI.h"
 #import "Braintree3DSecure.h"
+#import "BTDataCollector.h"
 
 typedef void (^Callback_block)(NSString *callbackNonce);
 
@@ -22,6 +23,7 @@ typedef void (^Callback_block)(NSString *callbackNonce);
 @property NSString *clientToken;
 @property (copy, nonatomic) Callback_block callbackNonce;
 @property (nonatomic, strong) RCTResponseSenderBlock callback;
+@property (nonatomic, strong) BTDataCollector *dataCollector;
 
 + (instancetype)sharedInstance;
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;
