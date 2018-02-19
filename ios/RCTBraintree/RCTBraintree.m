@@ -7,8 +7,8 @@
 //
 
 #import "RCTBraintree.h"
-#import "RCTUtils.h"
-#import "RCTConvert.h"
+#import <React/RCTUtils.h>
+#import <React/RCTConvert.h>
 #import "CreditCardUIView.h"
 #import <UIKit/UIKit.h>
 

@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { View, requireNativeComponent, Platform, NativeModules, findNodeHandle, ColorPropType, processColor } from 'react-native'
+import PropTypes from 'prop-types';
 
 export default class CrediCardUI extends React.Component {
   static displayName = "CrediCardUI";

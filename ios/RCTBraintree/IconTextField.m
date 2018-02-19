@@ -79,9 +79,10 @@
     [self.textField setPlaceholder:_placeholderText];
     [self.textField setTextColor:self.inputTextColor];
     [self.textField setFont:self.inputTextFont];
-    if(self.textField.placeholder)
-        self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: self.placeholderColor,
-                        NSFontAttributeName : self.placeholderFont}];
+    if(self.textField.placeholder && self.placeholderFont)
+        self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: self.placeholderColor, NSFontAttributeName : self.placeholderFont}];
+    else if(self.textField.placeholder)
+        self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: self.placeholderColor}];
     [self.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.textField addTarget:self action:@selector(textFieldDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
     [self.textField addTarget:self action:@selector(textFieldDidEndEditing:) forControlEvents:UIControlEventEditingDidEnd];
@@ -373,9 +374,11 @@
         }];
     }
     [self.textField setPlaceholder:_placeholderText];
-    if(self.textField.placeholder)
-        self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: self.placeholderColor,
-                                                                                                                                  NSFontAttributeName : self.placeholderFont}];
+    if(self.textField.placeholder && self.placeholderFont != NULL)
+        self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: self.placeholderColor, NSFontAttributeName : self.placeholderFont}];
+    else if(self.textField.placeholder)
+        self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: self.placeholderColor}];
+
     self.dividerLine.backgroundColor = self.dividerLineColor;
     self.iconLabel.textColor = self.dividerLineColor;
 }
@@ -448,7 +451,7 @@
 -(void)setPlaceholderFont:(UIFont*)placeholderFont
 {
     _placeholderFont = placeholderFont;
-    if(_textField != NULL) self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: self.placeholderColor,
+    if(_textField != NULL && _placeholderFont != NULL) self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: self.placeholderColor,
                     NSFontAttributeName : _placeholderFont}];
 }
 -(NSString*)getPlaceholderText
@@ -461,9 +464,11 @@
     if(_textField != NULL)
     {
         [self.textField setPlaceholder:_placeholderText];
-        if(self.textField.placeholder)
-            self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: self.placeholderColor,
-                                                                                                                                      NSFontAttributeName : self.placeholderFont}];    }
+        if(self.textField.placeholder && self.placeholderFont != NULL)
+            self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: self.placeholderColor, NSFontAttributeName : self.placeholderFont}];
+        else if(self.textField.placeholder)
+             self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: self.placeholderColor}];
+    }
 }
 -(UIColor*)getPlaceholderColor
 {
@@ -472,8 +477,9 @@
 -(void)setPlaceholderColor:(UIColor*)placeholderColor
 {
     _placeholderColor = placeholderColor;
-    if(_textField != NULL) self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: _placeholderColor,
+    if(_textField != NULL && self.placeholderFont != NULL) self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: _placeholderColor,
                     NSFontAttributeName : self.placeholderFont}];
+    else if(_textField != NULL) self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textField.placeholder attributes:@{NSForegroundColorAttributeName: _placeholderColor}];
 }
 //upper placeholder settings
 -(UIFont*)getUpperPlaceholderFont
