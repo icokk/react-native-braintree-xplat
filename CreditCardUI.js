@@ -35,8 +35,17 @@ export default class CrediCardUI extends React.Component {
   };
 
   _onNonceReceived(event) {
-    if ( this.props.onNonceReceived )
-      this.props.onNonceReceived(event.nativeEvent.nonce);
+    if ( this.props.onNonceReceived ) {
+      var nonce = null, error = null;
+      var result = event.nativeEvent.nonce;
+      if (Array.isArray(result)) {
+        nonce = result[0];
+        error = result[1];
+      } else {
+        nonce = result;
+      }
+      this.props.onNonceReceived(nonce, error);
+    }
   }
 
   submitCardData() {
