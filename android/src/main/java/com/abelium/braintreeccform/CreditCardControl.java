@@ -265,7 +265,9 @@ public class CreditCardControl extends FrameLayout implements CreditCardField.On
     private Validity validate(boolean submit) {
         Validity validity = Validity.Complete;
         validity = ValidatorUtils.min(validity, validateNumber(submit));
-        validity = ValidatorUtils.min(validity, validateCVV(submit));
+        if (requireCVV) {
+            validity = ValidatorUtils.min(validity, validateCVV(submit));
+        }
         validity = ValidatorUtils.min(validity, validateDate(submit));
         return validity;
     }
