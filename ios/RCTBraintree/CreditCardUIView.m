@@ -313,7 +313,9 @@ typedef enum
 {
     Validity validity = Complete;
     validity = MIN(validity, [self validateNumber:submit]);
-    validity = MIN(validity, [self validateCCV:submit]);
+    if ([self isRequireCVV]) {
+        validity = MIN(validity, [self validateCCV:submit]);
+    }
     validity = MIN(validity, [self validateDate:submit]);
     return validity;
 }
