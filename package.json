@@ -16,5 +16,8 @@
   "devDependencies": {
     "react": "15.3.2",
     "babel-preset-react-native": "1.9.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10"
   }
 }
