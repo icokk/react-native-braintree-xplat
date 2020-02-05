@@ -2,8 +2,7 @@
 #import "CreditCardUIView.h"
 #import "RCTBraintree.h"
 #import "CreditCardType.h"
-#import "RCTBridgeModule.h"
-#import "CreditCardUIView.h"
+#import <React/RCTBridgeModule.h>
 
 @implementation CreditCardUI{
     CreditCardUIView *rctView;

@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
-#import "RCTView.h"
+#import <React/RCTView.h>
 #import "CreditCardType.h"
 #import "CreditCardUI.h"
 #import "IconTextField.h"
