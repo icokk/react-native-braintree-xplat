@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, requireNativeComponent, Platform, NativeModules, findNodeHandle, ColorPropType, processColor } from 'react-native'
+import { View, requireNativeComponent, Platform, NativeModules, findNodeHandle, ColorPropType, processColor, ViewPropTypes } from 'react-native'
 import PropTypes from 'prop-types';
 
 export default class CrediCardUI extends React.Component {
