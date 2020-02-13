@@ -19,11 +19,9 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"
-    // Braintree 2.3.4 is the last version that works with ReactNative's Android SDK 23
-    implementation 'com.braintreepayments.api:braintree:2.3.4'
-    implementation 'com.braintreepayments.api:drop-in:2.3.4'
-    implementation 'com.braintreepayments.api:data-collector:2.3.4'
-    // ReactNative works with ancient v23 SDK
+    implementation 'com.braintreepayments.api:braintree:2.3.6'
+    implementation 'com.braintreepayments.api:drop-in:2.3.6'
+    implementation 'com.braintreepayments.api:data-collector:2.3.6'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
 
