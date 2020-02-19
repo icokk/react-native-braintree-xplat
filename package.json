@@ -13,10 +13,6 @@
     "type": "git",
     "url": "git@github.com:kraffslol/react-native-braintree-xplat.git"
   },
-  "devDependencies": {
-    "react": "15.3.2",
-    "babel-preset-react-native": "1.9.0"
-  },
   "dependencies": {
     "prop-types": "^15.5.10"
   }
